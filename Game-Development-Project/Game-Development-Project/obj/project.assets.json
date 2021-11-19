@@ -7380,25 +7380,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\issam\\.nuget\\packages\\": {},
+    "C:\\Users\\boets\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
+      "projectUniqueName": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
       "projectName": "Game-Development-Project",
-      "projectPath": "C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
-      "packagesPath": "C:\\Users\\issam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\obj\\",
+      "projectPath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
+      "packagesPath": "C:\\Users\\boets\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\issam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\boets\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

@@ -27,5 +27,20 @@ namespace GameDevelopmentProject
             return animation;
         }
 
+        public static Animatie GetRunAnimatieFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Run");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.run;
+
+            for (int i = 0; i < 8; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(47 * i, 0, 47, 53)));
+            }
+
+            return animation;
+        }
     }
 }

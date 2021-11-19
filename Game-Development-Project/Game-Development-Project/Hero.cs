@@ -28,10 +28,13 @@ namespace GameDevelopmentProject
 
         public Vector2 position { get; set; }
 
+        public bool lookingRight { get; set; }
+
         public Hero(List<Animatie> animaties)
         {
             this.Animaties = animaties;
             this.position = Vector2.One;
+            this.lookingRight = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
         }
@@ -43,7 +46,14 @@ namespace GameDevelopmentProject
 
         public void draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(currentAnimation.texture, position, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0f);
+            var spriteEffects = SpriteEffects.None;
+
+            if (lookingRight)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally;
+            }
+
+            _spriteBatch.Draw(currentAnimation.texture, position, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2.5f, spriteEffects, 0f);
         }
 
 
