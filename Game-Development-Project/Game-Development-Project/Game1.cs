@@ -1,15 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
-namespace Game_Development_Project
+namespace GameDevelopmentProject
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D idle;
-        private int count = 1;
+        private Hero hero { get; set; }
+
 
         public Game1()
         {
@@ -21,7 +22,6 @@ namespace Game_Development_Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -29,7 +29,9 @@ namespace Game_Development_Project
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            idle = Content.Load<Texture2D>("Idle");
+            var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content) };
+
+            hero = new Hero(heroAnimaties);
 
             // TODO: use this.Content to load your game content here
         }
@@ -39,7 +41,7 @@ namespace Game_Development_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            hero.update(gameTime);
 
             base.Update(gameTime);
         }
@@ -50,16 +52,9 @@ namespace Game_Development_Project
 
             // TODO: Add your drawing code here
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
-            _spriteBatch.Draw(idle, new Vector2(10, 10), new Rectangle(31 * (count), 0, 31, 54), Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
-
-            count++;
-
-            if (count >= 8)
-            {
-                count = 0;
-            }
+            hero.draw(_spriteBatch);
 
             _spriteBatch.End();
 

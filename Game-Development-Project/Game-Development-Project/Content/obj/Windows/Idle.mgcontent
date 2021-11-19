@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Idle.png</SourceFile>
-  <SourceTime>2021-11-18T17:37:47.6966445+01:00</SourceTime>
+  <SourceTime>2021-11-19T16:12:28.1263458+01:00</SourceTime>
   <DestFile>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/bin/Windows/Idle.xnb</DestFile>
-  <DestTime>2021-11-18T17:39:04.750062+01:00</DestTime>
+  <DestTime>2021-11-19T16:14:16.3537377+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

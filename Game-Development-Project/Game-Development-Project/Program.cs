@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game_Development_Project
+namespace GameDevelopmentProject
 {
     public static class Program
     {
