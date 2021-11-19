@@ -10,17 +10,22 @@ namespace GameDevelopmentProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero { get; set; }
+   
 
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            //_graphics.ToggleFullScreen();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = Data.ScreenW;
+            _graphics.PreferredBackBufferHeight = Data.ScreenH;
+            _graphics.ApplyChanges();
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -40,6 +45,26 @@ namespace GameDevelopmentProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                hero.position -= new Vector2(2.0f, 0.0f);
+                //Left
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                hero.position += new Vector2(2.0f, 0.0f);
+                //Right
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                //Down
+            }
+          
+            if (Keyboard.GetState().IsKeyDown(Keys.Z))
+            {
+                //Up
+            }
 
             hero.update(gameTime);
 

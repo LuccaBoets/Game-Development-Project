@@ -43,7 +43,7 @@ namespace GameDevelopmentProject
 
         public void draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(currentAnimation.texture, position, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(currentAnimation.texture, position, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0f);
         }
 
 
