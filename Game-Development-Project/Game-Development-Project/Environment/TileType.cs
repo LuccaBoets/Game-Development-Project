@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameDevelopmentProject.Environment
 {
-    class TileType
+    public class TileType
     {
         public Texture2D texture { get; set; }
         public bool noHitBox { get; set; }

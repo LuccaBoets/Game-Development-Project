@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameDevelopmentProject.Environment
 {
-    class Tile
+    public class Tile
     {
         public TileType tileType { get; set; }
 
@@ -20,7 +20,17 @@ namespace GameDevelopmentProject.Environment
 
         public void draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+        }
+
+        public Rectangle getRectangle()
+        {
+            var rectangle = tileType.texture.Bounds;
+
+            rectangle.X += (int) position.X;
+            rectangle.Y += (int) position.Y;
+
+            return rectangle;
         }
     }
 }

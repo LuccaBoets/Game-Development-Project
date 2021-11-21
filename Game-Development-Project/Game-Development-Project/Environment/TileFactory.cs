@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameDevelopmentProject.Environment
 {
-    class TileFactory
+    public class TileFactory
     {
 
         public static List<TileType> TileTypes { get; set; } = new List<TileType>();

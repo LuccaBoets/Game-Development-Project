@@ -46,13 +46,13 @@ namespace GameDevelopmentProject
 
             for (int i = 0; i < 30; i++)
             {
-                tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 5 * 16 * 2.5f), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+                tilemap.addTile(textureTileSet, new Vector2(i,5), new Rectangle(96, 448, 16, 16), GraphicsDevice);
             }
 
-            for (int i = 0; i < 30; i++)
-            {
-                tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
-            }
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
+            //}
 
         }
 
@@ -61,40 +61,49 @@ namespace GameDevelopmentProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            var idle = true;
+
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 hero.position -= new Vector2(3.0f, 0.0f);
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
                 hero.lookingRight = true;
-
+                idle = false;
                 //Left
             }
-            else
+            
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 hero.position += new Vector2(3.0f, 0.0f);
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
                 hero.lookingRight = false;
+                idle = false;
                 //Right
             }
-            else
+
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
+                idle = false;
                 //Down
+                hero.position += new Vector2(0.0f, 3.0f);
+
             }
-            else
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
+                idle = false;
                 //Up
+                hero.position += new Vector2(0.0f, -3.0f);
+
             }
-            else
+
+            if (idle)
             {
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
-
             }
 
-            hero.update(gameTime);
+            hero.update(gameTime, tilemap);
 
             base.Update(gameTime);
         }
