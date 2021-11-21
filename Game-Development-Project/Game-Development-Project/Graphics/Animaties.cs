@@ -34,6 +34,7 @@ namespace GameDevelopmentProject
             var animation = new Animatie(texture);
 
             animation.AnimatieNaam = HeroAnimations.run;
+            animation.offset = new Vector2(1, 0);
 
             for (int i = 0; i < 8; i++)
             {

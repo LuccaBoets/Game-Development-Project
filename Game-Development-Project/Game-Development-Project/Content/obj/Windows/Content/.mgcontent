@@ -12,10 +12,12 @@
     <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Idle.png</File>
     <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Jump.png</File>
     <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Run.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/SET1_Mainlev_build.png</File>
     <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit - white silhouette.png</File>
     <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

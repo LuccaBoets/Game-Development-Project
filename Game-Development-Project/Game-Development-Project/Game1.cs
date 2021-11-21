@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Environment;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace GameDevelopmentProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero { get; set; }
+        private Tilemap tilemap { get; set; }
 
 
 
@@ -38,7 +40,20 @@ namespace GameDevelopmentProject
             var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content) };
             hero = new Hero(heroAnimaties);
 
-            // TODO: use this.Content to load your game content here
+            tilemap = new Tilemap();
+
+            Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
+
+            for (int i = 0; i < 30; i++)
+            {
+                tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 5 * 16 * 2.5f), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+            }
+
+            for (int i = 0; i < 30; i++)
+            {
+                tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
+            }
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -93,6 +108,7 @@ namespace GameDevelopmentProject
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
             hero.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch);
 
             _spriteBatch.End();
 

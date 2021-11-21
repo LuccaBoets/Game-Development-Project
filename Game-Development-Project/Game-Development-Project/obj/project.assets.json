@@ -7387,9 +7387,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
-      "projectName": "Game-Development-Project",
-      "projectPath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
+      "projectUniqueName": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
+      "projectName": "GameDevelopmentProject",
+      "projectPath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
       "packagesPath": "C:\\Users\\boets\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\obj\\",
       "projectStyle": "PackageReference",

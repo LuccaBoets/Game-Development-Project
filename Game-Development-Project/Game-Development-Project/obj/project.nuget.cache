@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eT7zH48knUb4Q5y1NSJUNZnvLbgczIPeozmmaAdiFfZYWIYGyjSxGkiivbj4j6QhRTDr+RVGMradklKdQD/6jA==",
+  "dgSpecHash": "1SLz+JMF6Xg9BQucCfiOJDMYUFGX9JLBH5kgQlRYIuQd3pZbmWDybFyVYR1mRcYh+Py27IbwFbNStthfdrxruQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
+  "projectFilePath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\boets\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\boets\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
