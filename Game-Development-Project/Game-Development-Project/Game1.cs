@@ -46,7 +46,7 @@ namespace GameDevelopmentProject
 
             for (int i = 0; i < 30; i++)
             {
-                tilemap.addTile(textureTileSet, new Vector2(i,5), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+                tilemap.addTile(textureTileSet, new Vector2(i, 5), new Rectangle(96, 448, 16, 16), GraphicsDevice);
             }
 
             //for (int i = 0; i < 30; i++)
@@ -71,7 +71,7 @@ namespace GameDevelopmentProject
                 idle = false;
                 //Left
             }
-            
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 hero.position += new Vector2(3.0f, 0.0f);
@@ -88,7 +88,7 @@ namespace GameDevelopmentProject
                 hero.position += new Vector2(0.0f, 3.0f);
 
             }
-            
+
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
@@ -118,6 +118,13 @@ namespace GameDevelopmentProject
 
             hero.draw(_spriteBatch);
             tilemap.draw(_spriteBatch);
+
+            Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+            rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17*2);
+            rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27*2);
+
+            GraphicsDevice.Viewport = new Viewport(rectangle);
+
 
             _spriteBatch.End();
 
