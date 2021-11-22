@@ -12,9 +12,17 @@ namespace GameDevelopmentProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero { get; set; }
+
+       
+        Scrolling scrolling1;
+        Scrolling scrolling2;
+        Movement move2;
+
         private Tilemap tilemap { get; set; }
 
 
+        const int speed = 3;
+       
 
         public Game1()
         {
@@ -26,9 +34,12 @@ namespace GameDevelopmentProject
 
         protected override void Initialize()
         {
+                
             _graphics.PreferredBackBufferWidth = Data.ScreenW;
             _graphics.PreferredBackBufferHeight = Data.ScreenH;
             _graphics.ApplyChanges();
+            move2 = new Movement();
+            move2.jumped = true;
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -37,7 +48,10 @@ namespace GameDevelopmentProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(800, 0, 1600, 900));
             var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content), Animaties.GetFallAnimatieFromHero(Content) };
+
             hero = new Hero(heroAnimaties);
 
             tilemap = new Tilemap();
@@ -58,6 +72,8 @@ namespace GameDevelopmentProject
 
         protected override void Update(GameTime gameTime)
         {
+
+            hero.position += move2.velocity;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -65,19 +81,32 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
+
+
+                move2.Move(hero, -speed, 0.0f);
+                hero.lookingRight = true;
+                scrolling1.Update(-speed);
+                scrolling2.Update(-speed);
+
                 hero.position -= new Vector2(3.0f, 0.0f);
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
                 hero.lookingRight = true;
                 idle = false;
-                //Left
+               //Left
+              
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                hero.position += new Vector2(3.0f, 0.0f);
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+
+                move2.Move(hero, speed, 0.0f);
                 hero.lookingRight = false;
+
+                scrolling1.Update(speed);
+                scrolling2.Update(speed);
+
                 idle = false;
+
                 //Right
             }
 
@@ -99,11 +128,52 @@ namespace GameDevelopmentProject
             }
 
             if (idle)
+
             {
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
             }
 
+
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && move2.jumped == false)
+            {
+
+                move2.Jump(hero);
+                move2.jumped = true;
+
+            }
+
+
+            if (move2.jumped)
+            {
+                move2.velocity.Y +=  0.15f * 1f;
+               
+            }
+
+            if(hero.position.Y > 700)
+            {
+                move2.jumped = false;
+            }
+              
+           
+            if (move2.jumped == false)
+            {
+                move2.velocity.Y = 0.0f;
+            }
+          
+
+            if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0) 
+            scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.texture.Width;
+            if (scrolling2.rectangle.X + scrolling2.texture.Width <= 0) 
+            scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling2.texture.Width;
+            /*scrolling1.Update();
+            scrolling2.Update();
+            */
+
+            hero.update(gameTime);
+
             hero.update(gameTime, tilemap);
+
 
             base.Update(gameTime);
         }
@@ -114,8 +184,11 @@ namespace GameDevelopmentProject
 
             // TODO: Add your drawing code here
 
+            
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
+            scrolling1.Draw(_spriteBatch);
+            scrolling2.Draw(_spriteBatch);
             hero.draw(_spriteBatch);
             tilemap.draw(_spriteBatch);
 

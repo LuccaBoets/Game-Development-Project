@@ -92,3 +92,6 @@ C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Projec
 C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\obj\Debug\netcoreapp3.1\Game-Development-Project.pdb
 C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\obj\Debug\netcoreapp3.1\Game-Development-Project.genruntimeconfig.cache
 C:\Users\boets\OneDrive\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\obj\Debug\netcoreapp3.1\Game-Development-Project.csproj.AssemblyReference.cache
+C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\bin\Debug\netcoreapp3.1\Content\Hills Free (update 3.0).xnb
+C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\bin\Debug\netcoreapp3.1\Content\Hills.xnb
+C:\Users\issam\Documents\GitHub\Game-Development-Project\Game-Development-Project\Game-Development-Project\bin\Debug\netcoreapp3.1\Content\Background.xnb

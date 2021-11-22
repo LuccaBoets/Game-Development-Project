@@ -29,12 +29,19 @@ namespace GameDevelopmentProject
 
         public Vector2 position { get; set; }
 
+       
+
         public bool lookingRight { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
             this.Animaties = animaties;
-            this.position = new Vector2(0, 500);
+
+            this.position = new Vector2(0,700);
+            
+
+         
+
             this.lookingRight = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
