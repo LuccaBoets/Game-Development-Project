@@ -20,10 +20,13 @@ namespace GameDevelopmentProject
 
         public int count { get; set; }
 
+        public Vector2 offset { get; set; }
+
         public Animatie(List<AnimatieFrame> frames, Texture2D texture)
         {
             this.frames = frames;
             this.texture = texture;
+            this.offset = new Vector2();
 
             currentFrame = frames[0];
             count = 0;
@@ -33,6 +36,8 @@ namespace GameDevelopmentProject
         {
             this.texture = texture;
             this.frames = new List<AnimatieFrame>();
+            this.offset = new Vector2();
+
             count = 0;
         }
 

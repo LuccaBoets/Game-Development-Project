@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Environment;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -11,10 +12,14 @@ namespace GameDevelopmentProject
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero { get; set; }
+
        
         Scrolling scrolling1;
         Scrolling scrolling2;
         Movement move2;
+
+        private Tilemap tilemap { get; set; }
+
 
         const int speed = 3;
        
@@ -48,7 +53,20 @@ namespace GameDevelopmentProject
             var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content) };
             hero = new Hero(heroAnimaties);
 
-            // TODO: use this.Content to load your game content here
+            tilemap = new Tilemap();
+
+            Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
+
+            for (int i = 0; i < 30; i++)
+            {
+                tilemap.addTile(textureTileSet, new Vector2(i, 5), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+            }
+
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
+            //}
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -58,46 +76,62 @@ namespace GameDevelopmentProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            var idle = true;
+
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
+
 
                 move2.Move(hero, -speed, 0.0f);
                 hero.lookingRight = true;
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
-                //Left
+
+                hero.position -= new Vector2(3.0f, 0.0f);
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+                hero.lookingRight = true;
+                idle = false;
+               //Left
               
             }
-            else
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
 
                 move2.Move(hero, speed, 0.0f);
                 hero.lookingRight = false;
+
                 scrolling1.Update(speed);
                 scrolling2.Update(speed);
+
+                idle = false;
+
                 //Right
             }
-            else
+
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
+                idle = false;
                 //Down
+                hero.position += new Vector2(0.0f, 3.0f);
+
             }
-            else
+
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
+                idle = false;
                 //Up
-            }
-           
-            
+                hero.position += new Vector2(0.0f, -3.0f);
 
-           
-            else
+            }
+
+            if (idle)
+
             {
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
-
             }
+
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && move2.jumped == false)
@@ -137,6 +171,9 @@ namespace GameDevelopmentProject
 
             hero.update(gameTime);
 
+            hero.update(gameTime, tilemap);
+
+
             base.Update(gameTime);
         }
 
@@ -152,6 +189,14 @@ namespace GameDevelopmentProject
             scrolling1.Draw(_spriteBatch);
             scrolling2.Draw(_spriteBatch);
             hero.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch);
+
+            Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+            rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17*2);
+            rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27*2);
+
+            GraphicsDevice.Viewport = new Viewport(rectangle);
+
 
             _spriteBatch.End();
 

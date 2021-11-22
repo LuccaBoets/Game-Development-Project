@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Environment;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -35,16 +36,32 @@ namespace GameDevelopmentProject
         public Hero(List<Animatie> animaties)
         {
             this.Animaties = animaties;
+
             this.position = new Vector2(0,700);
             
+
+         
+
             this.lookingRight = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
         }
 
-        public void update(GameTime gameTime)
+        public void update(GameTime gameTime, Tilemap tilemap)
         {
             currentAnimation.update(gameTime);
+
+            var rectangle = currentAnimation.texture.Bounds;
+
+            rectangle.X += (int)position.X;
+            rectangle.Y += (int)position.Y;
+            rectangle.Width = 34 * 2;
+            rectangle.Height = 54 *2;
+
+            if (tilemap.touchGround(rectangle))
+            {
+                position -= new Vector2(0, -10f);
+            }
         }
 
         public void draw(SpriteBatch _spriteBatch)
@@ -56,7 +73,7 @@ namespace GameDevelopmentProject
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2.5f, spriteEffects, 0f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0f);
         }
 
 

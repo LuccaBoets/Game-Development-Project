@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+<<<<<<< HEAD
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack1.png</File>
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack2.png</File>
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack3.png</File>
@@ -16,6 +17,19 @@
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Run.png</File>
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit - white silhouette.png</File>
     <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit.png</File>
+=======
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack1.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack2.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack3.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Death.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Fall.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Idle.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Jump.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Run.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/SET1_Mainlev_build.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit - white silhouette.png</File>
+    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit.png</File>
+>>>>>>> e4603ee88164489988184e76b75ab561cc9faf68
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -25,6 +39,7 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File>Hills.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
