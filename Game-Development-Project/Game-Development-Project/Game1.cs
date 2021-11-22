@@ -37,7 +37,7 @@ namespace GameDevelopmentProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content) };
+            var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content), Animaties.GetFallAnimatieFromHero(Content) };
             hero = new Hero(heroAnimaties);
 
             tilemap = new Tilemap();

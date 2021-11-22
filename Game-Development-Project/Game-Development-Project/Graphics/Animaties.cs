@@ -34,11 +34,27 @@ namespace GameDevelopmentProject
             var animation = new Animatie(texture);
 
             animation.AnimatieNaam = HeroAnimations.run;
-            animation.offset = new Vector2(1, 0);
+            //animation.offset = new Vector2(2, 0);
 
             for (int i = 0; i < 8; i++)
             {
                 animation.addFrame(new AnimatieFrame(new Rectangle(47 * i, 0, 47, 53)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetFallAnimatieFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Fall");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.fall;
+
+            for (int i = 0; i < 8; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(44 * i, 0, 44, 51)));
             }
 
             return animation;

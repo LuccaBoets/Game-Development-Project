@@ -51,7 +51,7 @@ namespace GameDevelopmentProject.Environment
 
         public bool touchGround(Rectangle rectangle)
         {
-            var temp = Rectangle.Intersect(tiles[0].getRectangle(), rectangle);
+            //var temp = Rectangle.Intersect(tiles[0].getRectangle(), rectangle);
             return tiles.Any(x => !Rectangle.Intersect(x.getRectangle(), rectangle).IsEmpty);
         }
     }

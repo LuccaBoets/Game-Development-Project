@@ -48,8 +48,8 @@ namespace GameDevelopmentProject
 
             rectangle.X += (int)position.X;
             rectangle.Y += (int)position.Y;
-            rectangle.Width = 34 * 2;
-            rectangle.Height = 54 *2;
+            rectangle.Width = (int)(currentAnimation.bounds.X * 2);
+            rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
 
             if (tilemap.touchGround(rectangle))
             {

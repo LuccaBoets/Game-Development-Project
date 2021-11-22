@@ -22,6 +22,8 @@ namespace GameDevelopmentProject
 
         public Vector2 offset { get; set; }
 
+        public Vector2 bounds { get; set; }
+
         public Animatie(List<AnimatieFrame> frames, Texture2D texture)
         {
             this.frames = frames;
@@ -29,6 +31,7 @@ namespace GameDevelopmentProject
             this.offset = new Vector2();
 
             currentFrame = frames[0];
+            bounds = new Vector2(frames[0].borders.Width, frames[0].borders.Height);
             count = 0;
         }
 
@@ -45,6 +48,7 @@ namespace GameDevelopmentProject
         {
             this.frames.Add(animatieFrame);
             currentFrame = frames[0];
+            bounds = new Vector2(frames[0].borders.Width, frames[0].borders.Height);
         }
 
         public void update(GameTime gameTime)
