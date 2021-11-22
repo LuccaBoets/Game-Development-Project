@@ -13,7 +13,6 @@ namespace GameDevelopmentProject
         private SpriteBatch _spriteBatch;
         private Hero hero { get; set; }
 
-       
         Scrolling scrolling1;
         Scrolling scrolling2;
         Movement move2;
@@ -170,10 +169,7 @@ namespace GameDevelopmentProject
             scrolling2.Update();
             */
 
-            hero.update(gameTime);
-
             hero.update(gameTime, tilemap);
-
 
             base.Update(gameTime);
         }
