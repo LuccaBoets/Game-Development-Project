@@ -57,5 +57,10 @@ namespace GameDevelopmentProject
             }
         }
 
+        public void update(GameTime gameTime)
+        {
+
+        }
+
     }
 }
