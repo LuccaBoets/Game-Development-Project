@@ -17,6 +17,7 @@
 *_p.c
 *.ncb
 *.suo
+.suo
 *.tlb
 *.tlh
 *.bak
