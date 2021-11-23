@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameDevelopmentProject
 {
-    class Movement
+    public class Movement
 {
         public const int speed = 3;
         public const float gravity = 1;
@@ -16,16 +16,18 @@ namespace GameDevelopmentProject
 
        
 
-        public void Move(Hero hero, int Xnumber, float Ynumber, GameTime gameTime)
+        public void Move(Hero hero, int Xnumber, GameTime gameTime)
         {
-                var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (Xnumber > 0)
+            var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (Xnumber > 0) //Right
             {
-                hero.position += new Vector2(0.3f * delta, Ynumber);
+                hero.position += new Vector2(0.3f * delta, 0.0f);
+                hero.lookingRight = false;
             }
-            else
+            else //Left
             {
-                hero.position += new Vector2(-0.3f * delta, Ynumber);
+                hero.position += new Vector2(-0.3f * delta, 0.0f);
+                hero.lookingRight = true;
             }
             
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
@@ -41,10 +43,18 @@ namespace GameDevelopmentProject
    
         }
 
-        public void Down()
+        public void Down(Hero hero)
         {
-            velocity.Y = 0.15f * gravity;
-         
+            velocity.Y += 0.15f * gravity;
+
+            if (velocity.Y > 0)
+            {
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
+            }
+            else
+            {
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
+            }
         }
 
     }

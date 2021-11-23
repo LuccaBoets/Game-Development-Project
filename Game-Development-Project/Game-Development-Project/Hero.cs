@@ -8,6 +8,7 @@ using System.Text;
 
 namespace GameDevelopmentProject
 {
+
     public enum HeroAnimations
     {
         idle,
@@ -22,6 +23,7 @@ namespace GameDevelopmentProject
     public class Hero
     {
 
+           public Movement move2;
 
         // dict key: enum (idle,attack,...) , value: Animatie
         public Animatie currentAnimation { get; set; }
@@ -38,9 +40,10 @@ namespace GameDevelopmentProject
             this.Animaties = animaties;
 
             this.position = new Vector2(0,700);
-            
 
-         
+
+            move2 = new Movement();
+            move2.jumped = true;
 
             this.lookingRight = true;
 
@@ -50,7 +53,7 @@ namespace GameDevelopmentProject
         public void update(GameTime gameTime, Tilemap tilemap)
         {
             currentAnimation.update(gameTime);
-
+            position += move2.velocity;
             var rectangle = currentAnimation.texture.Bounds;
 
             rectangle.X += (int)position.X;

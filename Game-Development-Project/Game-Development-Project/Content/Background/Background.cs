@@ -23,7 +23,7 @@ namespace GameDevelopmentProject
         public Scrolling(Texture2D newTexture, Rectangle newRectangle)
         {
         texture = newTexture;
-            rectangle = newRectangle;
+        rectangle = newRectangle;
         }
 
         public void Update(int Speed)

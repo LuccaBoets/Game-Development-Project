@@ -15,7 +15,7 @@ namespace GameDevelopmentProject
 
         Scrolling scrolling1;
         Scrolling scrolling2;
-        Movement move2;
+        
 
         private Tilemap tilemap { get; set; }
 
@@ -36,9 +36,13 @@ namespace GameDevelopmentProject
                 
             _graphics.PreferredBackBufferWidth = Data.ScreenW;
             _graphics.PreferredBackBufferHeight = Data.ScreenH;
+            this.Window.ClientSizeChanged +=
+            (sender, e) =>
+            {
+               
+            };
             _graphics.ApplyChanges();
-            move2 = new Movement();
-            move2.jumped = true;
+          
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -48,7 +52,7 @@ namespace GameDevelopmentProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(800, 0, 1600, 900));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(900, 0, 1600, 900));
             var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content), Animaties.GetFallAnimatieFromHero(Content), Animaties.GetJumpAnimatieFromHero(Content) };
 
             hero = new Hero(heroAnimaties);
@@ -72,40 +76,27 @@ namespace GameDevelopmentProject
         protected override void Update(GameTime gameTime)
         {
 
-            hero.position += move2.velocity;
+           
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             var idle = true;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
-            {
-
-
-                move2.Move(hero, -speed, 0.0f, gameTime);
-                hero.lookingRight = true;
+            { 
+                hero.move2.Move(hero, -speed, gameTime);
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
-
-                hero.position -= new Vector2(0.5f, 0.0f);
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
-                hero.lookingRight = true;
                 idle = false;
                //Left
-              
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-
-                move2.Move(hero, speed, 0.0f, gameTime);
-                hero.lookingRight = false;
-
+            { 
+                hero.move2.Move(hero, speed, gameTime);
                 scrolling1.Update(speed);
                 scrolling2.Update(speed);
-
                 idle = false;
-
                 //Right
             }
 
@@ -135,43 +126,34 @@ namespace GameDevelopmentProject
 
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && move2.jumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.move2.jumped == false)
             {
 
-                move2.Jump(hero);
+                hero.move2.Jump(hero);
          
-                move2.jumped = true;
+                hero.move2.jumped = true;
 
             }
 
 
-            if (move2.jumped)
+            if (hero.move2.jumped)
             {
-                move2.velocity.Y +=  0.15f * 1f;//gravity
-
-                if(move2.velocity.Y > 0)
-                {
-                    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
-                }
-                else
-                {
-                    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
-                }
+                hero.move2.Down(hero);//gravity
             }
 
             if(hero.position.Y > 800)
             {
-                move2.jumped = false;
+                hero.move2.jumped = false;
             }
               
            
-            if (move2.jumped == false)
+            if (hero.move2.jumped == false)
             {
-                move2.velocity.Y = 0.0f;
+                hero.move2.velocity.Y = 0.0f;
             }
           
 
-            if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0) 
+            /*if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0) 
             scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.texture.Width;
             if (scrolling2.rectangle.X + scrolling2.texture.Width <= 0) 
             scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling2.texture.Width;
@@ -201,7 +183,6 @@ namespace GameDevelopmentProject
             Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
             rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17*2);
             rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27*2);
-
             GraphicsDevice.Viewport = new Viewport(rectangle);
 
 
