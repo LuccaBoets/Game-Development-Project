@@ -87,7 +87,7 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             { 
-                hero.move2.Move(hero, -speed, gameTime);
+                hero.move.Move(hero, -speed, gameTime);
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
                 idle = false;
@@ -96,7 +96,7 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             { 
-                hero.move2.Move(hero, speed, gameTime);
+                hero.move.Move(hero, speed, gameTime);
                 scrolling1.Update(speed);
                 scrolling2.Update(speed);
                 idle = false;
@@ -129,30 +129,30 @@ namespace GameDevelopmentProject
 
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.move2.jumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.move.jumped == false)
             {
 
-                hero.move2.Jump(hero);
+                hero.move.Jump(hero);
          
-                hero.move2.jumped = true;
+                hero.move.jumped = true;
 
             }
 
 
-            if (hero.move2.jumped)
+            if (hero.move.jumped)
             {
-                hero.move2.Down(hero);//gravity
+                hero.move.Down(hero);//gravity
             }
 
             if(hero.position.Y > 800)
             {
-                hero.move2.jumped = false;
+                hero.move.jumped = false;
             }
               
            
-            if (hero.move2.jumped == false)
+            if (hero.move.jumped == false)
             {
-                hero.move2.velocity.Y = 0.0f;
+                hero.move.velocity.Y = 0.0f;
             }
           
 
