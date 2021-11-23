@@ -4,19 +4,19 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack1.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack2.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack3.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Background.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Death.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Fall.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Hills Free (update 3.0).png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Idle.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Jump.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Run.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/SET1_Mainlev_build.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit - white silhouette.png</File>
-    <File>C:/Users/boets/OneDrive/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack1.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack2.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Attack3.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Background.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Death.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Fall.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Hills Free (update 3.0).png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Idle.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Jump.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Run.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/SET1_Mainlev_build.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit - white silhouette.png</File>
+    <File>C:/Users/issam/Documents/GitHub/Game-Development-Project/Game-Development-Project/Game-Development-Project/Content/Take Hit.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -16,10 +16,18 @@ namespace GameDevelopmentProject
 
        
 
-        public void Move(Hero hero, int Xnumber, float Ynumber)
+        public void Move(Hero hero, int Xnumber, float Ynumber, GameTime gameTime)
         {
-
-                hero.position += new Vector2(Xnumber, Ynumber);
+                var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (Xnumber > 0)
+            {
+                hero.position += new Vector2(0.3f * delta, Ynumber);
+            }
+            else
+            {
+                hero.position += new Vector2(-0.3f * delta, Ynumber);
+            }
+            
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
             
               

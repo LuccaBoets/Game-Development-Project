@@ -61,7 +61,7 @@ namespace GameDevelopmentProject
                 ElapsedGameTime = 0;
             }
 
-            if (count > 7)
+            if (count > frames.Count - 1)
             {
                 count = 0;
             }

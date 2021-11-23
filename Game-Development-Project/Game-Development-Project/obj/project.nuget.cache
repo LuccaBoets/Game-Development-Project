@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "aUgz/0ZZEBqmkGMrBeKe5JOVN/C+BiTQ92BZ4ihvS1fuoLZiuk7qPjDhOZjLDBkloGWOuKqwRm09TjzblwiT0A==",
+  "dgSpecHash": "1fL+4Th4OO3YeTGHAzadjeEecV2hHRiqkHvwWWD5zv90A+FTSb6bmwgiex3RNItjQ4ZlBnNogwX/xEj778rSNQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project.csproj",
-=======
-  "dgSpecHash": "1SLz+JMF6Xg9BQucCfiOJDMYUFGX9JLBH5kgQlRYIuQd3pZbmWDybFyVYR1mRcYh+Py27IbwFbNStthfdrxruQ==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
->>>>>>> e4603ee88164489988184e76b75ab561cc9faf68
+  "projectFilePath": "C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\issam\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\issam\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
@@ -132,5 +126,12 @@
     "C:\\Users\\issam\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\issam\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\issam\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

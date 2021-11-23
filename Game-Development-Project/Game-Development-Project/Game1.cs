@@ -49,7 +49,7 @@ namespace GameDevelopmentProject
 
             scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
             scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(800, 0, 1600, 900));
-            var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content), Animaties.GetFallAnimatieFromHero(Content) };
+            var heroAnimaties = new List<Animatie>() { Animaties.GetIdleAnimatieFromHero(Content), Animaties.GetRunAnimatieFromHero(Content), Animaties.GetFallAnimatieFromHero(Content), Animaties.GetJumpAnimatieFromHero(Content) };
 
             hero = new Hero(heroAnimaties);
 
@@ -82,12 +82,12 @@ namespace GameDevelopmentProject
             {
 
 
-                move2.Move(hero, -speed, 0.0f);
+                move2.Move(hero, -speed, 0.0f, gameTime);
                 hero.lookingRight = true;
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
 
-                hero.position -= new Vector2(3.0f, 0.0f);
+                hero.position -= new Vector2(0.5f, 0.0f);
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
                 hero.lookingRight = true;
                 idle = false;
@@ -98,7 +98,7 @@ namespace GameDevelopmentProject
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
 
-                move2.Move(hero, speed, 0.0f);
+                move2.Move(hero, speed, 0.0f, gameTime);
                 hero.lookingRight = false;
 
                 scrolling1.Update(speed);
@@ -111,19 +111,20 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                idle = false;
+                /*idle = false;
                 //Down
                 hero.position += new Vector2(0.0f, 3.0f);
-
+                */
             }
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
+                /*
                 idle = false;
                 //Up
                 hero.position += new Vector2(0.0f, -3.0f);
-
+                */
             }
 
             if (idle)
@@ -138,6 +139,7 @@ namespace GameDevelopmentProject
             {
 
                 move2.Jump(hero);
+         
                 move2.jumped = true;
 
             }
@@ -145,11 +147,19 @@ namespace GameDevelopmentProject
 
             if (move2.jumped)
             {
-                move2.velocity.Y +=  0.15f * 1f;
-               
+                move2.velocity.Y +=  0.15f * 1f;//gravity
+
+                if(move2.velocity.Y > 0)
+                {
+                    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
+                }
+                else
+                {
+                    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
+                }
             }
 
-            if(hero.position.Y > 700)
+            if(hero.position.Y > 800)
             {
                 move2.jumped = false;
             }

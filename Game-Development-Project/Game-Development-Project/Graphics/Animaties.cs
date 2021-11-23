@@ -34,7 +34,7 @@ namespace GameDevelopmentProject
             var animation = new Animatie(texture);
 
             animation.AnimatieNaam = HeroAnimations.run;
-            //animation.offset = new Vector2(2, 0);
+            animation.offset = new Vector2(1, 0);
 
             for (int i = 0; i < 8; i++)
             {
@@ -43,7 +43,6 @@ namespace GameDevelopmentProject
 
             return animation;
         }
-
         public static Animatie GetFallAnimatieFromHero(ContentManager content)
         {
             Texture2D texture = content.Load<Texture2D>("Fall");
@@ -52,9 +51,25 @@ namespace GameDevelopmentProject
 
             animation.AnimatieNaam = HeroAnimations.fall;
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 2; i++)
             {
                 animation.addFrame(new AnimatieFrame(new Rectangle(44 * i, 0, 44, 51)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetJumpAnimatieFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Jump");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.jump;
+
+            for (int i = 0; i < 2; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(41 * i, 0, 41, 54)));
             }
 
             return animation;
