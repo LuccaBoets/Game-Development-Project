@@ -57,9 +57,12 @@ namespace GameDevelopmentProject
 
             Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
 
-            for (int i = 0; i < 30; i++)
+            tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+
+
+            for (int i = 10; i < 30; i++)
             {
-                tilemap.addTile(textureTileSet, new Vector2(i, 5), new Rectangle(96, 448, 16, 16), GraphicsDevice);
+                tilemap.addTile(textureTileSet, new Vector2(i, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice);
             }
 
             //for (int i = 0; i < 30; i++)
@@ -111,20 +114,20 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                /*idle = false;
+                idle = false;
                 //Down
                 hero.position += new Vector2(0.0f, 3.0f);
-                */
+                
             }
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
-                /*
+                
                 idle = false;
                 //Up
                 hero.position += new Vector2(0.0f, -3.0f);
-                */
+                
             }
 
             if (idle)

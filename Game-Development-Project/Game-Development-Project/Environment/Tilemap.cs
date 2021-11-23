@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Behavior;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -49,10 +50,9 @@ namespace GameDevelopmentProject.Environment
             return croppedTexture;
         }
 
-        public bool touchGround(Rectangle rectangle)
+        public List<CollisionDirection> hitAnyTile(Rectangle rectangle)
         {
-            //var temp = Rectangle.Intersect(tiles[0].getRectangle(), rectangle);
-            return tiles.Any(x => !Rectangle.Intersect(x.getRectangle(), rectangle).IsEmpty);
+            return tiles.Select(x => x.CollisionDetection(rectangle)).Distinct().ToList();
         }
     }
 }
