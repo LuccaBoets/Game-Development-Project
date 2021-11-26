@@ -54,22 +54,16 @@ namespace GameDevelopmentProject
             currentAnimation.update(gameTime);
             //position += movement.velocity;
 
-            movement.update(gameTime, this, this);
 
-            var rectangle = currentAnimation.texture.Bounds;
 
-            rectangle.X += (int)position.X;
-            rectangle.Y += (int)position.Y;
-            rectangle.Width = (int)(currentAnimation.bounds.X * 2);
-            rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
-
-            foreach (var direction in tilemap.hitAnyTile(rectangle))
+            foreach (var direction in tilemap.hitAnyTile(getCollsionRectangle()))
             {
                 switch (direction)
                 {
                     case CollisionDirection.north:
 
                         //position += new Vector2(0, -3);
+                        movement.inAir = false;
                         movement.velocity.Y = 0;
                         break;
                     case CollisionDirection.south:
@@ -92,11 +86,23 @@ namespace GameDevelopmentProject
                         break;
                 }
             }
+
+            movement.update(gameTime, this, this);
+
         }
 
         public Rectangle getCollsionRectangle()
         {
-            throw new NotImplementedException();
+
+            //var rectangle = currentAnimation.texture.Bounds;
+
+            //rectangle.X += (int)position.X;
+            //rectangle.Y += (int)position.Y;
+            //rectangle.Width = (int)(currentAnimation.bounds.X * 2);
+            //rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
+
+            //return rectangle;
+            return new Rectangle((int)position.X, (int)position.Y, 34 * 2, 54 * 2);
         }
 
         public CollisionDirection CollisionDetection(Rectangle rectangle)
