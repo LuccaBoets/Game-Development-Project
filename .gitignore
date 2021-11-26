@@ -64,3 +64,6 @@ monodroid*.msi
 *.VC.opendb
 
 artifacts/
+
+#Custom
+Game-Development-Project\Content
