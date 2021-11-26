@@ -1,66 +1,138 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevelopmentProject.Content.data;
+using GameDevelopmentProject.Graphics;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace GameDevelopmentProject
 {
     public class Movement
-{
+    {
         public const int speed = 3;
         public const float gravity = 1;
-        public bool jumped;
+        public bool inAir;
         public Vector2 velocity;
-      
+        public int maxSpeedX { get; set; } = 5;
+        public bool isButtonXPressed { get; set; } = false;
 
-       
 
-        public void Move(Hero hero, int Xnumber, GameTime gameTime)
+        //public void Move(Hero hero, int Xnumber, GameTime gameTime)
+        //{
+        //    var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+        //    if (Xnumber > 0) //Right
+        //    {
+        //        hero.position += new Vector2(0.3f * delta, 0.0f);
+        //        //velocity.X += 1f;
+        //        hero.lookingRight = false;
+        //    }
+        //    else //Left
+        //    {
+        //        hero.position += new Vector2(-0.3f * delta, 0.0f);
+        //        //velocity.X += -1f;
+
+        //        hero.lookingRight = true;
+        //    }
+
+        //    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+
+
+        //}
+
+        public void right(IAnimationable animationable)
         {
-            var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (Xnumber > 0) //Right
+            velocity.X += 1f;
+            isButtonXPressed = true;
+
+
+            animationable.lookingRight = false;
+
+            if (!animationable.currentAnimation.AnimatieNaam.Equals(HeroAnimations.run))
             {
-                hero.position += new Vector2(0.3f * delta, 0.0f);
-                hero.lookingRight = false;
+                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
             }
-            else //Left
-            {
-                hero.position += new Vector2(-0.3f * delta, 0.0f);
-                hero.lookingRight = true;
-            }
-            
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
-            
-              
         }
 
-        public void Jump(Hero hero)
+        public void left(IAnimationable animationable)
         {
+            velocity.X -= 1f;
+            isButtonXPressed = true;
 
-           hero.position = new Vector2(hero.position.X, hero.position.Y -10f);
-           velocity.Y = -6f;
-   
+            animationable.lookingRight = true;
+
+            if (!animationable.currentAnimation.AnimatieNaam.Equals(HeroAnimations.run))
+            {
+                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+            }
         }
 
-        public void Down(Hero hero)
+        public void jump(Hero hero)
+        {
+
+            //hero.position = new Vector2(hero.position.X, hero.position.Y -10f);
+            velocity.Y = -6f;
+            inAir = true;
+
+        }
+
+        public void down()
         {
             velocity.Y += 0.15f * gravity;
 
-            if (velocity.Y > 0)
-            {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
-            }
-            else
-            {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
-            }
         }
 
-        public void update(GameTime gameTime)
+        public void update(GameTime gameTime, IAnimationable animationable, IMoveable moveable)
         {
+            if (velocity.X >= maxSpeedX)
+            {
+                velocity.X = maxSpeedX;
+            }
+            else if (velocity.X <= -maxSpeedX)
+            {
+                velocity.X = -maxSpeedX;
+            }
 
+            if (!isButtonXPressed)
+            {
+                if (velocity.X > 0)
+                {
+                    velocity.X -= 0.5f;
+
+                }
+                else if (velocity.X < 0)
+                {
+                    velocity.X += 0.5f;
+                }
+            }
+
+
+
+            if (inAir)
+            {
+
+                down();
+
+                if (velocity.Y > 0)
+                {
+                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
+                }
+                else
+                {
+                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
+                }
+            }
+
+            moveable.position += velocity * gameTime.ElapsedGameTime.Ticks / 100000;
+
+            Debug.WriteLine(velocity);
+
+            //if (moveable.position.Y >= )
+            //{
+
+            //}
+            isButtonXPressed = false;
         }
-
     }
 }

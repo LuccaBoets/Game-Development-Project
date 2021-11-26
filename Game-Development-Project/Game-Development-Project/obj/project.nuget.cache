@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2uEUCFUtcltwwRB3iZPB2ed2+szzyiXkOpTJ+ImY5qwCQCSpjnHWzA+kdsHGAWs3eH4tzuWklAyxA0SHFbteGw==",
+  "dgSpecHash": "1SLz+JMF6Xg9BQucCfiOJDMYUFGX9JLBH5kgQlRYIuQd3pZbmWDybFyVYR1mRcYh+Py27IbwFbNStthfdrxruQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\boets\\OneDrive\\Documents\\GitHub\\Game-Development-Project\\Game-Development-Project\\Game-Development-Project\\GameDevelopmentProject.csproj",
   "expectedPackageFiles": [
@@ -124,8 +124,7 @@
     "C:\\Users\\boets\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
     "C:\\Users\\boets\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\boets\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\boets\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\boets\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512"
+    "C:\\Users\\boets\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512"
   ],
   "logs": []
 }

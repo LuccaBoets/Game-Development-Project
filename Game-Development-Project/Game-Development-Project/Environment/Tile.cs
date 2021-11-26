@@ -41,10 +41,6 @@ namespace GameDevelopmentProject.Environment
         {
             Rectangle rectangle1 = this.getCollsionRectangle();
             var temp = CollisionManager.detection(rectangle1, rectangle);
-            if (temp != CollisionDirection.noHit)
-            {
-                Debug.WriteLine(temp);
-            }
             return temp;
             //return CollisionManager.detection(this.getCollsionRectangle(), rectangle);
         }

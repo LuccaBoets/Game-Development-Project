@@ -32,8 +32,6 @@ namespace GameDevelopmentProject.Behavior
         {
             double degrees = rectanglesToDegrees(rectangle1, rectangle2);
 
-            Debug.WriteLine(degrees);
-
             if (degrees >= 45 && degrees < 135)
             {
                 return CollisionDirection.north;

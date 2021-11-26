@@ -1,5 +1,7 @@
 ﻿using GameDevelopmentProject.Behavior;
+using GameDevelopmentProject.Content.data;
 using GameDevelopmentProject.Environment;
+using GameDevelopmentProject.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -21,18 +23,16 @@ namespace GameDevelopmentProject
         attack3,
         death
     }
-    public class Hero : ICollisionable
+    public class Hero : ICollisionable, IMoveable, IAnimationable
     {
 
-        public Movement move;
-
-        // dict key: enum (idle,attack,...) , value: Animatie
         public Animatie currentAnimation { get; set; }
         public List<Animatie> Animaties { get; set; }
+        public bool lookingRight { get; set; }
 
         public Vector2 position { get; set; }
 
-        public bool lookingRight { get; set; }
+        public Movement movement { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
@@ -41,8 +41,8 @@ namespace GameDevelopmentProject
             this.position = new Vector2(0, 700);
 
 
-            move = new Movement();
-            move.jumped = true;
+            movement = new Movement();
+            //movement.inAir = true;
 
             this.lookingRight = true;
 
@@ -52,7 +52,10 @@ namespace GameDevelopmentProject
         public void update(GameTime gameTime, Tilemap tilemap)
         {
             currentAnimation.update(gameTime);
-            position += move.velocity;
+            //position += movement.velocity;
+
+            movement.update(gameTime, this, this);
+
             var rectangle = currentAnimation.texture.Bounds;
 
             rectangle.X += (int)position.X;
@@ -67,20 +70,20 @@ namespace GameDevelopmentProject
                     case CollisionDirection.north:
 
                         //position += new Vector2(0, -3);
-                        move.velocity.Y = 0;
+                        movement.velocity.Y = 0;
                         break;
                     case CollisionDirection.south:
                         //position += new Vector2(0, 3f);
-                        move.velocity.Y = 0;
+                        movement.velocity.Y = 0;
                         break;
                     case CollisionDirection.west:
                         //position += new Vector2(3, 0);
-                        move.velocity.X = 0;
+                        movement.velocity.X = 0;
 
                         break;
                     case CollisionDirection.east:
                         //position += new Vector2(-3, 0);
-                        move.velocity.X = 0;
+                        movement.velocity.X = 0;
 
                         break;
                     case CollisionDirection.noHit:

@@ -5,10 +5,8 @@ using System.Text;
 
 namespace GameDevelopmentProject.Content.data
 {
-    public interface IMoveable : IPositionable
+    public interface IPositionable
     {
-        public Movement movement { get; set; }
-
-        //public Vector2 position { get; set; }
+        public Vector2 position { get; set; }
     }
 }

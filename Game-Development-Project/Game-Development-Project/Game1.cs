@@ -87,7 +87,7 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             { 
-                hero.move.Move(hero, -speed, gameTime);
+                hero.movement.left(hero);
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
                 idle = false;
@@ -95,8 +95,10 @@ namespace GameDevelopmentProject
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
-            { 
-                hero.move.Move(hero, speed, gameTime);
+            {
+                hero.movement.right(hero);
+
+                //hero.movement.Move(hero, speed, gameTime);
                 scrolling1.Update(speed);
                 scrolling2.Update(speed);
                 idle = false;
@@ -129,31 +131,31 @@ namespace GameDevelopmentProject
 
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.move.jumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.movement.inAir == false)
             {
 
-                hero.move.Jump(hero);
+                hero.movement.jump(hero);
          
-                hero.move.jumped = true;
+                //hero.movement.inAir = true;
 
             }
 
 
-            if (hero.move.jumped)
-            {
-                hero.move.Down(hero);//gravity
-            }
+            //if (hero.movement.jumped)
+            //{
+            //    hero.movement.down(hero);//gravity
+            //}
 
-            if(hero.position.Y > 800)
-            {
-                hero.move.jumped = false;
-            }
+            //if(hero.position.Y > 800)
+            //{
+            //    hero.movement.jumped = false;
+            //}
               
            
-            if (hero.move.jumped == false)
-            {
-                hero.move.velocity.Y = 0.0f;
-            }
+            //if (hero.movement.jumped == false)
+            //{
+            //    hero.movement.velocity.Y = 0.0f;
+            //}
           
 
             /*if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0) 
