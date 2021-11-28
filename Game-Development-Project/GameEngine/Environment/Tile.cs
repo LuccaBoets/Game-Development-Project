@@ -1,4 +1,5 @@
-﻿using GameDevelopmentProject.Behavior;
+﻿using GameEngine.Behavior;
+using GameEngine.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace GameDevelopmentProject.Environment
+namespace GameEngine.Environment
 {
     public class Tile : ICollisionable
     {
@@ -27,7 +28,7 @@ namespace GameDevelopmentProject.Environment
             _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0f);
         }
 
-        public Rectangle getCollsionRectangle()
+        public Rectangle GetCollsionRectangle()
         {
             var rectangle = tileType.texture.Bounds;
 
@@ -43,7 +44,7 @@ namespace GameDevelopmentProject.Environment
         {
             if (tileType.solid)
             {
-                Rectangle rectangle1 = this.getCollsionRectangle();
+                Rectangle rectangle1 = this.GetCollsionRectangle();
                 var temp = CollisionManager.detection(rectangle1, rectangle);
                 return temp;
             }

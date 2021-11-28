@@ -1,5 +1,4 @@
-﻿using GameDevelopmentProject.Content.data;
-using GameDevelopmentProject.Graphics;
+﻿using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace GameDevelopmentProject
+namespace GameEngine.Data
 {
     public class Movement
     {

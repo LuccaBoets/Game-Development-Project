@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.Content.data
+namespace GameEngine.Data
 {
     public interface IMoveable : IPositionable
     {
-        public Movement movement { get; set; }
+        public Movement Movement { get; set; }
 
         //public Vector2 position { get; set; }
     }

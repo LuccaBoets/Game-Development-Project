@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject
+namespace GameEngine.Data
 {
     class Menu
     {

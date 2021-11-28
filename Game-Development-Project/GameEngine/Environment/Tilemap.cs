@@ -1,5 +1,5 @@
-﻿using GameDevelopmentProject.Behavior;
-using GameDevelopmentProject.ExtensionMethods;
+﻿using GameEngine.Behavior;
+using GameEngine.ExtensionMethods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameDevelopmentProject.Environment
+namespace GameEngine.Environment
 {
     public class Tilemap
     {

@@ -1,13 +1,16 @@
-﻿using GameDevelopmentProject.Environment;
-using GameDevelopmentProject.ExtensionMethods;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Environment;
+using GameEngine.Graphics;
+using GameEngine.ExtensionMethods;
+using GameEngine.Data;
+using GameEngine.Background;
 
-namespace GameDevelopmentProject
+namespace GameEngine
 {
     public class Game1 : Game
     {
@@ -36,8 +39,8 @@ namespace GameDevelopmentProject
         protected override void Initialize()
         {
 
-            _graphics.PreferredBackBufferWidth = Data.ScreenW;
-            _graphics.PreferredBackBufferHeight = Data.ScreenH;
+            _graphics.PreferredBackBufferWidth = Settings.ScreenW;
+            _graphics.PreferredBackBufferHeight = Settings.ScreenH;
             this.Window.ClientSizeChanged +=
             (sender, e) =>
             {
@@ -130,7 +133,7 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
-                hero.movement.left(hero);
+                hero.Movement.left(hero);
                 scrolling1.Update(-speed);
                 scrolling2.Update(-speed);
                 idle = false;
@@ -139,7 +142,7 @@ namespace GameDevelopmentProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                hero.movement.right(hero);
+                hero.Movement.right(hero);
 
                 //hero.movement.Move(hero, speed, gameTime);
                 scrolling1.Update(speed);
@@ -174,10 +177,10 @@ namespace GameDevelopmentProject
 
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.movement.inAir == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
             {
 
-                hero.movement.jump(hero);
+                hero.Movement.jump(hero);
 
                 //hero.movement.inAir = true;
 
@@ -230,8 +233,8 @@ namespace GameDevelopmentProject
             tilemap.draw(_spriteBatch);
 
             Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-            rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17 * 2);
-            rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27 * 2);
+            rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+            rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
             GraphicsDevice.Viewport = new Viewport(rectangle);
 
 
