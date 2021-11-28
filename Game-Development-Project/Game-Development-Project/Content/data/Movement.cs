@@ -127,7 +127,7 @@ namespace GameDevelopmentProject
 
             moveable.position += velocity * gameTime.ElapsedGameTime.Ticks / 100000;
 
-            Debug.WriteLine(velocity);
+            //Debug.WriteLine(velocity);
 
             //if (moveable.position.Y >= )
             //{

@@ -9,17 +9,17 @@ namespace GameDevelopmentProject.Environment
     public class TileType
     {
         public Texture2D texture { get; set; }
-        public bool noHitBox { get; set; }
+        public bool solid { get; set; }
 
         public TileType(Texture2D texture)
         {
             this.texture = texture;
-            this.noHitBox = false;
+            this.solid = true;
         }
 
         public TileType(Texture2D texture, bool noHitBox) : this(texture)
         {
-            this.noHitBox = noHitBox;
+            this.solid = noHitBox;
         }
     }
 }

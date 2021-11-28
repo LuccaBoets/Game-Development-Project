@@ -13,35 +13,42 @@ namespace GameDevelopmentProject.Environment
         public TileType tileType { get; set; }
 
         public Vector2 position { get; set; }
+        public SpriteEffects spriteEffects { get; set; }
 
-        public Tile(TileType tileType, Vector2 position)
+        public Tile(TileType tileType, Vector2 position, SpriteEffects spriteEffects)
         {
             this.tileType = tileType;
             this.position = position;
+            this.spriteEffects = spriteEffects;
         }
 
         public void draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0f);
         }
 
         public Rectangle getCollsionRectangle()
         {
             var rectangle = tileType.texture.Bounds;
 
-            rectangle.X = (int) position.X;
-            rectangle.Y = (int) position.Y;
+            rectangle.X = (int)position.X;
+            rectangle.Y = (int)position.Y;
             rectangle.Width *= 2;
             rectangle.Height *= 2;
 
             return rectangle;
         }
 
-        public CollisionDirection CollisionDetection(Rectangle rectangle)
+        public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
-            Rectangle rectangle1 = this.getCollsionRectangle();
-            var temp = CollisionManager.detection(rectangle1, rectangle);
-            return temp;
+            if (tileType.solid)
+            {
+                Rectangle rectangle1 = this.getCollsionRectangle();
+                var temp = CollisionManager.detection(rectangle1, rectangle);
+                return temp;
+            }
+
+            return null;
             //return CollisionManager.detection(this.getCollsionRectangle(), rectangle);
         }
     }

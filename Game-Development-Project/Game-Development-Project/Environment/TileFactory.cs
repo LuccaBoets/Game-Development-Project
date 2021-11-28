@@ -11,18 +11,17 @@ namespace GameDevelopmentProject.Environment
 
         public static List<TileType> TileTypes { get; set; } = new List<TileType>();
 
-        public static TileType GetTileType(Texture2D texture)
+        public static TileType GetTileType(Texture2D texture, bool solid = true)
         {
              var tileType = TileTypes.FirstOrDefault(x => x.texture.Equals(texture));
 
             if (tileType == null)
             {
-                tileType = new TileType(texture);
+                tileType = new TileType(texture, solid);
                 TileTypes.Add(tileType);
             }
 
             return tileType;
         }
-
     }
 }

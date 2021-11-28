@@ -1,4 +1,5 @@
 ﻿using GameDevelopmentProject.Behavior;
+using GameDevelopmentProject.ExtensionMethods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,17 +20,17 @@ namespace GameDevelopmentProject.Environment
             this.scale = 2f;
         }
 
-        public void addTile(Texture2D texture, Vector2 position)
+        public void addTile(Texture2D texture, Vector2 position, SpriteEffects spriteEffects, bool noHitBox = true)
         {
-            var tileType = TileFactory.GetTileType(texture);
-            tiles.Add(new Tile(tileType, position * 16 * scale));
+            var tileType = TileFactory.GetTileType(texture, noHitBox);
+            tiles.Add(new Tile(tileType, position * 16 * scale, spriteEffects));
         }
 
-        public void addTile(Texture2D textureTileSet, Vector2 position, Rectangle rectangle, GraphicsDevice graphicsDevice)
+        public void addTile(Texture2D textureTileSet, Vector2 position, Rectangle rectangle, GraphicsDevice graphicsDevice, SpriteEffects spriteEffects, bool noHitBox = true)
         {
-            Texture2D croppedTexture = cropTexture(textureTileSet, rectangle, graphicsDevice);
+            //Texture2D croppedTexture = cropTexture(textureTileSet, rectangle, graphicsDevice);
 
-            addTile(croppedTexture, position);
+            addTile(textureTileSet.Cut(rectangle, graphicsDevice), position, spriteEffects, noHitBox);
         }
 
         public void draw(SpriteBatch _spriteBatch)
@@ -40,19 +41,19 @@ namespace GameDevelopmentProject.Environment
             }
         }
 
-        private static Texture2D cropTexture(Texture2D textureTileSet, Rectangle rectangle, GraphicsDevice graphicsDevice)
-        {
-            Texture2D croppedTexture = new Texture2D(graphicsDevice, rectangle.Width, rectangle.Height);
+        //private static Texture2D cropTexture(Texture2D textureTileSet, Rectangle rectangle, GraphicsDevice graphicsDevice)
+        //{
+        //    Texture2D croppedTexture = new Texture2D(graphicsDevice, rectangle.Width, rectangle.Height);
 
-            Color[] data = new Color[rectangle.Width * rectangle.Height];
-            textureTileSet.GetData(0, rectangle, data, 0, rectangle.Width * rectangle.Height);
-            croppedTexture.SetData(data);
-            return croppedTexture;
-        }
+        //    Color[] data = new Color[rectangle.Width * rectangle.Height];
+        //    textureTileSet.GetData(0, rectangle, data, 0, rectangle.Width * rectangle.Height);
+        //    croppedTexture.SetData(data);
+        //    return croppedTexture;
+        //}
 
-        public List<CollisionDirection> hitAnyTile(Rectangle rectangle)
+        public List<Tuple<CollisionDirection, Rectangle>> hitAnyTile(Rectangle rectangle)
         {
-            return tiles.Select(x => x.CollisionDetection(rectangle)).Distinct().ToList();
+            return tiles.Select(x => x.CollisionDetection(rectangle)).Where(x => x != null).Where(x => x.Item1 != CollisionDirection.noHit).GroupBy(x => x.Item1).Select(x => x.First()).ToList();
         }
     }
 }

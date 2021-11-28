@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -38,11 +39,9 @@ namespace GameDevelopmentProject
         {
             this.Animaties = animaties;
 
-            this.position = new Vector2(0, 700);
-
+            this.position = new Vector2(100, 700);
 
             movement = new Movement();
-            //movement.inAir = true;
 
             this.lookingRight = true;
 
@@ -51,37 +50,40 @@ namespace GameDevelopmentProject
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {
-            currentAnimation.update(gameTime);
-            //position += movement.velocity;
+            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(getCollsionRectangle());
 
-
-
-            foreach (var direction in tilemap.hitAnyTile(getCollsionRectangle()))
+            foreach (var direction in directions)
             {
-                switch (direction)
+                switch (direction.Item1)
                 {
                     case CollisionDirection.north:
-
-                        //position += new Vector2(0, -3);
+                        Debug.WriteLine(position);
+                        position = new Vector2(position.X, direction.Item2.Y - getCollsionRectangle().Height);
                         movement.inAir = false;
                         movement.velocity.Y = 0;
                         break;
+
                     case CollisionDirection.south:
-                        //position += new Vector2(0, 3f);
+                        //position += new Vector2(0, direction.Item2.Height);
+                        position = new Vector2(position.X, direction.Item2.Y + direction.Item2.Height);
+
                         movement.velocity.Y = 0;
                         break;
+
                     case CollisionDirection.west:
-                        //position += new Vector2(3, 0);
-                        movement.velocity.X = 0;
+                        position = new Vector2(direction.Item2.X + direction.Item2.Width, position.Y);
 
+
+                        movement.velocity.X = 0;
                         break;
+
                     case CollisionDirection.east:
-                        //position += new Vector2(-3, 0);
-                        movement.velocity.X = 0;
+                        position = new Vector2(direction.Item2.X - getCollsionRectangle().Width, position.Y);
 
+                        //position += new Vector2(-direction.Item2.Width, 0);
+                        movement.velocity.X = 0;
                         break;
-                    case CollisionDirection.noHit:
-                        break;
+
                     default:
                         break;
                 }
@@ -89,6 +91,7 @@ namespace GameDevelopmentProject
 
             movement.update(gameTime, this, this);
 
+            currentAnimation.update(gameTime);
         }
 
         public Rectangle getCollsionRectangle()
@@ -102,13 +105,21 @@ namespace GameDevelopmentProject
             //rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
 
             //return rectangle;
-            return new Rectangle((int)position.X, (int)position.Y, 34 * 2, 54 * 2);
+            return new Rectangle((int)(position.X + movement.velocity.X), (int)(position.Y + movement.velocity.Y), 34 * 2, 54 * 2);
         }
 
-        public CollisionDirection CollisionDetection(Rectangle rectangle)
+        public Rectangle getTextureRectangle()
         {
-            throw new NotImplementedException();
+            var rectangle = currentAnimation.texture.Bounds;
+
+            rectangle.X += (int)position.X;
+            rectangle.Y += (int)position.Y;
+            rectangle.Width = (int)(currentAnimation.bounds.X * 2);
+            rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
+
+            return rectangle;
         }
+
 
         public void draw(SpriteBatch _spriteBatch)
         {
@@ -122,6 +133,10 @@ namespace GameDevelopmentProject
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0f);
         }
 
+        public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

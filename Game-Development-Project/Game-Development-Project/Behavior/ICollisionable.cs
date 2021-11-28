@@ -8,7 +8,7 @@ namespace GameDevelopmentProject.Behavior
     interface ICollisionable
     {
         public Rectangle getCollsionRectangle();
-        public CollisionDirection CollisionDetection(Rectangle rectangle);
+        public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle);
 
     }
 }

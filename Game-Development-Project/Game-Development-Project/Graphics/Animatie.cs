@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameDevelopmentProject
@@ -60,6 +61,7 @@ namespace GameDevelopmentProject
                 count++;
                 ElapsedGameTime = 0;
             }
+
 
             if (count > frames.Count - 1)
             {
