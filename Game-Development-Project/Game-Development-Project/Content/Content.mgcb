@@ -121,7 +121,7 @@
 /processorParam:TextureFormat=Color
 /build:Jump.png
 
-#begin Jump.png
+#begin press-enter-text.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -131,7 +131,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Jump.png
+/build:press-enter-text.png
 
 #begin Run.png
 /importer:TextureImporter

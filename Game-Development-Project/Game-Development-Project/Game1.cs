@@ -8,7 +8,6 @@ using GameEngine.Environment;
 using GameEngine.Graphics;
 using GameEngine.ExtensionMethods;
 using GameEngine.Data;
-using GameEngine.Background;
 
 namespace GameEngine
 {
@@ -268,18 +267,15 @@ namespace GameEngine
           
             if (buttonIspressed)
             {
-                do
-                {
 
-                } while (buttonIspressed);
                 scrolling1.Draw(_spriteBatch);
                 scrolling2.Draw(_spriteBatch);
                 hero.draw(_spriteBatch);
                 tilemap.draw(_spriteBatch);
 
                 Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-                rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17 * 2);
-                rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27 * 2);
+                rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+                rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
                 GraphicsDevice.Viewport = new Viewport(rectangle);
 
             }
@@ -287,7 +283,7 @@ namespace GameEngine
             {
                 background2.Draw(_spriteBatch);
              
-                _spriteBatch.Draw(image, new Vector2(750, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+                _spriteBatch.Draw(image, new Vector2(620, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
             }
 
             _spriteBatch.End();
