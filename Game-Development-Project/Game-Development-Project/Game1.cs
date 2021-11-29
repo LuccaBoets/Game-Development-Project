@@ -261,7 +261,6 @@ namespace GameEngine
             rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
             GraphicsDevice.Viewport = new Viewport(rectangle);
 
-
             _spriteBatch.End();
 
 
