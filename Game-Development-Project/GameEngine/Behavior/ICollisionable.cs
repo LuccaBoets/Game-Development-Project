@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameEngine.Behavior;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.Behavior
+namespace GameEngine.Characters
 {
     interface ICollisionable
     {
-        public Rectangle getCollsionRectangle();
+        public Rectangle GetCollsionRectangle();
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle);
 
     }

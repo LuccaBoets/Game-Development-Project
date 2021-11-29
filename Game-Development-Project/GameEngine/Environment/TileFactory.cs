@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameDevelopmentProject.Environment
+namespace GameEngine.Environment
 {
     public class TileFactory
     {

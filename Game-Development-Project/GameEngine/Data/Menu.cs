@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameDevelopmentProject
+namespace GameEngine.Data
 {
     /*public class Menu : Microsoft.Xna.Framework.DrawableGameComponent
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.Content.data
+namespace GameEngine.Data
 {
     public interface IPositionable
     {

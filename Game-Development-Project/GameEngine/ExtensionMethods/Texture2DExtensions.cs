@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.ExtensionMethods
+namespace GameEngine.ExtensionMethods
 {
     public static class Texture2DExtensions
     {

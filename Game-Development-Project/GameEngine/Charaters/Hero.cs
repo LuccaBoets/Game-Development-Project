@@ -1,7 +1,7 @@
-﻿using GameDevelopmentProject.Behavior;
-using GameDevelopmentProject.Content.data;
-using GameDevelopmentProject.Environment;
-using GameDevelopmentProject.Graphics;
+﻿using GameEngine.Behavior;
+using GameEngine.Characters;
+using GameEngine.Environment;
+using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using GameEngine.Data;
 
-namespace GameDevelopmentProject
+namespace GameEngine
 {
 
     public enum HeroAnimations
@@ -33,7 +34,7 @@ namespace GameDevelopmentProject
 
         public Vector2 position { get; set; }
 
-        public Movement movement { get; set; }
+        public Movement Movement { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
@@ -41,7 +42,7 @@ namespace GameDevelopmentProject
 
             this.position = new Vector2(100, 700);
 
-            movement = new Movement();
+            Movement = new Movement();
 
             this.lookingRight = true;
 
@@ -50,7 +51,7 @@ namespace GameDevelopmentProject
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {
-            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(getCollsionRectangle());
+            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollsionRectangle());
 
             foreach (var direction in directions)
             {
@@ -58,30 +59,30 @@ namespace GameDevelopmentProject
                 {
                     case CollisionDirection.north:
                         Debug.WriteLine(position);
-                        position = new Vector2(position.X, direction.Item2.Y - getCollsionRectangle().Height);
-                        movement.inAir = false;
-                        movement.velocity.Y = 0;
+                        position = new Vector2(position.X, direction.Item2.Y - GetCollsionRectangle().Height);
+                        Movement.inAir = false;
+                        Movement.velocity.Y = 0;
                         break;
 
                     case CollisionDirection.south:
                         //position += new Vector2(0, direction.Item2.Height);
                         position = new Vector2(position.X, direction.Item2.Y + direction.Item2.Height);
 
-                        movement.velocity.Y = 0;
+                        Movement.velocity.Y = 0;
                         break;
 
                     case CollisionDirection.west:
                         position = new Vector2(direction.Item2.X + direction.Item2.Width, position.Y);
 
 
-                        movement.velocity.X = 0;
+                        Movement.velocity.X = 0;
                         break;
 
                     case CollisionDirection.east:
-                        position = new Vector2(direction.Item2.X - getCollsionRectangle().Width, position.Y);
+                        position = new Vector2(direction.Item2.X - GetCollsionRectangle().Width, position.Y);
 
                         //position += new Vector2(-direction.Item2.Width, 0);
-                        movement.velocity.X = 0;
+                        Movement.velocity.X = 0;
                         break;
 
                     default:
@@ -89,12 +90,17 @@ namespace GameDevelopmentProject
                 }
             }
 
-            movement.update(gameTime, this, this);
+            if (tilemap.hitAnyTile(GetUnderCollisionRectangle()).Count <= 0)
+            {
+                Movement.inAir = true;
+            }
+
+            Movement.update(gameTime, this, this);
 
             currentAnimation.update(gameTime);
         }
 
-        public Rectangle getCollsionRectangle()
+        public Rectangle GetCollsionRectangle()
         {
 
             //var rectangle = currentAnimation.texture.Bounds;
@@ -105,7 +111,7 @@ namespace GameDevelopmentProject
             //rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
 
             //return rectangle;
-            return new Rectangle((int)(position.X + movement.velocity.X), (int)(position.Y + movement.velocity.Y), 34 * 2, 54 * 2);
+            return new Rectangle((int)(position.X + Movement.velocity.X), (int)(position.Y + Movement.velocity.Y), 34 * 2, 54 * 2);
         }
 
         public Rectangle getTextureRectangle()
@@ -118,6 +124,11 @@ namespace GameDevelopmentProject
             rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
 
             return rectangle;
+        }
+
+        public Rectangle GetUnderCollisionRectangle()
+        {
+            return new Rectangle((int)(position.X), (int)(position.Y + 54 * 2), 34 * 2, 1);
         }
 
 

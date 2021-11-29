@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.Graphics
+namespace GameEngine.Graphics
 {
     public interface IAnimationable
     {

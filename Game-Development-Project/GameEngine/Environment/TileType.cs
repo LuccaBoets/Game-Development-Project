@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameDevelopmentProject.Environment
+namespace GameEngine.Environment
 {
     public class TileType
     {

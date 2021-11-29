@@ -1,5 +1,4 @@
-﻿using GameDevelopmentProject.Content.data;
-using GameDevelopmentProject.Graphics;
+﻿using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace GameDevelopmentProject
+namespace GameEngine.Data
 {
     public class Movement
     {
@@ -68,12 +67,9 @@ namespace GameDevelopmentProject
             }
         }
 
-        public void jump(IMoveable moveable)
+        public void jump()
         {
-
-            //hero.position = new Vector2(hero.position.X, hero.position.Y -10f);
             velocity.Y = -6f;
-            moveable.position += new Vector2(0, -1f);
             inAir = true;
 
         }
