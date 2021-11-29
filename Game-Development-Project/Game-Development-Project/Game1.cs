@@ -13,11 +13,15 @@ namespace GameDevelopmentProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Texture2D background;
         private Hero hero { get; set; }
 
         Scrolling scrolling1;
         Scrolling scrolling2;
-
+        public bool buttonIspressed = false;
+        Background background2;
+        Background backgroundCharacterSelect;
+        Texture2D image;
 
         private Tilemap tilemap { get; set; }
 
@@ -52,9 +56,12 @@ namespace GameDevelopmentProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            background2 = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
+            backgroundCharacterSelect = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
             scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
             scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(900, 0, 1600, 900));
+            image = Content.Load<Texture2D>("press-enter-text");
+
 
             var heroAnimaties = new List<Animatie>() {
                 Animaties.GetIdleAnimatieFromHero(Content),
@@ -184,6 +191,13 @@ namespace GameDevelopmentProject
             }
 
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+
+                buttonIspressed = true;
+
+            }
+
             //if (hero.movement.jumped)
             //{
             //    hero.movement.down(hero);//gravity
@@ -213,26 +227,43 @@ namespace GameDevelopmentProject
 
             base.Update(gameTime);
         }
-
+    
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+          
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
-            scrolling1.Draw(_spriteBatch);
-            scrolling2.Draw(_spriteBatch);
 
-            hero.draw(_spriteBatch);
-            tilemap.draw(_spriteBatch);
+          
+            if (buttonIspressed)
+            {
+                do
+                {
 
-            Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-            rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17 * 2);
-            rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27 * 2);
-            GraphicsDevice.Viewport = new Viewport(rectangle);
+                } while (buttonIspressed);
+                scrolling1.Draw(_spriteBatch);
+                scrolling2.Draw(_spriteBatch);
+                hero.draw(_spriteBatch);
+                tilemap.draw(_spriteBatch);
+
+                Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+                rectangle.X = (int)((Data.ScreenW / 2) - hero.position.X - 17 * 2);
+                rectangle.Y = (int)((Data.ScreenH / 2) - hero.position.Y - 27 * 2);
+                GraphicsDevice.Viewport = new Viewport(rectangle);
+
+            }
+            else
+            {
+                background2.Draw(_spriteBatch);
+             
+                _spriteBatch.Draw(image, new Vector2(750, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            }
+
+   
 
 
             _spriteBatch.End();
