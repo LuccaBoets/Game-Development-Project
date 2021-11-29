@@ -8,7 +8,5 @@ namespace GameEngine.Data
     public interface IMoveable : IPositionable
     {
         public Movement Movement { get; set; }
-
-        //public Vector2 position { get; set; }
     }
 }

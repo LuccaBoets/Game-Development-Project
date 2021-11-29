@@ -88,7 +88,7 @@ namespace GameEngine
 
             tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
 
-            Random random = new Random();
+            Random random = new Random(1);
 
             for (int i = 10; i < 100; i++)
             {
@@ -111,6 +111,31 @@ namespace GameEngine
                 else
                 {
                     tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
+
+                }
+            }
+
+            for (int i = 10; i < 20; i++)
+            {
+                if (random.Next(0, 2) == 1)
+                {
+                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
+
+                }
+                else
+                {
+                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
+
+                }
+
+                if (random.Next(0, 2) == 1)
+                {
+                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
+
+                }
+                else
+                {
+                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
 
                 }
             }
@@ -166,7 +191,6 @@ namespace GameEngine
                 idle = false;
                 //Up
                 hero.position += new Vector2(0.0f, -3.0f);
-
             }
 
             if (idle)
@@ -180,7 +204,7 @@ namespace GameEngine
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
             {
 
-                hero.Movement.jump(hero);
+                hero.Movement.jump();
 
                 //hero.movement.inAir = true;
 
