@@ -60,8 +60,8 @@ namespace GameEngine
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background2 = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
             backgroundCharacterSelect = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
-            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(900, 0, 1600, 900));
+            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 928*2, 793*2));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 928 * 2, 793 * 2));
             image = Content.Load<Texture2D>("press-enter-text");
 
 
@@ -95,6 +95,8 @@ namespace GameEngine
             tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
 
             Random random = new Random(1);
+
+            tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
 
             for (int i = 10; i < 100; i++)
             {
@@ -268,15 +270,16 @@ namespace GameEngine
             if (buttonIspressed)
             {
 
+       
+                Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+                rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+                //rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
+                GraphicsDevice.Viewport = new Viewport(rectangle);
+
                 scrolling1.Draw(_spriteBatch);
                 scrolling2.Draw(_spriteBatch);
                 hero.draw(_spriteBatch);
                 tilemap.draw(_spriteBatch);
-
-                Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-                rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
-                rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
-                GraphicsDevice.Viewport = new Viewport(rectangle);
 
             }
             else
