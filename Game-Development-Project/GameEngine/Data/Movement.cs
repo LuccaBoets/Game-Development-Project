@@ -67,12 +67,9 @@ namespace GameEngine.Data
             }
         }
 
-        public void jump(IMoveable moveable)
+        public void jump()
         {
-
-            //hero.position = new Vector2(hero.position.X, hero.position.Y -10f);
             velocity.Y = -6f;
-            moveable.position += new Vector2(0, -1f);
             inAir = true;
 
         }

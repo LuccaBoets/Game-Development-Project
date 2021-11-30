@@ -8,7 +8,6 @@ using GameEngine.Environment;
 using GameEngine.Graphics;
 using GameEngine.ExtensionMethods;
 using GameEngine.Data;
-using GameEngine.Background;
 
 namespace GameEngine
 {
@@ -16,11 +15,15 @@ namespace GameEngine
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Texture2D background;
         private Hero hero { get; set; }
 
         Scrolling scrolling1;
         Scrolling scrolling2;
-
+        public bool buttonIspressed = false;
+        Background background2;
+        Background backgroundCharacterSelect;
+        Texture2D image;
 
         private Tilemap tilemap { get; set; }
 
@@ -55,9 +58,12 @@ namespace GameEngine
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            background2 = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
+            backgroundCharacterSelect = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
+            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 928*2, 793*2));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 928 * 2, 793 * 2));
+            image = Content.Load<Texture2D>("press-enter-text");
 
-            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 900));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(900, 0, 1600, 900));
 
             var heroAnimaties = new List<Animatie>() {
                 Animaties.GetIdleAnimatieFromHero(Content),
@@ -88,7 +94,9 @@ namespace GameEngine
 
             tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
 
-            Random random = new Random();
+            Random random = new Random(1);
+
+            tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
 
             for (int i = 10; i < 100; i++)
             {
@@ -111,6 +119,31 @@ namespace GameEngine
                 else
                 {
                     tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
+
+                }
+            }
+
+            for (int i = 10; i < 20; i++)
+            {
+                if (random.Next(0, 2) == 1)
+                {
+                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
+
+                }
+                else
+                {
+                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
+
+                }
+
+                if (random.Next(0, 2) == 1)
+                {
+                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
+
+                }
+                else
+                {
+                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
 
                 }
             }
@@ -166,7 +199,6 @@ namespace GameEngine
                 idle = false;
                 //Up
                 hero.position += new Vector2(0.0f, -3.0f);
-
             }
 
             if (idle)
@@ -180,12 +212,19 @@ namespace GameEngine
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
             {
 
-                hero.Movement.jump(hero);
+                hero.Movement.jump();
 
                 //hero.movement.inAir = true;
 
             }
 
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+
+                buttonIspressed = true;
+
+            }
 
             //if (hero.movement.jumped)
             //{
@@ -216,7 +255,7 @@ namespace GameEngine
 
             base.Update(gameTime);
         }
-
+    
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -243,14 +282,29 @@ namespace GameEngine
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            scrolling1.Draw(_spriteBatch);
-            scrolling2.Draw(_spriteBatch);
 
-            hero.draw(_spriteBatch);
-            tilemap.draw(_spriteBatch);
+          
+            if (buttonIspressed)
+            {
 
+       
+                Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+                rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+                //rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
+                GraphicsDevice.Viewport = new Viewport(rectangle);
 
+                scrolling1.Draw(_spriteBatch);
+                scrolling2.Draw(_spriteBatch);
+                hero.draw(_spriteBatch);
+                tilemap.draw(_spriteBatch);
 
+            }
+            else
+            {
+                background2.Draw(_spriteBatch);
+             
+                _spriteBatch.Draw(image, new Vector2(620, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            }
 
             _spriteBatch.End();
 

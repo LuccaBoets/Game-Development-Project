@@ -90,6 +90,11 @@ namespace GameEngine
                 }
             }
 
+            if (tilemap.hitAnyTile(GetUnderCollisionRectangle()).Count <= 0)
+            {
+                Movement.inAir = true;
+            }
+
             Movement.update(gameTime, this, this);
 
             currentAnimation.update(gameTime);
@@ -119,6 +124,11 @@ namespace GameEngine
             rectangle.Height = (int)(currentAnimation.bounds.Y * 2);
 
             return rectangle;
+        }
+
+        public Rectangle GetUnderCollisionRectangle()
+        {
+            return new Rectangle((int)(position.X), (int)(position.Y + 54 * 2), 34 * 2, 1);
         }
 
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameEngine.Background
+namespace GameEngine.Environment
 {
     public class Background
     {
@@ -14,6 +14,11 @@ namespace GameEngine.Background
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, rectangle, Color.White);
+        }
+        public Background(Texture2D newTexture, Rectangle newRectangle)
+        {
+            texture = newTexture;
+            rectangle = newRectangle;
         }
 
     }
