@@ -92,7 +92,7 @@ namespace GameEngine
 
             for (int i = 10; i < 100; i++)
             {
-                if (random.Next(0,2) == 1)
+                if (random.Next(0, 2) == 1)
                 {
                     tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.FlipHorizontally);
 
@@ -223,8 +223,25 @@ namespace GameEngine
 
             // TODO: Add your drawing code here
 
+            //Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+            //rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+            //rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
+            ////GraphicsDevice.Viewport = new Viewport(rectangle);
+            ///
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            var position = Matrix.CreateTranslation(
+  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
+  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
+  0);
+
+            var offset = Matrix.CreateTranslation(
+                Settings.ScreenW / 2,
+                Settings.ScreenH / 2,
+                0);
+
+            var Transform = position * offset;
+
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: Transform);
 
             scrolling1.Draw(_spriteBatch);
             scrolling2.Draw(_spriteBatch);
@@ -232,10 +249,7 @@ namespace GameEngine
             hero.draw(_spriteBatch);
             tilemap.draw(_spriteBatch);
 
-            Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-            rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
-            rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
-            GraphicsDevice.Viewport = new Viewport(rectangle);
+
 
 
             _spriteBatch.End();
