@@ -288,10 +288,10 @@ namespace GameEngine
             {
 
        
-                Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-                rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
-                //rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
-                GraphicsDevice.Viewport = new Viewport(rectangle);
+                //Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
+                //rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
+                ////rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
+                //GraphicsDevice.Viewport = new Viewport(rectangle);
 
                 scrolling1.Draw(_spriteBatch);
                 scrolling2.Draw(_spriteBatch);
