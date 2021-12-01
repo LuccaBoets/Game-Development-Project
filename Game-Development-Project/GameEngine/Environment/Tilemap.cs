@@ -20,17 +20,37 @@ namespace GameEngine.Environment
             this.scale = 2f;
         }
 
-        public void addTile(Texture2D texture, Vector2 position, SpriteEffects spriteEffects, bool noHitBox = true)
+        public Tilemap(Texture2D map, GraphicsDevice graphicsDevice)
+        {
+            tiles = new List<Tile>();
+            this.scale = 2f;
+
+            for (int i = 0; i < map.Width/16; i++)
+            {
+                for (int j = 0; j < map.Height/16; j++)
+                {
+                    Texture2D texture = map.Cut(new Rectangle(i * 16, j * 16, 16, 16), graphicsDevice);
+                    if (!texture.IsTransparent())
+                    {
+                        addTile(texture, new Vector2(i, j));
+                    }
+                }
+            }
+        }
+
+        public void addTile(Texture2D texture, Vector2 position, SpriteEffects spriteEffects = SpriteEffects.None, bool noHitBox = true)
         {
             var tileType = TileFactory.GetTileType(texture, noHitBox);
             tiles.Add(new Tile(tileType, position * 16 * scale, spriteEffects));
         }
 
-        public void addTile(Texture2D textureTileSet, Vector2 position, Rectangle rectangle, GraphicsDevice graphicsDevice, SpriteEffects spriteEffects, bool noHitBox = true)
+        public void addTile(Texture2D textureTileSet, Vector2 position, Rectangle rectangle, GraphicsDevice graphicsDevice, SpriteEffects spriteEffects = SpriteEffects.None, bool noHitBox = true)
         {
-            //Texture2D croppedTexture = cropTexture(textureTileSet, rectangle, graphicsDevice);
-
-            addTile(textureTileSet.Cut(rectangle, graphicsDevice), position, spriteEffects, noHitBox);
+            Texture2D texture = textureTileSet.Cut(rectangle, graphicsDevice);
+            if (!texture.IsTransparent())
+            {
+                addTile(texture, position, spriteEffects, noHitBox);
+            }
         }
 
         public void draw(SpriteBatch _spriteBatch)

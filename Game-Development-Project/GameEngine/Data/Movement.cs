@@ -104,8 +104,6 @@ namespace GameEngine.Data
                 }
             }
 
-
-
             if (inAir)
             {
 

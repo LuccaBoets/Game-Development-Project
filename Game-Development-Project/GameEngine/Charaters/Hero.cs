@@ -40,7 +40,7 @@ namespace GameEngine
         {
             this.Animaties = animaties;
 
-            this.position = new Vector2(100, 700);
+            this.position = new Vector2(700, 700);
 
             Movement = new Movement();
 

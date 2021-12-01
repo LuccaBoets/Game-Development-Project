@@ -74,79 +74,81 @@ namespace GameEngine
 
             hero = new Hero(heroAnimaties);
 
-            tilemap = new Tilemap();
+            tilemap = new Tilemap(Content.Load<Texture2D>("test2"), GraphicsDevice);
 
-            Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
+            
 
-            List<Texture2D> ground = new List<Texture2D>() {
-                textureTileSet.Cut(new Rectangle(96, 448, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(112, 448, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(128, 448, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(144, 448, 16, 16), GraphicsDevice)
-            };
+            //Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
 
-            List<Texture2D> grass = new List<Texture2D>() {
-                textureTileSet.Cut(new Rectangle(96, 432, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(112, 432, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(128, 432, 16, 16), GraphicsDevice),
-                textureTileSet.Cut(new Rectangle(144, 432, 16, 16), GraphicsDevice)
-            };
+            //List<Texture2D> ground = new List<Texture2D>() {
+            //    textureTileSet.Cut(new Rectangle(96, 448, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(112, 448, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(128, 448, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(144, 448, 16, 16), GraphicsDevice)
+            //};
 
-            tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
+            //List<Texture2D> grass = new List<Texture2D>() {
+            //    textureTileSet.Cut(new Rectangle(96, 432, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(112, 432, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(128, 432, 16, 16), GraphicsDevice),
+            //    textureTileSet.Cut(new Rectangle(144, 432, 16, 16), GraphicsDevice)
+            //};
 
-            Random random = new Random(1);
+            //tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
 
-            tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
+            //Random random = new Random(1);
 
-            for (int i = 10; i < 100; i++)
-            {
-                if (random.Next(0, 2) == 1)
-                {
-                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.FlipHorizontally);
+            //tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
 
-                }
-                else
-                {
-                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.None);
+            //for (int i = 10; i < 100; i++)
+            //{
+            //    if (random.Next(0, 2) == 1)
+            //    {
+            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.FlipHorizontally);
 
-                }
+            //    }
+            //    else
+            //    {
+            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.None);
 
-                if (random.Next(0, 2) == 1)
-                {
-                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.FlipHorizontally, false);
+            //    }
 
-                }
-                else
-                {
-                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
+            //    if (random.Next(0, 2) == 1)
+            //    {
+            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.FlipHorizontally, false);
 
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
 
-            for (int i = 10; i < 20; i++)
-            {
-                if (random.Next(0, 2) == 1)
-                {
-                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
+            //    }
+            //}
 
-                }
-                else
-                {
-                    tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
+            //for (int i = 10; i < 20; i++)
+            //{
+            //    if (random.Next(0, 2) == 1)
+            //    {
+            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
 
-                }
+            //    }
+            //    else
+            //    {
+            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
 
-                if (random.Next(0, 2) == 1)
-                {
-                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
+            //    }
 
-                }
-                else
-                {
-                    tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
+            //    if (random.Next(0, 2) == 1)
+            //    {
+            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
 
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
+
+            //    }
+            //}
 
             //for (int i = 0; i < 30; i++)
             //{
