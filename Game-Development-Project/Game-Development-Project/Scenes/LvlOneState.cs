@@ -1,84 +1,81 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameEngine.Data;
+using GameEngine.Environment;
+using GameEngine.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameEngine.Environment;
-using GameEngine.Graphics;
-using GameEngine.ExtensionMethods;
-using GameEngine.Data;
+using System.Text;
 
-namespace GameEngine
+namespace GameEngine.Scenes
 {
-    public class Game1 : Game
+    public class LvlOneState : SceneState
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Texture2D background;
         private Hero hero { get; set; }
 
         Scrolling scrolling1;
         Scrolling scrolling2;
-        public bool buttonIspressed = false;
-        Background background2;
-        Background backgroundCharacterSelect;
-        Texture2D image;
 
+        private Texture2D background;
         private Tilemap tilemap { get; set; }
-
 
         const int speed = 3;
 
-
-        public Game1()
+        public LvlOneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
-            _graphics = new GraphicsDeviceManager(this);
-            //_graphics.ToggleFullScreen();
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            LoadContent();
         }
 
-        protected override void Initialize()
+        public override void Draw(GameTime gameTime)
         {
+            var position = Matrix.CreateTranslation(
+                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
+                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
+                  0);
 
-            _graphics.PreferredBackBufferWidth = Settings.ScreenW;
-            _graphics.PreferredBackBufferHeight = Settings.ScreenH;
-            this.Window.ClientSizeChanged +=
-            (sender, e) =>
-            {
+            var offset = Matrix.CreateTranslation(
+                Settings.ScreenW / 2,
+                Settings.ScreenH / 2,
+                0);
 
-            };
-            _graphics.ApplyChanges();
+            var Transform = position * offset;
 
-            // TODO: Add your initialization logic here
-            base.Initialize();
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
+
+            scrolling1.Draw(_spriteBatch);
+            scrolling2.Draw(_spriteBatch);
+            hero.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch);
+
+            _spriteBatch.End();
         }
 
-        protected override void LoadContent()
+        public override void Initialize()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            background2 = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
-            backgroundCharacterSelect = new Background(Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
-            scrolling1 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 928 * 2, 793 * 2));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 928 * 2, 793 * 2));
-            image = Content.Load<Texture2D>("press-enter-text");
+            throw new NotImplementedException();
+        }
 
+        public override void LoadContent()
+        {
+            scrolling1 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 928 * 2, 793 * 2));
+            scrolling2 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 928 * 2, 793 * 2));
 
             var heroAnimaties = new List<Animatie>() {
-                Animaties.GetIdleAnimatieFromHero(Content),
-                Animaties.GetRunAnimatieFromHero(Content),
-                Animaties.GetFallAnimatieFromHero(Content),
-                Animaties.GetJumpAnimatieFromHero(Content)
+                Animaties.GetIdleAnimatieFromHero(MainGame.Content),
+                Animaties.GetRunAnimatieFromHero(MainGame.Content),
+                Animaties.GetFallAnimatieFromHero(MainGame.Content),
+                Animaties.GetJumpAnimatieFromHero(MainGame.Content)
             };
 
             hero = new Hero(heroAnimaties);
 
             tilemap = new Tilemap();
-            tilemap.addTiles(Content.Load<Texture2D>("test2"), GraphicsDevice);
-            tilemap.addTiles(Content.Load<Texture2D>("ForeGround1"), GraphicsDevice, 1);
-            tilemap.addTiles(Content.Load<Texture2D>("Background2"), GraphicsDevice, -1);
-            tilemap.addTiles(Content.Load<Texture2D>("Background1"), GraphicsDevice, -2);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
 
             #region old tilemap
             //Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
@@ -160,13 +157,8 @@ namespace GameEngine
             #endregion
         }
 
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             var idle = true;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
@@ -223,92 +215,7 @@ namespace GameEngine
 
             }
 
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-
-                buttonIspressed = true;
-
-            }
-
-            //if (hero.movement.jumped)
-            //{
-            //    hero.movement.down(hero);//gravity
-            //}
-
-            //if(hero.position.Y > 800)
-            //{
-            //    hero.movement.jumped = false;
-            //}
-
-
-            //if (hero.movement.jumped == false)
-            //{
-            //    hero.movement.velocity.Y = 0.0f;
-            //}
-
-
-            /*if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0) 
-            scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.texture.Width;
-            if (scrolling2.rectangle.X + scrolling2.texture.Width <= 0) 
-            scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling2.texture.Width;
-            /*scrolling1.Update();
-            scrolling2.Update();
-            */
-
             hero.update(gameTime, tilemap);
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            //Rectangle rectangle = GraphicsDevice.Viewport.Bounds;
-            //rectangle.X = (int)((Settings.ScreenW / 2) - hero.position.X - 17 * 2);
-            //rectangle.Y = (int)((Settings.ScreenH / 2) - hero.position.Y - 27 * 2);
-            ////GraphicsDevice.Viewport = new Viewport(rectangle);
-            ///
-
-            var position = Matrix.CreateTranslation(
-                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
-                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
-                  0);
-
-            var offset = Matrix.CreateTranslation(
-                Settings.ScreenW / 2,
-                Settings.ScreenH / 2,
-                0);
-
-            var Transform = position * offset;
-
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
-
-
-
-            if (buttonIspressed)
-            {
-
-                scrolling1.Draw(_spriteBatch);
-                scrolling2.Draw(_spriteBatch);
-                hero.draw(_spriteBatch);
-                tilemap.draw(_spriteBatch);
-
-            }
-            else
-            {
-                background2.Draw(_spriteBatch);
-
-                _spriteBatch.Draw(image, new Vector2(620, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
-            }
-
-            _spriteBatch.End();
-
-
-            base.Draw(gameTime);
         }
     }
 }
