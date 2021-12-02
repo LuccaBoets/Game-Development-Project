@@ -141,7 +141,7 @@ namespace GameEngine
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
         }
 
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)

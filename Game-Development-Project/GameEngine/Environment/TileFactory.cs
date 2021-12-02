@@ -11,13 +11,13 @@ namespace GameEngine.Environment
 
         public static List<TileType> TileTypes { get; set; } = new List<TileType>();
 
-        public static TileType GetTileType(Texture2D texture, bool solid = true)
+        public static TileType GetTileType(Texture2D texture)
         {
              var tileType = TileTypes.FirstOrDefault(x => x.texture.Equals(texture));
 
             if (tileType == null)
             {
-                tileType = new TileType(texture, solid);
+                tileType = new TileType(texture);
                 TileTypes.Add(tileType);
             }
 
