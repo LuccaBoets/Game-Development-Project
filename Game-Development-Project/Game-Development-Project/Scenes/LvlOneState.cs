@@ -59,14 +59,15 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            scrolling1 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 928 * 2, 793 * 2));
-            scrolling2 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 928 * 2, 793 * 2));
+            scrolling1 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 793 * 2));
+            scrolling2 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 1600, 793 * 2));
 
             var heroAnimaties = new List<Animatie>() {
                 Animaties.GetIdleAnimatieFromHero(MainGame.Content),
                 Animaties.GetRunAnimatieFromHero(MainGame.Content),
                 Animaties.GetFallAnimatieFromHero(MainGame.Content),
-                Animaties.GetJumpAnimatieFromHero(MainGame.Content)
+                Animaties.GetJumpAnimatieFromHero(MainGame.Content),
+                Animaties.GetAttack1FromHero(MainGame.Content)
             };
 
             hero = new Hero(heroAnimaties);
@@ -204,6 +205,13 @@ namespace GameEngine.Scenes
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
             }
 
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack1);
+
+
+            }
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)

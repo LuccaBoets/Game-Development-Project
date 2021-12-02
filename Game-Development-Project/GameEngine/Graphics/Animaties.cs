@@ -74,5 +74,21 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
+        public static Animatie GetAttack1FromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Attack1");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.attack1;
+
+            for (int i = 0; i < 4; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(93 * i, 0, 93, 68)));
+            }
+
+            return animation;
+        }
     }
 }
