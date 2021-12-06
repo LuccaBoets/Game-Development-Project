@@ -10,6 +10,8 @@ namespace GameEngine.Graphics
 {
     public static class Animaties
     {
+        private const int _heroWidth = 160;
+        private const int _heroHeight = 111;
 
         public static Animatie GetIdleAnimatieFromHero(ContentManager content)
         {
@@ -21,7 +23,7 @@ namespace GameEngine.Graphics
 
             for (int i = 0; i < 8; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(34 * i, 0, 34, 54)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;
@@ -34,11 +36,11 @@ namespace GameEngine.Graphics
             var animation = new Animatie(texture);
 
             animation.AnimatieNaam = HeroAnimations.run;
-            animation.offset = new Vector2(1, 0);
+            //animation.offset = new Vector2(0, 100);
 
             for (int i = 0; i < 8; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(47 * i, 0, 47, 53)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;
@@ -53,7 +55,7 @@ namespace GameEngine.Graphics
 
             for (int i = 0; i < 2; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(44 * i, 0, 44, 51)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;
@@ -69,7 +71,24 @@ namespace GameEngine.Graphics
 
             for (int i = 0; i < 2; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(41 * i, 0, 41, 54)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetAttack2AnimatieFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Attack2");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.attack2;
+            //animation.offset = new Vector2(35*2, 0); // 35
+
+            for (int i = 0; i < 4; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;

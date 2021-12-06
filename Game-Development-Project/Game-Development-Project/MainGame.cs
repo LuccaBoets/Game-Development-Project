@@ -29,16 +29,16 @@ namespace GameEngine
 
         protected override void Initialize()
         {
-
             _graphics.PreferredBackBufferWidth = Settings.ScreenW;
             _graphics.PreferredBackBufferHeight = Settings.ScreenH;
+
             this.Window.ClientSizeChanged +=
             (sender, e) =>
             {
 
             };
-            _graphics.ApplyChanges();
 
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -47,20 +47,17 @@ namespace GameEngine
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            this.ChangeSceneState(new MenuState(this, this._graphics, this._spriteBatch));
+            this.ChangeSceneState(new LvlOneState(this, this._graphics, this._spriteBatch));
 
             //this.SceneState.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
-
-
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             this.SceneState.Update(gameTime);
-
 
             base.Update(gameTime);
         }

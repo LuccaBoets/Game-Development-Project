@@ -1,5 +1,6 @@
 ﻿using GameEngine.Data;
 using GameEngine.Environment;
+using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,8 +32,8 @@ namespace GameEngine.Scenes
         public override void Draw(GameTime gameTime)
         {
             var position = Matrix.CreateTranslation(
-                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
-                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
+                  -hero.position.X - (hero.GetNextCollisionRectangle().Width / 2),
+                  -hero.position.Y - (hero.GetNextCollisionRectangle().Height / 2),
                   0);
 
             var offset = Matrix.CreateTranslation(
@@ -48,6 +49,16 @@ namespace GameEngine.Scenes
             scrolling2.Draw(_spriteBatch);
             hero.draw(_spriteBatch);
             tilemap.draw(_spriteBatch);
+
+            Texture2D _texture;
+
+            _texture = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            _texture.SetData(new Color[] { Color.DarkSlateGray });
+            _spriteBatch.Draw(_texture, hero.GetTextureRectangle(), Color.Blue);
+
+            _spriteBatch.Draw(_texture, hero.GetCollisionRectangle(), Color.Red);
+            _spriteBatch.Draw(_texture, hero.GetNextCollisionRectangle(), Color.Yellow);
+
 
             _spriteBatch.End();
         }
@@ -66,7 +77,8 @@ namespace GameEngine.Scenes
                 Animaties.GetIdleAnimatieFromHero(MainGame.Content),
                 Animaties.GetRunAnimatieFromHero(MainGame.Content),
                 Animaties.GetFallAnimatieFromHero(MainGame.Content),
-                Animaties.GetJumpAnimatieFromHero(MainGame.Content)
+                Animaties.GetJumpAnimatieFromHero(MainGame.Content),
+                Animaties.GetAttack2AnimatieFromHero(MainGame.Content)
             };
 
             hero = new Hero(heroAnimaties);
@@ -76,85 +88,6 @@ namespace GameEngine.Scenes
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
-
-            #region old tilemap
-            //Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
-
-            //List<Texture2D> ground = new List<Texture2D>() {
-            //    textureTileSet.Cut(new Rectangle(96, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(112, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(128, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(144, 448, 16, 16), GraphicsDevice)
-            //};
-
-            //List<Texture2D> grass = new List<Texture2D>() {
-            //    textureTileSet.Cut(new Rectangle(96, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(112, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(128, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(144, 432, 16, 16), GraphicsDevice)
-            //};
-
-            //tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
-
-            //Random random = new Random(1);
-
-            //tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
-
-            //for (int i = 10; i < 100; i++)
-            //{
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.FlipHorizontally);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.None);
-
-            //    }
-
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.FlipHorizontally, false);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
-
-            //    }
-            //}
-
-            //for (int i = 10; i < 20; i++)
-            //{
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
-
-            //    }
-
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
-
-            //    }
-            //}
-
-            //for (int i = 0; i < 30; i++)
-            //{
-            //    tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
-            //}
-            #endregion
         }
 
         public override void Update(GameTime gameTime)
@@ -206,12 +139,18 @@ namespace GameEngine.Scenes
 
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.InAir == false)
             {
 
                 hero.Movement.jump();
 
                 //hero.movement.inAir = true;
+
+            }
+
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack2);
 
             }
 

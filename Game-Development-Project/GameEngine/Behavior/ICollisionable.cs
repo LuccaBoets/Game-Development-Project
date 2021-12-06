@@ -8,7 +8,8 @@ namespace GameEngine.Characters
 {
     interface ICollisionable
     {
-        public Rectangle GetCollsionRectangle();
+        public Rectangle GetNextCollisionRectangle();
+        public Rectangle GetCollisionRectangle();
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle);
 
     }

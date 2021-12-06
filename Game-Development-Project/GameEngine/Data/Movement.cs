@@ -10,12 +10,12 @@ namespace GameEngine.Data
 {
     public class Movement
     {
-        public const int speed = 3;
-        public const float gravity = 1;
-        public bool inAir;
-        public Vector2 velocity;
-        public int maxSpeedX { get; set; } = 5;
-        public bool isButtonXPressed { get; set; } = false;
+        public const int Speed = 3;
+        public const float Gravity = 1;
+        public bool InAir;
+        public Vector2 Velocity;
+        public int MaxSpeedX { get; set; } = 5;
+        public bool IsButtonXPressed { get; set; } = false;
 
 
         //public void Move(Hero hero, int Xnumber, GameTime gameTime)
@@ -42,8 +42,8 @@ namespace GameEngine.Data
 
         public void right(IAnimationable animationable)
         {
-            velocity.X += 1f;
-            isButtonXPressed = true;
+            Velocity.X += 1f;
+            IsButtonXPressed = true;
 
 
             animationable.lookingRight = false;
@@ -56,8 +56,8 @@ namespace GameEngine.Data
 
         public void left(IAnimationable animationable)
         {
-            velocity.X -= 1f;
-            isButtonXPressed = true;
+            Velocity.X -= 1f;
+            IsButtonXPressed = true;
 
             animationable.lookingRight = true;
 
@@ -69,47 +69,47 @@ namespace GameEngine.Data
 
         public void jump()
         {
-            velocity.Y = -6f;
-            inAir = true;
+            Velocity.Y = -6f;
+            InAir = true;
 
         }
 
         public void down()
         {
-            velocity.Y += 0.15f * gravity;
+            Velocity.Y += 0.15f * Gravity;
 
         }
 
         public void update(GameTime gameTime, IAnimationable animationable, IMoveable moveable)
         {
-            if (velocity.X >= maxSpeedX)
+            if (Velocity.X >= MaxSpeedX)
             {
-                velocity.X = maxSpeedX;
+                Velocity.X = MaxSpeedX;
             }
-            else if (velocity.X <= -maxSpeedX)
+            else if (Velocity.X <= -MaxSpeedX)
             {
-                velocity.X = -maxSpeedX;
+                Velocity.X = -MaxSpeedX;
             }
 
-            if (!isButtonXPressed)
+            if (!IsButtonXPressed)
             {
-                if (velocity.X > 0)
+                if (Velocity.X > 0)
                 {
-                    velocity.X -= 0.5f;
+                    Velocity.X -= 0.5f;
 
                 }
-                else if (velocity.X < 0)
+                else if (Velocity.X < 0)
                 {
-                    velocity.X += 0.5f;
+                    Velocity.X += 0.5f;
                 }
             }
 
-            if (inAir)
+            if (InAir)
             {
 
                 down();
 
-                if (velocity.Y > 0)
+                if (Velocity.Y > 0)
                 {
                     animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
                 }
@@ -119,7 +119,7 @@ namespace GameEngine.Data
                 }
             }
 
-            moveable.position += velocity * gameTime.ElapsedGameTime.Ticks / 100000;
+            moveable.position += Velocity * gameTime.ElapsedGameTime.Ticks / 100000;
 
             //Debug.WriteLine(velocity);
 
@@ -127,7 +127,7 @@ namespace GameEngine.Data
             //{
 
             //}
-            isButtonXPressed = false;
+            IsButtonXPressed = false;
         }
     }
 }
