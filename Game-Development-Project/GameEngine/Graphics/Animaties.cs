@@ -90,5 +90,21 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
+        public static Animatie GetHitFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Take Hit - white silhouette");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = HeroAnimations.hit;
+
+            for (int i = 0; i < 4; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(160 * i, 0, 160, 111)));
+            }
+
+            return animation;
+        }
     }
 }

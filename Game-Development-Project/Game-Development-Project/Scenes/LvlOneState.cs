@@ -15,11 +15,9 @@ namespace GameEngine.Scenes
     {
         private Hero hero { get; set; }
 
-        Scrolling scrolling1;
-        Scrolling scrolling2;
-
-        private Texture2D background;
+        private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
+
 
         const int speed = 3;
 
@@ -28,30 +26,7 @@ namespace GameEngine.Scenes
             LoadContent();
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            var position = Matrix.CreateTranslation(
-                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
-                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
-                  0);
-
-            var offset = Matrix.CreateTranslation(
-                Settings.ScreenW / 2,
-                Settings.ScreenH / 2,
-                0);
-
-            var Transform = position * offset;
-
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
-
-            scrolling1.Draw(_spriteBatch);
-            scrolling2.Draw(_spriteBatch);
-            hero.draw(_spriteBatch);
-            tilemap.draw(_spriteBatch);
-
-            _spriteBatch.End();
-        }
-
+        
         public override void Initialize()
         {
             throw new NotImplementedException();
@@ -59,18 +34,80 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            scrolling1 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(0, 0, 1600, 793 * 2));
-            scrolling2 = new Scrolling(MainGame.Content.Load<Texture2D>("Background"), new Rectangle(928 * 2, 0, 1600, 793 * 2));
+      
 
             var heroAnimaties = new List<Animatie>() {
                 Animaties.GetIdleAnimatieFromHero(MainGame.Content),
                 Animaties.GetRunAnimatieFromHero(MainGame.Content),
                 Animaties.GetFallAnimatieFromHero(MainGame.Content),
                 Animaties.GetJumpAnimatieFromHero(MainGame.Content),
-                Animaties.GetAttack1FromHero(MainGame.Content)
+                Animaties.GetAttack1FromHero(MainGame.Content), 
+                Animaties.GetHitFromHero(MainGame.Content)
             };
 
             hero = new Hero(heroAnimaties);
+
+            _scrollingBackgrounds = new List<Scrolling>()
+            {
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 60f)
+                {
+                    Layer = 0.47f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 60f)
+                {
+                    Layer = 0.47f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 60f)
+                {
+                    Layer = 0.47f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 60f)
+                {
+                    Layer = 0.40f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 60f)
+                {
+                    Layer = 0.40f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 40f)
+                {
+                Layer = 0.39f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 30f)
+                {
+                Layer = 0.39f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 30f)
+                {
+                    Layer = 0.39f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 15f)
+                {
+                    Layer = 0.37f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 10f)
+                {
+                    Layer = 0.35f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0010_1"), hero, 0f)
+                {
+                    Layer = 0.30f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0011_0"), hero, 0f)
+                {
+                    Layer = 0.30f,
+                },
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f,true)
+                {
+                    Layer = 0.35f,
+                },
+                 new Scrolling(MainGame.Content.Load<Texture2D>("Background/SunLayer5"), hero, 0f)
+                {
+                    Layer = 0.10f,
+                },
+
+
+            };
 
             tilemap = new Tilemap();
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
@@ -165,8 +202,7 @@ namespace GameEngine.Scenes
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 hero.Movement.left(hero);
-                scrolling1.Update(-speed);
-                scrolling2.Update(-speed);
+          
                 idle = false;
                 //Left
             }
@@ -176,8 +212,7 @@ namespace GameEngine.Scenes
                 hero.Movement.right(hero);
 
                 //hero.movement.Move(hero, speed, gameTime);
-                scrolling1.Update(speed);
-                scrolling2.Update(speed);
+            
                 idle = false;
                 //Right
             }
@@ -213,6 +248,14 @@ namespace GameEngine.Scenes
 
             }
 
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.hit);
+
+
+            }
+
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
             {
@@ -223,7 +266,49 @@ namespace GameEngine.Scenes
 
             }
 
+            foreach (var sb in _scrollingBackgrounds)
+            {
+                sb.Update(gameTime);
+
+
+            }
+            //base.Update(gameTime);
             hero.update(gameTime, tilemap);
         }
+        public override void Draw(GameTime gameTime)
+        {
+            var position = Matrix.CreateTranslation(
+                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
+                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
+                  0);
+
+
+            var offset = Matrix.CreateTranslation(
+                Settings.ScreenW / 2,
+                Settings.ScreenH / 2,
+                0);
+
+
+
+            var Transform = position * offset;
+
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
+
+
+
+            hero.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch);
+
+        
+            foreach (var sb in _scrollingBackgrounds)
+            {
+                sb.Draw(gameTime, _spriteBatch);
+
+
+            }
+            //base.Draw(gameTime);
+            _spriteBatch.End();
+        }
+
     }
 }

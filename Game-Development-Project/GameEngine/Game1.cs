@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameEngine.Data;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ namespace GameEngine
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+          
 
         public Game1()
         {
@@ -19,7 +21,9 @@ namespace GameEngine
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            _graphics.PreferredBackBufferWidth = Settings.ScreenW;
+            _graphics.PreferredBackBufferHeight = Settings.ScreenH;
+            _graphics.ApplyChanges();
             base.Initialize();
         }
 

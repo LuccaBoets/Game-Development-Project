@@ -23,7 +23,8 @@ namespace GameEngine
         attack1,
         attack2,
         attack3,
-        death
+        death,
+        hit
     }
     public class Hero : ICollisionable, IMoveable, IAnimationable
     {
@@ -47,6 +48,10 @@ namespace GameEngine
             this.lookingRight = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
+        }
+        public Hero()
+        {
+           
         }
 
         public void update(GameTime gameTime, Tilemap tilemap)
