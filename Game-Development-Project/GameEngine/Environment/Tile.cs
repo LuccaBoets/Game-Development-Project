@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace GameEngine.Environment
@@ -36,6 +37,13 @@ namespace GameEngine.Environment
             rectangle.Height *= 2;
 
             return rectangle;
+        }
+
+        internal void Save(BinaryWriter writer)
+        {
+            writer.Write(position.X);
+            writer.Write(position.Y);
+            //writer.Write();
         }
 
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)

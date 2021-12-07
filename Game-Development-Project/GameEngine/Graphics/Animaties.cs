@@ -104,7 +104,7 @@ namespace GameEngine.Graphics
 
             for (int i = 0; i < 4; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(93 * i, 0, 93, 68)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;
@@ -120,7 +120,7 @@ namespace GameEngine.Graphics
 
             for (int i = 0; i < 4; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(160 * i, 0, 160, 111)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
             }
 
             return animation;

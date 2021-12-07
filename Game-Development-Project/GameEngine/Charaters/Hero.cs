@@ -58,7 +58,7 @@ namespace GameEngine
         {
             this.Movement.update(gameTime, this, this);
 
-            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetNextCollisionRectangle());
+            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
             foreach (var direction in directions)
             {
                 if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)

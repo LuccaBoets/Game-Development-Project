@@ -23,5 +23,10 @@ namespace GameEngine.Environment
 
             return tileType;
         }
+
+        public static void save()
+        {
+            //Texture2D texture = new Texture2D();
+        }
     }
 }
