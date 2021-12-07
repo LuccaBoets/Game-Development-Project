@@ -1,5 +1,6 @@
 ﻿using GameEngine.Data;
 using GameEngine.Environment;
+using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,7 +27,6 @@ namespace GameEngine.Scenes
             LoadContent();
         }
 
-        
         public override void Initialize()
         {
             throw new NotImplementedException();
@@ -43,6 +43,8 @@ namespace GameEngine.Scenes
                 Animaties.GetJumpAnimatieFromHero(MainGame.Content),
                 Animaties.GetAttack1FromHero(MainGame.Content), 
                 Animaties.GetHitFromHero(MainGame.Content)
+                Animaties.GetAttack2AnimatieFromHero(MainGame.Content)
+
             };
 
             hero = new Hero(heroAnimaties);
@@ -114,85 +116,6 @@ namespace GameEngine.Scenes
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
             tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
-
-            #region old tilemap
-            //Texture2D textureTileSet = Content.Load<Texture2D>("SET1_Mainlev_build");
-
-            //List<Texture2D> ground = new List<Texture2D>() {
-            //    textureTileSet.Cut(new Rectangle(96, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(112, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(128, 448, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(144, 448, 16, 16), GraphicsDevice)
-            //};
-
-            //List<Texture2D> grass = new List<Texture2D>() {
-            //    textureTileSet.Cut(new Rectangle(96, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(112, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(128, 432, 16, 16), GraphicsDevice),
-            //    textureTileSet.Cut(new Rectangle(144, 432, 16, 16), GraphicsDevice)
-            //};
-
-            //tilemap.addTile(textureTileSet, new Vector2(5, 25), new Rectangle(96, 448, 16, 16), GraphicsDevice, SpriteEffects.None);
-
-            //Random random = new Random(1);
-
-            //tilemap.addTile(Content.Load<Texture2D>("Island"), new Vector2(5, 15), SpriteEffects.None);
-
-            //for (int i = 10; i < 100; i++)
-            //{
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.FlipHorizontally);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 25), SpriteEffects.None);
-
-            //    }
-
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.FlipHorizontally, false);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 24), SpriteEffects.None, false);
-
-            //    }
-            //}
-
-            //for (int i = 10; i < 20; i++)
-            //{
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.FlipHorizontally);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(ground[random.Next(0, ground.Count)], new Vector2(i, 20), SpriteEffects.None);
-
-            //    }
-
-            //    if (random.Next(0, 2) == 1)
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.FlipHorizontally, false);
-
-            //    }
-            //    else
-            //    {
-            //        tilemap.addTile(grass[random.Next(0, grass.Count)], new Vector2(i, 19), SpriteEffects.None, false);
-
-            //    }
-            //}
-
-            //for (int i = 0; i < 30; i++)
-            //{
-            //    tilemap.addTile(textureTileSet, new Vector2(16 * i * 2.5f, 4 * 16 * 2.5f), new Rectangle(96, 448-16, 16, 16), GraphicsDevice);
-            //}
-            #endregion
         }
 
         public override void Update(GameTime gameTime)
@@ -257,7 +180,7 @@ namespace GameEngine.Scenes
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.inAir == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.InAir == false)
             {
 
                 hero.Movement.jump();
@@ -273,6 +196,13 @@ namespace GameEngine.Scenes
 
             }
             //base.Update(gameTime);
+
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack2);
+
+            }
+
             hero.update(gameTime, tilemap);
         }
         public override void Draw(GameTime gameTime)

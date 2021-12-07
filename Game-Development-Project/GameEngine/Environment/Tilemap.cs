@@ -72,16 +72,6 @@ namespace GameEngine.Environment
             }
         }
 
-        //private static Texture2D cropTexture(Texture2D textureTileSet, Rectangle rectangle, GraphicsDevice graphicsDevice)
-        //{
-        //    Texture2D croppedTexture = new Texture2D(graphicsDevice, rectangle.Width, rectangle.Height);
-
-        //    Color[] data = new Color[rectangle.Width * rectangle.Height];
-        //    textureTileSet.GetData(0, rectangle, data, 0, rectangle.Width * rectangle.Height);
-        //    croppedTexture.SetData(data);
-        //    return croppedTexture;
-        //}
-
         public List<Tuple<CollisionDirection, Rectangle>> hitAnyTile(Rectangle rectangle, int layer = 0)
         {
             return GetTilemapLayer(layer).Tiles.Select(x => x.CollisionDetection(rectangle)).Where(x => x != null).Where(x => x.Item1 != CollisionDirection.noHit).GroupBy(x => x.Item1).Select(x => x.First()).ToList();

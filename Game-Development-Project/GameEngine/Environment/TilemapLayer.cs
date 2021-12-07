@@ -20,7 +20,7 @@ namespace GameEngine.Environment
         {
             foreach (var tile in Tiles)
             {
-                tile.Draw(_spriteBatch, 0.5f + ((float)LayerDepth / 10f));
+                tile.Draw(_spriteBatch, 0.5f + ((float)LayerDepth / 100f));
             }
         }
     }

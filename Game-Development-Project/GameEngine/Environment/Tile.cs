@@ -26,7 +26,7 @@ namespace GameEngine.Environment
             _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, layerDepth);
         }
 
-        public Rectangle GetCollsionRectangle()
+        public Rectangle GetNextCollisionRectangle()
         {
             var rectangle = tileType.texture.Bounds;
 
@@ -41,10 +41,15 @@ namespace GameEngine.Environment
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
 
-            Rectangle rectangle1 = this.GetCollsionRectangle();
-            var temp = CollisionManager.detection(rectangle1, rectangle);
+            //Rectangle rectangle1 = this.GetNextCollisionRectangle();
+            var temp = CollisionManager.Detection(GetNextCollisionRectangle(), rectangle);
             return temp;
             //return CollisionManager.detection(this.getCollsionRectangle(), rectangle);
+        }
+
+        public Rectangle GetCollisionRectangle()
+        {
+            throw new NotImplementedException();
         }
     }
 }
