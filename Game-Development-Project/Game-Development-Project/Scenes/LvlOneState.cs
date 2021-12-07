@@ -42,7 +42,7 @@ namespace GameEngine.Scenes
                 Animaties.GetFallAnimatieFromHero(MainGame.Content),
                 Animaties.GetJumpAnimatieFromHero(MainGame.Content),
                 Animaties.GetAttack1FromHero(MainGame.Content), 
-                Animaties.GetHitFromHero(MainGame.Content)
+                Animaties.GetHitFromHero(MainGame.Content),
                 Animaties.GetAttack2AnimatieFromHero(MainGame.Content)
 
             };
@@ -208,8 +208,8 @@ namespace GameEngine.Scenes
         public override void Draw(GameTime gameTime)
         {
             var position = Matrix.CreateTranslation(
-                  -hero.position.X - (hero.GetCollsionRectangle().Width / 2),
-                  -hero.position.Y - (hero.GetCollsionRectangle().Height / 2),
+                  -hero.position.X - (hero.GetCollisionRectangle().Width / 2),
+                  -hero.position.Y - (hero.GetCollisionRectangle().Height / 2),
                   0);
 
 

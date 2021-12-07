@@ -89,10 +89,10 @@ namespace GameEngine.Environment
         {
             _speed = (float)(_scrollingSpeed * gameTime.ElapsedGameTime.TotalSeconds);
 
-            if(!_constantSpeed || hero.Movement.velocity.X != 0)
+            if(!_constantSpeed || hero.Movement.Velocity.X != 0)
             {
               
-                _speed *= hero.Movement.velocity.X;
+                _speed *= hero.Movement.Velocity.X;
             }
 
             foreach (var sprite in _sprites)
