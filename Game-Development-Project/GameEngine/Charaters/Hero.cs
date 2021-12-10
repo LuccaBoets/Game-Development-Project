@@ -49,10 +49,7 @@ namespace GameEngine
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
         }
-        public Hero()
-        {
-           
-        }
+    
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {

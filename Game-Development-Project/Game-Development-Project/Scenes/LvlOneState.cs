@@ -1,4 +1,4 @@
-﻿using GameEngine.Data;
+﻿
 using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
@@ -100,10 +100,10 @@ namespace GameEngine.Scenes
             };
 
             tilemap = new Tilemap();
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosMain"), MainGame.GraphicsDevice);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosForeground"), MainGame.GraphicsDevice, 1);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosBackground"), MainGame.GraphicsDevice, -1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
         }
 
         public override void Update(GameTime gameTime)
@@ -132,7 +132,7 @@ namespace GameEngine.Scenes
             {
                 idle = false;
                 //Down
-                hero.position += new Vector2(0.0f, 3.0f);
+                //hero.position += new Vector2(0.0f, 3.0f);
 
             }
 
@@ -142,7 +142,7 @@ namespace GameEngine.Scenes
 
                 idle = false;
                 //Up
-                hero.position += new Vector2(0.0f, -3.0f);
+                //hero.position += new Vector2(0.0f, -3.0f);
             }
 
             if (idle)
@@ -152,7 +152,8 @@ namespace GameEngine.Scenes
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack1);
+                idle = false;
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack1);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
@@ -205,6 +206,9 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
+            //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            //Texture2D.SetData(new[] { Color.Red });
+            //_spriteBatch.Draw(Texture2D, _scrollingBackgrounds[0].viewRectangle.Location.ToVector2(), Texture2D.Bounds, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
 
             hero.draw(_spriteBatch);
@@ -214,7 +218,9 @@ namespace GameEngine.Scenes
             foreach (var sb in _scrollingBackgrounds)
             {
                 sb.Draw(gameTime, _spriteBatch);
-
+                //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+                //Texture2D.SetData(new[] { Color.Red });
+                //_spriteBatch.Draw(Texture2D, sb.viewRectangle.Location.ToVector2(), Texture2D.Bounds, Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             }
             _spriteBatch.End();

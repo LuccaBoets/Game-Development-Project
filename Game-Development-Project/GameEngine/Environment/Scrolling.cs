@@ -4,13 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameEngine.Environment
 {
     public class Scrolling : Component
     {
-
+        public Vector2 heroStartPosition;
 
         private bool _constantSpeed;
 
@@ -23,6 +24,8 @@ namespace GameEngine.Environment
         private readonly Hero hero;
 
         private float _speed;
+
+        public float parallaxEffect;
 
         public float Layer
         {
@@ -60,6 +63,8 @@ namespace GameEngine.Environment
                 });
 
             }
+
+            heroStartPosition = hero.position;
         }
         //public Texture2D texture;
         //public Rectangle rectangle3;
@@ -71,9 +76,8 @@ namespace GameEngine.Environment
             foreach (var sprite in _sprites)
             {
                 sprite.Draw(gametime, spriteBatch);
-            }
-
-           
+            
+            }           
         }
     
 
@@ -102,25 +106,39 @@ namespace GameEngine.Environment
             
         }
 
-         
+
         private void CheckPosition()
         {
             for (int i = 0; i < _sprites.Count; i++)
-            {
-                var sprite = _sprites[i];
-
-                if(sprite.Rectangle.Right <= 0)
                 {
-                    var index = i - 1;
+                    var sprite = _sprites[i];
 
-                    if (index < 0)
+                    if (sprite.Rectangle.Right <= hero.position.X - heroStartPosition.X)
                     {
-                        index = _sprites.Count - 1;
-                    }
+                        var index = i - 1;
 
-                    sprite.Position.X = _sprites[index].Rectangle.Right - (_speed * 2);
+                        if (index < 0)
+                            index = _sprites.Count - 1;
+
+                        sprite.Position.X = _sprites[index].Rectangle.Right - (_speed * 2);
+                    
                 }
-            }
-        }
+
+
+                //if (sprite.Rectangle.Right >= hero.position.X - heroStartPosition.X)
+                //{
+                //    var index = i + 1;
+
+                //    if (index > 0)
+                //        index = _sprites.Count + 1;
+
+                //    sprite.Position.X = _sprites[index].Rectangle.Right - (_speed * 2);
+                //}
+
+                }
+
+            
+        } 
     }
 }
+
