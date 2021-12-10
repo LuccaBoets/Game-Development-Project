@@ -100,10 +100,10 @@ namespace GameEngine.Scenes
             };
 
             tilemap = new Tilemap();
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosMain"), MainGame.GraphicsDevice);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosForeground"), MainGame.GraphicsDevice, 1);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("naamloosBackground"), MainGame.GraphicsDevice, -1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
+            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
         }
 
         public override void Update(GameTime gameTime)
@@ -153,7 +153,7 @@ namespace GameEngine.Scenes
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 idle = false;
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack1);
+                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack1);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
