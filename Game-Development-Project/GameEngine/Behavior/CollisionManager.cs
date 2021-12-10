@@ -92,16 +92,16 @@ namespace GameEngine.Behavior
         {
             return rectangle1.Right > rectangle2.Left &&
               rectangle1.Left < rectangle2.Left &&
-              rectangle1.Bottom > rectangle2.Top &&
-              rectangle1.Top < rectangle2.Bottom;
+              rectangle1.Bottom > rectangle2.Top + 10 &&
+              rectangle1.Top < rectangle2.Bottom - 10;
         }
 
         public static bool IsTouchingRight(Rectangle rectangle1, Rectangle rectangle2)
         {
             return rectangle1.Left < rectangle2.Right &&
               rectangle1.Right > rectangle2.Right &&
-              rectangle1.Bottom > rectangle2.Top &&
-              rectangle1.Top < rectangle2.Bottom;
+              rectangle1.Bottom > rectangle2.Top + 10 &&
+              rectangle1.Top < rectangle2.Bottom - 10;
         }
 
         public static bool IsTouchingTop(Rectangle rectangle1, Rectangle rectangle2)

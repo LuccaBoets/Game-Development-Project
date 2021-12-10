@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -98,6 +99,27 @@ namespace GameEngine.Environment
                     Backgrounds.Add(new TilemapLayer(layer));
                 }
                 return Backgrounds[Math.Abs(layer)-1];
+            }
+        }
+
+        public void Save(Stream stream)
+        {
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(Scale);
+                writer.Write(ForeGrounds.Count);
+                foreach (var foreGround in ForeGrounds)
+                {
+                    foreGround.Save(writer);
+                }
+
+                MiddleGround.Save(writer);
+
+                writer.Write(Backgrounds.Count);
+                foreach (var background in Backgrounds)
+                {
+                    background.Save(writer);
+                }
             }
         }
     }

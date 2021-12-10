@@ -158,25 +158,22 @@ namespace GameEngine.Scenes
             }
 
             if (idle)
-
             {
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
+
                 idle = false;
+
+
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.attack1);
-
-
             }
 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.hit);
-
-
             }
 
 
@@ -241,7 +238,6 @@ namespace GameEngine.Scenes
                 //_spriteBatch.Draw(Texture2D, sb.viewRectangle.Location.ToVector2(), Texture2D.Bounds, Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             }
-            //base.Draw(gameTime);
             _spriteBatch.End();
         }
 

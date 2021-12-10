@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace GameEngine.Environment
@@ -22,6 +23,17 @@ namespace GameEngine.Environment
             {
                 tile.Draw(_spriteBatch, 0.5f + ((float)LayerDepth / 100f));
             }
+        }
+
+        internal void Save(BinaryWriter writer)
+        {
+            writer.Write(LayerDepth);
+            writer.Write(Tiles.Count);
+
+            foreach (var tile in Tiles)
+            {
+                tile.Save(writer);
+            }            
         }
     }
 }
