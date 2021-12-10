@@ -48,9 +48,9 @@ namespace GameEngine.Data
 
             animationable.lookingRight = false;
 
-            if (!animationable.currentAnimation.AnimatieNaam.Equals(HeroAnimations.run))
+            if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
             {
-                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
             }
         }
 
@@ -61,9 +61,9 @@ namespace GameEngine.Data
 
             animationable.lookingRight = true;
 
-            if (!animationable.currentAnimation.AnimatieNaam.Equals(HeroAnimations.run))
+            if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
             {
-                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
+                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
             }
         }
 
@@ -111,11 +111,11 @@ namespace GameEngine.Data
 
                 if (Velocity.Y > 0)
                 {
-                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.fall);
+                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.fall);
                 }
                 else
                 {
-                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == HeroAnimations.jump);
+                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.jump);
                 }
             }
 

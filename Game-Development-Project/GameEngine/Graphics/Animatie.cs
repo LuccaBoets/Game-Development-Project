@@ -9,7 +9,7 @@ namespace GameEngine.Graphics
 {
     public class Animatie
     {
-        public HeroAnimations AnimatieNaam { get; set; }
+        public AnimationsTypes AnimatieNaam { get; set; }
 
         public Texture2D texture { get; set; }
 

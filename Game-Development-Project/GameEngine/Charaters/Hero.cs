@@ -14,7 +14,7 @@ using GameEngine.Data;
 namespace GameEngine
 {
 
-    public enum HeroAnimations
+    public enum AnimationsTypes
     {
         idle,
         run,
@@ -47,7 +47,7 @@ namespace GameEngine
 
             this.lookingRight = true;
 
-            this.currentAnimation = animaties.First(x => x.AnimatieNaam == HeroAnimations.idle);
+            this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
         }
         public Hero()
         {

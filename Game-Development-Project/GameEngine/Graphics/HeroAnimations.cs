@@ -8,10 +8,25 @@ using System.Text;
 
 namespace GameEngine.Graphics
 {
-    public static class Animaties
+    public class HeroAnimations
     {
-        private const int _heroWidth = 160;
-        private const int _heroHeight = 111;
+        public static int _width { get; set; } = 160;
+        public static int _height { get; set; } = 111;
+
+        public static List<Animatie> AllAnimation(ContentManager content)
+        {
+            List<Animatie> heroAnimaties = new List<Animatie>() {
+                HeroAnimations.GetIdleAnimatieFromHero(content),
+                HeroAnimations.GetRunAnimatieFromHero(content),
+                HeroAnimations.GetFallAnimatieFromHero(content),
+                HeroAnimations.GetJumpAnimatieFromHero(content),
+                HeroAnimations.GetAttack1FromHero(content),
+                HeroAnimations.GetHitFromHero(content),
+                HeroAnimations.GetAttack2AnimatieFromHero(content)
+            };
+
+            return heroAnimaties;
+        }
 
         public static Animatie GetIdleAnimatieFromHero(ContentManager content)
         {
@@ -19,11 +34,11 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.idle;
+            animation.AnimatieNaam = AnimationsTypes.idle;
 
             for (int i = 0; i < 8; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -35,12 +50,12 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.run;
+            animation.AnimatieNaam = AnimationsTypes.run;
             //animation.offset = new Vector2(0, 100);
 
             for (int i = 0; i < 8; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -51,11 +66,11 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.fall;
+            animation.AnimatieNaam = AnimationsTypes.fall;
 
             for (int i = 0; i < 2; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -67,11 +82,11 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.jump;
+            animation.AnimatieNaam = AnimationsTypes.jump;
 
             for (int i = 0; i < 2; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -83,12 +98,12 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.attack2;
+            animation.AnimatieNaam = AnimationsTypes.attack2;
             //animation.offset = new Vector2(35*2, 0); // 35
 
             for (int i = 0; i < 4; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -100,11 +115,11 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.attack1;
+            animation.AnimatieNaam = AnimationsTypes.attack1;
 
             for (int i = 0; i < 4; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
@@ -116,11 +131,11 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = HeroAnimations.hit;
+            animation.AnimatieNaam = AnimationsTypes.hit;
 
             for (int i = 0; i < 4; i++)
             {
-                animation.addFrame(new AnimatieFrame(new Rectangle(_heroWidth * i, 0, _heroWidth, _heroHeight)));
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
 
             return animation;
