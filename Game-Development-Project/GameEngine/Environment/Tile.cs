@@ -22,6 +22,11 @@ namespace GameEngine.Environment
             this.position = position;
         }
 
+        public Tile(BinaryReader reader)
+        {
+            Load(reader);
+        }
+
         public void Draw(SpriteBatch _spriteBatch, float layerDepth = 0.5f)
         {
             _spriteBatch.Draw(tileType.texture, position, tileType.texture.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, layerDepth);
@@ -41,9 +46,16 @@ namespace GameEngine.Environment
 
         internal void Save(BinaryWriter writer)
         {
-            writer.Write(position.X);
-            writer.Write(position.Y);
-            //writer.Write();
+            writer.Write(Convert.ToDouble(position.X));
+            writer.Write(Convert.ToDouble(position.Y));
+            writer.Write(tileType.index);
+        }
+
+        internal void Load(BinaryReader reader)
+        {
+            position = new Vector2((float)reader.ReadDouble(), (float)reader.ReadDouble());
+
+            tileType = TileFactory.GetTileType(reader.ReadInt32());
         }
 
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
