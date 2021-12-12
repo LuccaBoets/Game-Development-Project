@@ -101,16 +101,25 @@ namespace GameEngine.Scenes
             };
 
             //tilemap = new Tilemap();
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.0"), MainGame.GraphicsDevice);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.1"), MainGame.GraphicsDevice, 1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.2"), MainGame.GraphicsDevice, 2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.3"), MainGame.GraphicsDevice, 3);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-1"), MainGame.GraphicsDevice, -1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-2"), MainGame.GraphicsDevice, -2);
+
 
             TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
             using (FileStream fs = File.OpenRead(@"ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }
+
+            //TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
+            //using (FileStream fs = File.OpenRead(@"ExportedTilemapData.txt"))
+            //{
+            //    tilemap = new Tilemap(fs);
+            //}
         }
 
         public override void Update(GameTime gameTime)
