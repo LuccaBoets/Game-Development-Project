@@ -25,6 +25,13 @@ namespace GameEngine.Environment
             this.Scale = 2f;
         }
 
+        public Tilemap(Stream stream)
+        {
+            ForeGrounds = new List<TilemapLayer>();
+            Backgrounds = new List<TilemapLayer>();
+            Load(stream);
+        }
+
         public void addTiles(Texture2D map, GraphicsDevice graphicsDevice, int layer = 0)
         {
             for (int i = 0; i < map.Width / 16; i++)
@@ -106,7 +113,7 @@ namespace GameEngine.Environment
         {
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                writer.Write(Scale);
+                writer.Write(Convert.ToDouble(Scale));
                 writer.Write(ForeGrounds.Count);
                 foreach (var foreGround in ForeGrounds)
                 {
@@ -119,6 +126,30 @@ namespace GameEngine.Environment
                 foreach (var background in Backgrounds)
                 {
                     background.Save(writer);
+                }
+            }
+        }
+
+        public void Load(Stream stream)
+        {
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                Scale = (float)reader.ReadDouble();
+
+                var ForeGroundsCount = reader.ReadInt32();
+
+                for (int i = 0; i < ForeGroundsCount; i++)
+                {
+                    ForeGrounds.Add(new TilemapLayer(reader));
+                }
+
+                MiddleGround = new TilemapLayer(reader);
+
+                var BackgroundsCount = reader.ReadInt32();
+
+                for (int i = 0; i < BackgroundsCount; i++)
+                {
+                    Backgrounds.Add(new TilemapLayer(reader));
                 }
             }
         }

@@ -26,5 +26,27 @@ namespace GameEngine.ExtensionMethods
             texture.GetData(0, texture.Bounds, buffer, 0, size);
             return buffer.All(c => c == Color.Transparent);
         }
+
+        public static bool EqualsPixelBased(this Texture2D texture1, Texture2D texture2)
+        {
+            int size = texture1.Width * texture1.Height;
+            Color[] buffer1 = new Color[size];
+            Color[] buffer2 = new Color[size];
+            texture1.GetData(0, texture1.Bounds, buffer1, 0, size);
+            texture2.GetData(0, texture2.Bounds, buffer2, 0, size);
+
+            bool temp = true;
+
+            for (int i = 0; i < buffer1.Length; i++)
+            {
+                if (buffer1[i].R != buffer2[i].R && buffer1[i].G != buffer2[i].G && buffer1[i].B != buffer2[i].B)
+                {
+                    temp = false;
+                    break;
+                }
+            }
+
+            return temp;
+        }
     }
 }

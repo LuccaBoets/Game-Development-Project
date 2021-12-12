@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -99,11 +100,17 @@ namespace GameEngine.Scenes
 
             };
 
-            tilemap = new Tilemap();
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
-            tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
+            //tilemap = new Tilemap();
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("test2"), MainGame.GraphicsDevice);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("ForeGround1"), MainGame.GraphicsDevice, 1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background2"), MainGame.GraphicsDevice, -1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Background1"), MainGame.GraphicsDevice, -2);
+
+            TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"ExportedTilemapData.txt"))
+            {
+                tilemap = new Tilemap(fs);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -169,6 +176,15 @@ namespace GameEngine.Scenes
 
                 //hero.movement.inAir = true;
 
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.L))
+            {
+                TileFactory.Save(MainGame.GraphicsDevice);
+                using (FileStream fs = File.Create(@"ExportedTilemapData.txt"))
+                {
+                    tilemap.Save(fs);
+                }
             }
 
             foreach (var sb in _scrollingBackgrounds)

@@ -17,6 +17,12 @@ namespace GameEngine.Environment
             LayerDepth = layerDepth;
         }
 
+        public TilemapLayer(BinaryReader reader)
+        {
+            Tiles = new List<Tile>();
+            Load(reader);
+        }
+
         internal void Draw(SpriteBatch _spriteBatch)
         {
             foreach (var tile in Tiles)
@@ -33,7 +39,18 @@ namespace GameEngine.Environment
             foreach (var tile in Tiles)
             {
                 tile.Save(writer);
-            }            
+            }
+        }
+
+        internal void Load(BinaryReader reader)
+        {
+            LayerDepth = reader.ReadInt32();
+            var tileCount = reader.ReadInt32();
+
+            for (int i = 0; i < tileCount; i++)
+            {
+                Tiles.Add(new Tile(reader));
+            }
         }
     }
 }
