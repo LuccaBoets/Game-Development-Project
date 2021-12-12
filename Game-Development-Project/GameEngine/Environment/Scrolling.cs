@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Text;
 
 namespace GameEngine.Environment
+
 {
     public class Scrolling : Component
     {
