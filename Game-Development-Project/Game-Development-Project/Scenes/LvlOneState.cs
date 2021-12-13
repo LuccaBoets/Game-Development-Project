@@ -88,7 +88,7 @@ namespace GameEngine.Scenes
                 {
                     Layer = 0.30f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f,true)
+                new Scrolling(MainGame.Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f)
                 {
                     Layer = 0.35f,
                 },
@@ -215,8 +215,8 @@ namespace GameEngine.Scenes
         public override void Draw(GameTime gameTime)
         {
             var position = Matrix.CreateTranslation(
-                  -hero.position.X - (hero.GetCollisionRectangle().Width / 2),
-                  -hero.position.Y - (hero.GetCollisionRectangle().Height / 2),
+                  -hero.GetCollisionRectangle().Center.X,
+                  -hero.GetCollisionRectangle().Center.Y,
                   0);
 
 
@@ -224,8 +224,6 @@ namespace GameEngine.Scenes
                 Settings.ScreenW / 2,
                 Settings.ScreenH / 2,
                 0);
-
-
 
             var Transform = position * offset;
 

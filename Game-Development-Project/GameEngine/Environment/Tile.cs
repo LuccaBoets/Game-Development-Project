@@ -62,7 +62,7 @@ namespace GameEngine.Environment
         {
 
             //Rectangle rectangle1 = this.GetNextCollisionRectangle();
-            var temp = CollisionManager.Detection(GetNextCollisionRectangle(), rectangle);
+            var temp = CollisionManager.DetectionAndDirection(GetNextCollisionRectangle(), rectangle);
             return temp;
             //return CollisionManager.detection(this.getCollsionRectangle(), rectangle);
         }

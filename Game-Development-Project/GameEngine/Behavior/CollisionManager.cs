@@ -18,15 +18,20 @@ namespace GameEngine.Behavior
 
     public static class CollisionManager
     {
-        public static Tuple<CollisionDirection, Rectangle> Detection(Rectangle rectangle1, Rectangle rectangle2)
+        public static Tuple<CollisionDirection, Rectangle> DetectionAndDirection(Rectangle rectangle1, Rectangle rectangle2)
         {
             var intersectRectangle = Rectangle.Intersect(rectangle1, rectangle2);
-            if (!intersectRectangle.IsEmpty)
+            if (Detection(rectangle1, rectangle2))
             {
                 return new Tuple<CollisionDirection, Rectangle>(RectanglesToDirection(rectangle1, rectangle2), intersectRectangle);
             }
 
             return new Tuple<CollisionDirection, Rectangle>(CollisionDirection.noHit, intersectRectangle);
+        }
+
+        public static bool Detection(Rectangle rectangle1, Rectangle rectangle2)
+        {
+            return rectangle1.Intersects(rectangle2);
         }
 
         //private static CollisionDirection RectanglesToDirection(Rectangle rectangle1, Rectangle rectangle2)
