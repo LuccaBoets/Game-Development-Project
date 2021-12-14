@@ -9,8 +9,8 @@ namespace GameEngine.Graphics
     public class MushroomAnimations
     {
 
-        public static int _width { get; set; } = 160;
-        public static int _height { get; set; } = 111;
+        public static int _width { get; set; } = 150;
+        public static int _height { get; set; } = 150;
 
         public static List<Animatie> AllAnimation(ContentManager content)
         {
