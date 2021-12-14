@@ -1,4 +1,5 @@
-﻿using GameEngine.Data;
+﻿using GameEngine.Charaters;
+using GameEngine.Data;
 using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
@@ -16,6 +17,8 @@ namespace GameEngine.Scenes
     public class LvlOneState : SceneState
     {
         private Hero hero { get; set; }
+
+        private MushroomMonster mushroomMonster { get; set; }
 
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
@@ -37,6 +40,8 @@ namespace GameEngine.Scenes
         {
       
             hero = new Hero(HeroAnimations.AllAnimation(MainGame.Content));
+            mushroomMonster = new MushroomMonster(MushroomAnimations.AllAnimation(MainGame.Content), new Vector2(900, 950), 500);
+
 
             _scrollingBackgrounds = new List<Scrolling>()
             {
@@ -211,6 +216,7 @@ namespace GameEngine.Scenes
             }
 
             hero.update(gameTime, tilemap);
+            mushroomMonster.update(gameTime, hero);
         }
         public override void Draw(GameTime gameTime)
         {
@@ -237,6 +243,7 @@ namespace GameEngine.Scenes
 
 
             hero.draw(_spriteBatch);
+            mushroomMonster.draw(_spriteBatch);
             tilemap.draw(_spriteBatch);
 
         
