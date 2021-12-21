@@ -64,7 +64,7 @@ namespace GameEngine.Environment
 
                 _sprites.Add(new Sprite(texture)
                 {
-                    Position = new Vector2((i * texture.Width) - 1, Settings.ScreenH - texture.Height)
+                    Position = new Vector2((i * texture.Width) - 1, player.position.Y)
                 });
 
             }
@@ -88,10 +88,9 @@ namespace GameEngine.Environment
 
         public override void Update(GameTime gameTime)
         {
-
             foreach (var sprite in _sprites)
             {
-
+                sprite.Position.Y = hero.GetCollisionRectangle().Center.Y - sprite.Rectangle.Height/2 - 300;
             }
 
             ApplySpeed(gameTime);

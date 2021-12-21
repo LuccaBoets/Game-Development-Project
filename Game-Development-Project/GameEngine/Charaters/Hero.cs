@@ -26,7 +26,7 @@ namespace GameEngine
         death,
         hit
     }
-    public class Hero : ICollisionable, IMoveable, IAnimationable
+    public class Hero : ICollisionable, IMoveable, IAnimationable, IHitable
     {
 
         public Animatie currentAnimation { get; set; }
@@ -49,7 +49,7 @@ namespace GameEngine
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
         }
-    
+
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {
@@ -76,12 +76,12 @@ namespace GameEngine
                 if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
                 {
                     this.Movement.Velocity.Y = 0;
-                    position += new Vector2(0 , direction.Item2.Height);
+                    position += new Vector2(0, direction.Item2.Height);
                 }
 
                 if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
                 {
-                    position += new Vector2(0 , -direction.Item2.Height);
+                    position += new Vector2(0, -direction.Item2.Height);
 
                     this.Movement.Velocity.Y = 0;
                     this.Movement.InAir = false;
@@ -190,6 +190,31 @@ namespace GameEngine
         {
             throw new NotImplementedException();
         }
-    }
 
+        public void attack1(List<IHitable> hitables)
+        {
+            Rectangle attackCollsionRectangle = new Rectangle();
+            if (lookingRight)
+            {
+                attackCollsionRectangle = new Rectangle();
+            }
+            else
+            {
+                attackCollsionRectangle = new Rectangle();
+            }
+
+            foreach (var hitable in hitables)
+            {
+                if (CollisionManager.Detection(hitable.GetCollisionRectangle(), attackCollsionRectangle))
+                {
+                    hitable.hit();
+                }
+            }
+        }
+
+        public void hit()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
