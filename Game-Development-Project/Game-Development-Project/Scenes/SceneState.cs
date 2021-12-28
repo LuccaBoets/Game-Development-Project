@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GameEngine;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameEngine.Scenes
 {
@@ -13,12 +10,16 @@ namespace GameEngine.Scenes
 
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
+        public ContentManager Content;
+        public GraphicsDevice GraphicsDevice;
 
         protected SceneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
             this.MainGame = game;
-            _graphics = graphics;
-            _spriteBatch = spriteBatch;
+            this._graphics = graphics;
+            this._spriteBatch = spriteBatch;
+            this.Content = game.Content;
+            this.GraphicsDevice = game.GraphicsDevice;
         }
 
         public abstract void Initialize();

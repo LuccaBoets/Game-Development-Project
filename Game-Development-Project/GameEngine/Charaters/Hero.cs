@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using GameEngine.Data;
+using GameEngine.Charaters;
 
 namespace GameEngine
 {
@@ -31,11 +32,14 @@ namespace GameEngine
 
         public Animatie currentAnimation { get; set; }
         public List<Animatie> Animaties { get; set; }
-        public bool lookingRight { get; set; }
+        public bool lookingLeft { get; set; }
 
         public Vector2 position { get; set; }
 
         public Movement Movement { get; set; }
+        public Stats stats { get; set; }
+        public double invisibleTimer { get; set; }
+        public bool invisible { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
@@ -45,9 +49,11 @@ namespace GameEngine
 
             Movement = new Movement();
 
-            this.lookingRight = true;
+            this.lookingLeft = true;
 
-            this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
+            changeAnimation(AnimationsTypes.idle);
+
+            stats = new Stats(100, 20);
         }
 
 
@@ -178,7 +184,7 @@ namespace GameEngine
         {
             var spriteEffects = SpriteEffects.None;
 
-            if (lookingRight)
+            if (lookingLeft)
             {
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
@@ -191,30 +197,40 @@ namespace GameEngine
             throw new NotImplementedException();
         }
 
-        public void attack1(List<IHitable> hitables)
+        public void attack1(List<Enemy> enemies)
         {
-            Rectangle attackCollsionRectangle = new Rectangle();
-            if (lookingRight)
+            if (currentAnimation.count == 3 && currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
             {
-                attackCollsionRectangle = new Rectangle();
-            }
-            else
-            {
-                attackCollsionRectangle = new Rectangle();
-            }
 
-            foreach (var hitable in hitables)
-            {
-                if (CollisionManager.Detection(hitable.GetCollisionRectangle(), attackCollsionRectangle))
+                Rectangle attackCollsionRectangle = new Rectangle();
+                if (lookingLeft)
                 {
-                    hitable.hit();
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - 36 * 3, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+                else
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+
+                foreach (var enemy in enemies)
+                {
+                    if (CollisionManager.Detection(enemy.GetCollisionRectangle(), attackCollsionRectangle))
+                    {
+                        enemy.Hit(stats.damage);
+                    }
                 }
             }
+
         }
 
-        public void hit()
+        public void Hit(int damage)
         {
             throw new NotImplementedException();
+        }
+
+        public void changeAnimation(AnimationsTypes animationsTypes)
+        {
+            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
         }
     }
 }

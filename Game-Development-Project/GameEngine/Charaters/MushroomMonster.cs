@@ -13,11 +13,11 @@ using GameEngine.Data;
 
 namespace GameEngine.Charaters
 {
-    public class MushroomMonster : ICollisionable, IAnimationable
+    public class MushroomMonster : Enemy
     {
-        public Animatie currentAnimation { get; set; }
-        public List<Animatie> Animaties { get; set; }
-        public bool lookingRight { get; set; }
+        public override Animatie currentAnimation { get; set; }
+        public override List<Animatie> Animaties { get; set; }
+        public override bool lookingLeft { get; set; }
 
         public Vector2 position;
 
@@ -29,8 +29,9 @@ namespace GameEngine.Charaters
         float oldstance;
 
         public Movement Movement { get; set; }
-
-
+        public override Stats stats { get; set; }
+        public override double invisibleTimer { get; set; }
+        public override bool invisible { get; set; } = false;
 
         public MushroomMonster(List<Animatie> animaties, Vector2 newPosition, float newDistance)
         {
@@ -42,24 +43,35 @@ namespace GameEngine.Charaters
 
             oldstance = distance;
 
-
             Movement = new Movement();
 
-            this.lookingRight = true;
+            this.lookingLeft = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
+
+            this.stats = new Stats(50, 10);
         }
-        public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
+        public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
             throw new NotImplementedException();
         }
 
-       
 
-        public void update(GameTime gameTime, Hero hero)
+
+        public override void Update(GameTime gameTime, Hero hero)
         {
+            //Follow(hero);
 
-            Follow(hero);
+            if (invisible)
+            {
+                invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            if (invisibleTimer >= 1000)
+            {
+                invisible = false;
+                invisibleTimer = 0;
+            }
 
             currentAnimation.update(gameTime);
 
@@ -68,15 +80,16 @@ namespace GameEngine.Charaters
 
             if (distance <= 0)
             {
-                lookingRight = false;
+                lookingLeft = false;
                 velocity.X = 1f;
-            }else if (distance <= oldstance)
+            }
+            else if (distance <= oldstance)
             {
-                lookingRight = true;
+                lookingLeft = true;
                 velocity.X = 1f;
             }
 
-            if (lookingRight) 
+            if (lookingLeft)
             {
                 distance += 1;
             }
@@ -90,7 +103,7 @@ namespace GameEngine.Charaters
         {
             if (hero.position.X < position.X + 100 && hero.position.X > position.X - 100)
             {
-                if (lookingRight)
+                if (lookingLeft)
                 {
                     distance -= 5;
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
@@ -102,36 +115,51 @@ namespace GameEngine.Charaters
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
                     distance -= 5;
                     velocity.X = 5f;
-                   
+
                 }
-
-              
-
-
             }
         }
 
-            public Rectangle GetCollisionRectangle()
+        public override Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, currentAnimation.texture.Bounds.Width, currentAnimation.texture.Bounds.Height);
+        }
+
+        public override Rectangle GetNextCollisionRectangle()
         {
             throw new NotImplementedException();
         }
 
-        public Rectangle GetNextCollisionRectangle()
-        {
-            throw new NotImplementedException();
-        }
 
-
-        public void draw(SpriteBatch _spriteBatch)
+        public override void Draw(SpriteBatch _spriteBatch)
         {
             var spriteEffects = SpriteEffects.None;
 
-            if (lookingRight)
+            if (lookingLeft)
             {
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+        }
+
+        public override void changeAnimation(AnimationsTypes animationsTypes)
+        {
+            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
+        }
+
+        public override void Hit(int damage)
+        {
+            if (!invisible)
+            {
+                Debug.WriteLine("hit");
+                stats.health -= damage;
+                invisible = true;
+                if (stats.health <= 0)
+                {
+                    position.X = 10000;
+                }
+            }
         }
     }
 }

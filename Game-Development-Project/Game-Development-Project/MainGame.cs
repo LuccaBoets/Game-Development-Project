@@ -47,7 +47,7 @@ namespace GameEngine
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            this.ChangeSceneState(new LvlOneState(this, this._graphics, this._spriteBatch));
+            this.ChangeSceneState(new MenuState(this, this._graphics, this._spriteBatch));
 
             //this.SceneState.LoadContent();
         }

@@ -71,16 +71,13 @@ namespace GameEngine.Environment
 
             heroStartPosition = hero.position;
         }
-        //public Texture2D texture;
-        //public Rectangle rectangle3;
-        //public Vector2 position { get; set; }
 
-        public override void Draw(GameTime gametime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
 
             foreach (var sprite in _sprites)
             {
-                sprite.Draw(gametime, spriteBatch);
+                sprite.Draw(spriteBatch);
 
             }
         }
@@ -90,7 +87,7 @@ namespace GameEngine.Environment
         {
             foreach (var sprite in _sprites)
             {
-                sprite.Position.Y = hero.GetCollisionRectangle().Center.Y - sprite.Rectangle.Height/2 - 300;
+                sprite.Position.Y = hero.GetCollisionRectangle().Center.Y - sprite.Rectangle.Height/2 - 200;
             }
 
             ApplySpeed(gameTime);

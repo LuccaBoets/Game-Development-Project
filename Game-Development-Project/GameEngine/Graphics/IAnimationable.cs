@@ -8,6 +8,8 @@ namespace GameEngine.Graphics
     {
         public Animatie currentAnimation { get; set; }
         public List<Animatie> Animaties { get; set; }
-        public bool lookingRight { get; set; }
+        public bool lookingLeft { get; set; }
+
+        public void changeAnimation(AnimationsTypes animationsTypes);
     }
 }
