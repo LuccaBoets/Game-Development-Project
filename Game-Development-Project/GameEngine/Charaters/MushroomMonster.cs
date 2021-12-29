@@ -62,7 +62,6 @@ namespace GameEngine.Charaters
 
 
         public override void Update(GameTime gameTime, Hero hero)
-
         {
             //Follow(hero);
 
@@ -96,6 +95,7 @@ namespace GameEngine.Charaters
                 forwardChance += 50;
             }
             if (position.X - 50 > hero.position.X)
+            {
 
                 lookingLeft = false;
                 velocity.X = 1f;
@@ -111,7 +111,7 @@ namespace GameEngine.Charaters
             {
                 leftChance += 50;
             }
-            else if (position.X + 50< hero.position.X)
+            else if (position.X + 50 < hero.position.X)
             {
                 rightChance += 50;
             }
@@ -130,12 +130,12 @@ namespace GameEngine.Charaters
                 if (vergelijkingLR == leftChance)
                 {
                     state = 1;
-                 
+
                 }
                 else
                 {
                     state = 2;
-                 
+
                 }
             }
             /*else //Up Down
@@ -162,18 +162,18 @@ namespace GameEngine.Charaters
                 distance = 0;
                 //update(hero);
             }
-           
+
             switch (state)
             {
 
                 case 2:
                     position.X += 2.0f;
                     state = 0;
-                    lookingRight = false;
+                    lookingLeft = false;
                     break;
                 case 1:
                     position.X -= 2.0f;
-                    lookingRight = true;
+                    lookingLeft = true;
                     state = 0;
                     break;
                 /*case 3:
@@ -183,7 +183,7 @@ namespace GameEngine.Charaters
                     position.Y += 2.0f;
                     break;
                 */
-                       
+
                 case 0:
                     break;
             }
@@ -191,10 +191,10 @@ namespace GameEngine.Charaters
 
 
 
-           
 
 
-            if (position.X < hero.position.X + 50 && position.X  > hero.position.X - 50)
+
+            if (position.X < hero.position.X + 50 && position.X > hero.position.X - 50)
             {
                 Random random = new Random();
                 int aanval = random.Next(0, 2);
@@ -203,30 +203,33 @@ namespace GameEngine.Charaters
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack1);
                 }
                 else if (aanval == 1)
-
-                if (lookingLeft)
-
-                {
-                    currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack2);
-                }
-                else
                 {
 
-                    currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack3);
+                    if (lookingLeft)
+
+                    {
+                        currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack2);
+                    }
+                    else
+                    {
+
+                        currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack3);
+                    }
+                    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.hit);
                 }
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.hit);
-            }else if (lookingRight)
+            }
+            else if (lookingLeft)
             {
 
                 currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
 
-                    currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
-                    distance -= 5;
-                    velocity.X = 5f;
+                currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
+                distance -= 5;
+                velocity.X = 5f;
 
 
-                }
             }
+
             else
             {
                 currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
@@ -251,7 +254,7 @@ namespace GameEngine.Charaters
             if (lookingLeft)
             {
                 spriteEffects = SpriteEffects.FlipHorizontally;
-                
+
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
@@ -277,3 +280,6 @@ namespace GameEngine.Charaters
         }
     }
 }
+
+
+
