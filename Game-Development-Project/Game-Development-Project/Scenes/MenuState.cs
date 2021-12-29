@@ -58,8 +58,7 @@ namespace GameEngine.Scenes
             {
                 background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
 
-               
-
+             
             }
 
             imageTitel = MainGame.Content.Load<Texture2D>("TitelNieuw");
