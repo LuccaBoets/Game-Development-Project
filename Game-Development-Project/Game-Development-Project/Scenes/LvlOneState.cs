@@ -216,7 +216,9 @@ namespace GameEngine.Scenes
             }
 
             hero.update(gameTime, tilemap);
-            mushroomMonster.update(gameTime, hero);
+            
+            mushroomMonster.update(gameTime,hero);
+     
         }
         public override void Draw(GameTime gameTime)
         {
