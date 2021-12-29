@@ -4,7 +4,9 @@ using System.Text;
 
 namespace GameDevelopmentProject.Scenes
 {
-    class Class1
+    class StartScreen
     {
+
+
     }
 }
