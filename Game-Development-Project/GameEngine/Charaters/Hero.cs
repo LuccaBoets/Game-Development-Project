@@ -11,22 +11,10 @@ using System.Linq;
 using System.Text;
 using GameEngine.Data;
 using GameEngine.Charaters;
+using GameEngine.ExtensionMethods;
 
 namespace GameEngine
 {
-
-    public enum AnimationsTypes
-    {
-        idle,
-        run,
-        jump,
-        fall,
-        attack1,
-        attack2,
-        attack3,
-        death,
-        hit
-    }
     public class Hero : ICollisionable, IMoveable, IAnimationable, IHitable
     {
 
@@ -51,85 +39,52 @@ namespace GameEngine
 
             this.lookingLeft = true;
 
-            changeAnimation(AnimationsTypes.idle);
+            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == AnimationsTypes.idle);
 
             stats = new Stats(100, 20);
         }
 
-
         public void update(GameTime gameTime, Tilemap tilemap)
         {
-            this.Movement.update(gameTime, this, this);
-
-            List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
-            foreach (var direction in directions)
+            if (currentAnimation.AnimatieNaam.canMove())
             {
-                if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)
+
+                this.Movement.update(gameTime, this, this);
+
+                List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
+                foreach (var direction in directions)
                 {
-                    this.Movement.Velocity.X = 0;
-                    position += new Vector2(direction.Item2.Width, 0);
+                    if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)
+                    {
+                        this.Movement.Velocity.X = 0;
+                        position += new Vector2(direction.Item2.Width, 0);
+                    }
 
-                    //position += new Vector2(direction.Item2.Left - GetCollisionRectangle().Width, 0);
-                }
+                    if (this.Movement.Velocity.X > 0 & direction.Item1 == CollisionDirection.right)
+                    {
+                        this.Movement.Velocity.X = 0;
+                        position += new Vector2(-direction.Item2.Width, 0);
+                    }
 
-                if (this.Movement.Velocity.X > 0 & direction.Item1 == CollisionDirection.right)
-                {
-                    this.Movement.Velocity.X = 0;
-                    position += new Vector2(-direction.Item2.Width, 0);
+                    if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
+                    {
+                        this.Movement.Velocity.Y = 0;
+                        position += new Vector2(0, direction.Item2.Height);
+                    }
 
-                }
+                    if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
+                    {
+                        position += new Vector2(0, -direction.Item2.Height);
 
-                if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
-                {
-                    this.Movement.Velocity.Y = 0;
-                    position += new Vector2(0, direction.Item2.Height);
-                }
-
-                if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
-                {
-                    position += new Vector2(0, -direction.Item2.Height);
-
-                    this.Movement.Velocity.Y = 0;
-                    this.Movement.InAir = false;
+                        this.Movement.Velocity.Y = 0;
+                        this.Movement.InAir = false;
+                    }
                 }
             }
-
-            //Position += Velocity;
-            //Debug.WriteLine(direction.Item1);
-
-            //switch (direction.Item1)
-            //{
-            //    case CollisionDirection.up:
-            //        Debug.WriteLine(position);
-            //        position = new Vector2(position.X, direction.Item2.Y - GetTextureRectangle().Height + 12);
-            //        Movement.inAir = false;
-            //        Movement.velocity.Y = 0;
-            //        break;
-
-            //    case CollisionDirection.down:
-            //        //position += new Vector2(0, direction.Item2.Height);
-            //        position = new Vector2(position.X, direction.Item2.Y - direction.Item2.Height - 12);
-
-            //        Movement.velocity.Y = 0;
-            //        break;
-
-            //    case CollisionDirection.left:
-            //        position = new Vector2(direction.Item2.X + direction.Item2.Width - 63*2, position.Y);
-
-
-            //        Movement.velocity.X = 0;
-            //        break;
-
-            //    case CollisionDirection.right:
-            //        position = new Vector2(direction.Item2.X - GetCollisionRectangle().Width - 63*2, position.Y);
-
-            //        //position += new Vector2(-direction.Item2.Width, 0);
-            //        Movement.velocity.X = 0;
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //}
+            else
+            {
+                this.Movement.Velocity = new Vector2(0, 0);
+            }
 
             if (this.Movement.InAir == false)
             {
@@ -140,6 +95,8 @@ namespace GameEngine
             }
 
             currentAnimation.update(gameTime);
+
+            endOfAnimation();
         }
 
         public Rectangle GetNextCollisionRectangle()
@@ -179,7 +136,6 @@ namespace GameEngine
             return rectangle;
         }
 
-
         public void draw(SpriteBatch _spriteBatch)
         {
             var spriteEffects = SpriteEffects.None;
@@ -199,9 +155,10 @@ namespace GameEngine
 
         public void attack1(List<Enemy> enemies)
         {
-            if (currentAnimation.count == 2 && currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
-            {
+            Debug.WriteLine(currentAnimation.count);
 
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            {
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
                 {
@@ -228,9 +185,39 @@ namespace GameEngine
             throw new NotImplementedException();
         }
 
-        public void changeAnimation(AnimationsTypes animationsTypes)
+        public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
         {
-            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
+
+            if (!(this.currentAnimation.AnimatieNaam == animationsTypes) && (this.currentAnimation.AnimatieNaam.isHigherPriority(animationsTypes) || ignorePriority))
+            {
+                this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
+                this.currentAnimation.count = 0;
+            }
+
+
+        }
+
+        public void endOfAnimation()
+        {
+            if (this.currentAnimation.count >= this.currentAnimation.frames.Count - 1)
+            {
+                Debug.WriteLine("test");
+                switch (this.currentAnimation.AnimatieNaam)
+                {
+                    case AnimationsTypes.attack1:
+                    case AnimationsTypes.attack2:
+                    case AnimationsTypes.attack3:
+                        changeAnimation(AnimationsTypes.idle, true);
+                        break;
+                    case AnimationsTypes.hit:
+                        changeAnimation(AnimationsTypes.idle, true);
+                        break;
+                    case AnimationsTypes.death:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace GameEngine.Graphics
         public List<Animatie> Animaties { get; set; }
         public bool lookingLeft { get; set; }
 
-        public void changeAnimation(AnimationsTypes animationsTypes);
+        public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false);
+
+        public void endOfAnimation();
     }
 }

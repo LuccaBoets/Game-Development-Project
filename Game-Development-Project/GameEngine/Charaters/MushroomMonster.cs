@@ -260,7 +260,7 @@ namespace GameEngine.Charaters
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
         }
 
-        public override void changeAnimation(AnimationsTypes animationsTypes)
+        public override void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
         {
             this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
         }
@@ -277,6 +277,11 @@ namespace GameEngine.Charaters
                     position.X = 10000;
                 }
             }
+        }
+
+        public override void endOfAnimation()
+        {
+            throw new NotImplementedException();
         }
     }
 }

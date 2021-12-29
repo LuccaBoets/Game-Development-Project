@@ -129,71 +129,37 @@ namespace GameEngine.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            var idle = true;
-
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 hero.Movement.left(hero);
-          
-                idle = false;
-                //Left
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 hero.Movement.right(hero);
-
-                //hero.movement.Move(hero, speed, gameTime);
-            
-                idle = false;
-                //Right
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                idle = false;
-                //Down
-                //hero.position += new Vector2(0.0f, 3.0f);
-
-            }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Z))
-            {
-
-                idle = false;
-                //Up
-                //hero.position += new Vector2(0.0f, -3.0f);
-            }
-
-            if (idle)
-            {
-                hero.changeAnimation(AnimationsTypes.idle);
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                idle = false;
                 hero.attack1(this.Monsters);
 
                 hero.changeAnimation(AnimationsTypes.attack1);
-
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            } else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 hero.changeAnimation(AnimationsTypes.hit);
-
             }
-
+            else if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+                hero.changeAnimation(AnimationsTypes.attack2);
+            }
+            else
+            {
+                hero.changeAnimation(AnimationsTypes.idle);
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hero.Movement.InAir == false)
             {
-
                 hero.Movement.jump();
-
-                //hero.movement.inAir = true;
-
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.L))
@@ -211,12 +177,8 @@ namespace GameEngine.Scenes
 
 
             }
-            //base.Update(gameTime);
 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
-            {
-                hero.changeAnimation(AnimationsTypes.attack2);
-            }
+
 
             hero.update(gameTime, tilemap);
 
@@ -233,15 +195,14 @@ namespace GameEngine.Scenes
                   -hero.GetCollisionRectangle().Center.X,
                   -hero.GetCollisionRectangle().Center.Y,
                   0);
-
-
+    
             var offset = Matrix.CreateTranslation(
                 Settings.ScreenW / 2,
                 Settings.ScreenH / 2,
                 0);
 
             var Transform = position * offset;
-            
+
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
             //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
@@ -260,7 +221,7 @@ namespace GameEngine.Scenes
 
             tilemap.draw(_spriteBatch);
 
-        
+
             foreach (var sb in _scrollingBackgrounds)
             {
                 sb.Draw(_spriteBatch);

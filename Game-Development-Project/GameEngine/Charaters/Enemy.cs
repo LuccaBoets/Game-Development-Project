@@ -22,7 +22,7 @@ namespace GameEngine.Charaters
 
         public abstract void Update(GameTime gameTime, Hero hero);
 
-        public abstract void changeAnimation(AnimationsTypes animationsTypes);
+        public abstract void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false);
 
         public abstract Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle);
 
@@ -30,5 +30,6 @@ namespace GameEngine.Charaters
 
         public abstract Rectangle GetNextCollisionRectangle();
         public abstract void Hit(int damage);
+        public abstract void endOfAnimation();
     }
 }

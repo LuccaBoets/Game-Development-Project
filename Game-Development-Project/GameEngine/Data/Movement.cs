@@ -1,4 +1,5 @@
-﻿using GameEngine.Graphics;
+﻿using GameEngine.ExtensionMethods;
+using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,53 +18,36 @@ namespace GameEngine.Data
         public int MaxSpeedX { get; set; } = 5;
         public bool IsButtonXPressed { get; set; } = false;
 
-
-        //public void Move(Hero hero, int Xnumber, GameTime gameTime)
-        //{
-        //    var delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-        //    if (Xnumber > 0) //Right
-        //    {
-        //        hero.position += new Vector2(0.3f * delta, 0.0f);
-        //        //velocity.X += 1f;
-        //        hero.lookingRight = false;
-        //    }
-        //    else //Left
-        //    {
-        //        hero.position += new Vector2(-0.3f * delta, 0.0f);
-        //        //velocity.X += -1f;
-
-        //        hero.lookingRight = true;
-        //    }
-
-        //    hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == HeroAnimations.run);
-
-
-        //}
-
         public void right(IAnimationable animationable)
         {
-            Velocity.X += 1f;
-            IsButtonXPressed = true;
 
-
-            animationable.lookingLeft = false;
-
-            if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
+            if (animationable.currentAnimation.AnimatieNaam.canMove())
             {
-                animationable.changeAnimation(AnimationsTypes.run);
+                Velocity.X += 1f;
+                IsButtonXPressed = true;
+
+                animationable.lookingLeft = false;
+
+                if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
+                {
+                    animationable.changeAnimation(AnimationsTypes.run);
+                }
             }
         }
 
         public void left(IAnimationable animationable)
         {
-            Velocity.X -= 1f;
-            IsButtonXPressed = true;
-
-            animationable.lookingLeft = true;
-
-            if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
+            if (animationable.currentAnimation.AnimatieNaam.canMove())
             {
-                animationable.changeAnimation(AnimationsTypes.run);
+                Velocity.X -= 1f;
+                IsButtonXPressed = true;
+
+                animationable.lookingLeft = true;
+
+                if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
+                {
+                    animationable.changeAnimation(AnimationsTypes.run);
+                }
             }
         }
 
@@ -77,7 +61,6 @@ namespace GameEngine.Data
         public void down()
         {
             Velocity.Y += 0.15f * Gravity;
-
         }
 
         public void update(GameTime gameTime, IAnimationable animationable, IMoveable moveable)
@@ -120,14 +103,16 @@ namespace GameEngine.Data
                 }
             }
 
+            if (Velocity.X == 0 && Velocity.Y == 0)
+            {
+                if (animationable.currentAnimation.AnimatieNaam.canMove())
+                {
+                    animationable.changeAnimation(AnimationsTypes.idle, true);
+                }
+            }
+
             moveable.position += Velocity * gameTime.ElapsedGameTime.Ticks / 100000;
 
-            //Debug.WriteLine(velocity);
-
-            //if (moveable.position.Y >= )
-            //{
-
-            //}
             IsButtonXPressed = false;
         }
     }

@@ -7,6 +7,19 @@ using System.Text;
 
 namespace GameEngine.Graphics
 {
+    public enum AnimationsTypes
+    {
+        idle,
+        run,
+        attack1,
+        attack2,
+        attack3,
+        jump,
+        fall,
+        hit,
+        death,
+    }
+
     public class Animatie
     {
         public AnimationsTypes AnimatieNaam { get; set; }
