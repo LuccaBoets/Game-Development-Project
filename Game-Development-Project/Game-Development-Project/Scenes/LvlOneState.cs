@@ -1,4 +1,5 @@
-﻿using GameEngine.Charaters;
+﻿using GameEngine.Behavior;
+using GameEngine.Charaters;
 using GameEngine.Data;
 using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
@@ -18,11 +19,10 @@ namespace GameEngine.Scenes
     {
         private Hero hero { get; set; }
 
-        private MushroomMonster mushroomMonster { get; set; }
+        private List<Enemy> Monsters { get; set; }
 
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
-
 
         const int speed = 3;
 
@@ -38,66 +38,66 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-      
-            hero = new Hero(HeroAnimations.AllAnimation(MainGame.Content));
-            mushroomMonster = new MushroomMonster(MushroomAnimations.AllAnimation(MainGame.Content), new Vector2(900, 950), 500);
+            Monsters = new List<Enemy>();
+            hero = new Hero(HeroAnimations.AllAnimation(Content));
+            Monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 950), 500));
 
 
             _scrollingBackgrounds = new List<Scrolling>()
             {
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 60f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 60f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 60f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 60f)
                 {
                     Layer = 0.40f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 60f)
                 {
                     Layer = 0.40f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 40f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 40f)
                 {
                 Layer = 0.39f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 30f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 30f)
                 {
                 Layer = 0.39f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 30f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 30f)
                 {
                     Layer = 0.39f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 15f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 15f)
                 {
                     Layer = 0.37f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 10f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 10f)
                 {
                     Layer = 0.35f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0010_1"), hero, 0f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0010_1"), hero, 0f)
                 {
                     Layer = 0.30f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/Layer_0011_0"), hero, 0f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0011_0"), hero, 0f)
                 {
                     Layer = 0.30f,
                 },
-                new Scrolling(MainGame.Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f)
+                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f)
                 {
                     Layer = 0.35f,
                 },
-                 new Scrolling(MainGame.Content.Load<Texture2D>("Background/SunLayer5"), hero, 0f)
+                 new Scrolling(Content.Load<Texture2D>("Background/SunLayer5"), hero, 0f)
                 {
                     Layer = 0.10f,
                 },
@@ -114,7 +114,7 @@ namespace GameEngine.Scenes
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-2"), MainGame.GraphicsDevice, -2);
 
 
-            TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("ExportedTileSet"));
             using (FileStream fs = File.OpenRead(@"../../../Content/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
@@ -168,18 +168,22 @@ namespace GameEngine.Scenes
 
             if (idle)
             {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
+                hero.changeAnimation(AnimationsTypes.idle);
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 idle = false;
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack1);
+                hero.attack1(this.Monsters);
+
+                hero.changeAnimation(AnimationsTypes.attack1);
+
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.hit);
+                hero.changeAnimation(AnimationsTypes.hit);
+
             }
 
 
@@ -194,7 +198,7 @@ namespace GameEngine.Scenes
 
             if (Keyboard.GetState().IsKeyDown(Keys.L))
             {
-                TileFactory.Save(MainGame.GraphicsDevice);
+                TileFactory.Save(GraphicsDevice);
                 using (FileStream fs = File.Create(@"ExportedTilemapData.txt"))
                 {
                     tilemap.Save(fs);
@@ -211,14 +215,17 @@ namespace GameEngine.Scenes
 
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
-                hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack2);
-
+                hero.changeAnimation(AnimationsTypes.attack2);
             }
 
             hero.update(gameTime, tilemap);
-            
-            mushroomMonster.update(gameTime,hero);
-     
+
+
+            foreach (var monster in this.Monsters)
+            {
+                monster.Update(gameTime, hero);
+            }
+
         }
         public override void Draw(GameTime gameTime)
         {
@@ -234,26 +241,29 @@ namespace GameEngine.Scenes
                 0);
 
             var Transform = position * offset;
-
+            
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
             //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
             //Texture2D.SetData(new[] { Color.Red });
-            //_spriteBatch.Draw(Texture2D, _scrollingBackgrounds[0].viewRectangle.Location.ToVector2(), Texture2D.Bounds, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
+            //_spriteBatch.Draw(Texture2D, new Vector2(hero.GetCollisionRectangle().Right,hero.GetCollisionRectangle().Top+10), new Rectangle(0, 0, 54 * 2, 36 * 2), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
+            //// new Vector2(hero.position.X+10,hero.position.Y+36*2),
 
+            //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             hero.draw(_spriteBatch);
-            mushroomMonster.draw(_spriteBatch);
+
+            foreach (var monster in this.Monsters)
+            {
+                monster.Draw(_spriteBatch);
+            }
+
             tilemap.draw(_spriteBatch);
 
         
             foreach (var sb in _scrollingBackgrounds)
             {
-                sb.Draw(gameTime, _spriteBatch);
-                //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
-                //Texture2D.SetData(new[] { Color.Red });
-                //_spriteBatch.Draw(Texture2D, sb.viewRectangle.Location.ToVector2(), Texture2D.Bounds, Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
-
+                sb.Draw(_spriteBatch);
             }
             _spriteBatch.End();
         }

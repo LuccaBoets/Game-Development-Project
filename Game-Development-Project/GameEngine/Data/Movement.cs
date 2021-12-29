@@ -46,11 +46,11 @@ namespace GameEngine.Data
             IsButtonXPressed = true;
 
 
-            animationable.lookingRight = false;
+            animationable.lookingLeft = false;
 
             if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
             {
-                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
+                animationable.changeAnimation(AnimationsTypes.run);
             }
         }
 
@@ -59,11 +59,11 @@ namespace GameEngine.Data
             Velocity.X -= 1f;
             IsButtonXPressed = true;
 
-            animationable.lookingRight = true;
+            animationable.lookingLeft = true;
 
             if (!animationable.currentAnimation.AnimatieNaam.Equals(AnimationsTypes.run))
             {
-                animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
+                animationable.changeAnimation(AnimationsTypes.run);
             }
         }
 
@@ -111,11 +111,12 @@ namespace GameEngine.Data
 
                 if (Velocity.Y > 0)
                 {
-                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.fall);
+                    animationable.changeAnimation(AnimationsTypes.fall);
+
                 }
                 else
                 {
-                    animationable.currentAnimation = animationable.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.jump);
+                    animationable.changeAnimation(AnimationsTypes.jump);
                 }
             }
 

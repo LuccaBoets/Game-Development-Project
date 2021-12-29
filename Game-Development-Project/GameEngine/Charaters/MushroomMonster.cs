@@ -13,11 +13,11 @@ using GameEngine.Data;
 
 namespace GameEngine.Charaters
 {
-    public class MushroomMonster : ICollisionable, IAnimationable
+    public class MushroomMonster : Enemy
     {
-        public Animatie currentAnimation { get; set; }
-        public List<Animatie> Animaties { get; set; }
-        public bool lookingRight { get; set; }
+        public override Animatie currentAnimation { get; set; }
+        public override List<Animatie> Animaties { get; set; }
+        public override bool lookingLeft { get; set; }
 
         public Vector2 position;
 
@@ -31,8 +31,9 @@ namespace GameEngine.Charaters
         float oldstance;
 
         public Movement Movement { get; set; }
-
-
+        public override Stats stats { get; set; }
+        public override double invisibleTimer { get; set; }
+        public override bool invisible { get; set; } = false;
 
         public MushroomMonster(List<Animatie> animaties, Vector2 newPosition, int newDistance)
         {
@@ -44,22 +45,27 @@ namespace GameEngine.Charaters
 
             oldstance = distance;
 
-
             Movement = new Movement();
 
-            this.lookingRight = true;
+            this.lookingLeft = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
+
+            this.stats = new Stats(50, 10);
         }
-        public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
+        public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
             throw new NotImplementedException();
         }
 
-       
 
-        public void update(GameTime gameTime,Hero hero)
+
+
+        public override void Update(GameTime gameTime, Hero hero)
+
         {
+            //Follow(hero);
+
 
             Follow(hero);
             Random random = new Random();
@@ -68,8 +74,21 @@ namespace GameEngine.Charaters
             int leftChance = 10;
             int rightChance = 10;
 
+            if (invisible)
+            {
+                invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            if (invisibleTimer >= 1000)
+            {
+                invisible = false;
+                invisibleTimer = 0;
+            }
+
+
             if (position.Y + 50 > hero.position.Y)
             {
+
                 backChance += 50;
             }
             else if (position.Y - 50 < hero.position.Y)
@@ -77,6 +96,18 @@ namespace GameEngine.Charaters
                 forwardChance += 50;
             }
             if (position.X - 50 > hero.position.X)
+
+                lookingLeft = false;
+                velocity.X = 1f;
+            }
+            else if (distance <= oldstance)
+            {
+                lookingLeft = true;
+                velocity.X = 1f;
+            }
+
+            if (lookingLeft)
+
             {
                 leftChance += 50;
             }
@@ -134,6 +165,7 @@ namespace GameEngine.Charaters
            
             switch (state)
             {
+
                 case 2:
                     position.X += 2.0f;
                     state = 0;
@@ -171,11 +203,15 @@ namespace GameEngine.Charaters
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack1);
                 }
                 else if (aanval == 1)
+
+                if (lookingLeft)
+
                 {
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack2);
                 }
                 else
                 {
+
                     currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.attack3);
                 }
                 hero.currentAnimation = hero.Animaties.First(x => x.AnimatieNaam == AnimationsTypes.hit);
@@ -184,6 +220,12 @@ namespace GameEngine.Charaters
 
                 currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
 
+                    currentAnimation = Animaties.First(x => x.AnimatieNaam == AnimationsTypes.run);
+                    distance -= 5;
+                    velocity.X = 5f;
+
+
+                }
             }
             else
             {
@@ -191,28 +233,47 @@ namespace GameEngine.Charaters
             }
         }
 
-            public Rectangle GetCollisionRectangle()
+        public override Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, currentAnimation.texture.Bounds.Width, currentAnimation.texture.Bounds.Height);
+        }
+
+        public override Rectangle GetNextCollisionRectangle()
         {
             throw new NotImplementedException();
         }
 
-        public Rectangle GetNextCollisionRectangle()
-        {
-            throw new NotImplementedException();
-        }
 
-
-        public void draw(SpriteBatch _spriteBatch)
+        public override void Draw(SpriteBatch _spriteBatch)
         {
             var spriteEffects = SpriteEffects.None;
 
-            if (lookingRight)
+            if (lookingLeft)
             {
                 spriteEffects = SpriteEffects.FlipHorizontally;
                 
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+        }
+
+        public override void changeAnimation(AnimationsTypes animationsTypes)
+        {
+            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
+        }
+
+        public override void Hit(int damage)
+        {
+            if (!invisible)
+            {
+                Debug.WriteLine("hit");
+                stats.health -= damage;
+                invisible = true;
+                if (stats.health <= 0)
+                {
+                    position.X = 10000;
+                }
+            }
         }
     }
 }

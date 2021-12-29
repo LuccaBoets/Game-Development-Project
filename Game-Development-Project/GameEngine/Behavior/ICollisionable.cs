@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameEngine.Characters
 {
-    interface ICollisionable
+    public interface ICollisionable
     {
         public Rectangle GetNextCollisionRectangle();
         public Rectangle GetCollisionRectangle();

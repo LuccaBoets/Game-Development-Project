@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using GameEngine.Data;
+using GameEngine.Charaters;
 
 namespace GameEngine
 {
@@ -26,16 +27,19 @@ namespace GameEngine
         death,
         hit
     }
-    public class Hero : ICollisionable, IMoveable, IAnimationable
+    public class Hero : ICollisionable, IMoveable, IAnimationable, IHitable
     {
 
         public Animatie currentAnimation { get; set; }
         public List<Animatie> Animaties { get; set; }
-        public bool lookingRight { get; set; }
+        public bool lookingLeft { get; set; }
 
         public Vector2 position { get; set; }
 
         public Movement Movement { get; set; }
+        public Stats stats { get; set; }
+        public double invisibleTimer { get; set; }
+        public bool invisible { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
@@ -45,11 +49,13 @@ namespace GameEngine
 
             Movement = new Movement();
 
-            this.lookingRight = true;
+            this.lookingLeft = true;
 
-            this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
+            changeAnimation(AnimationsTypes.idle);
+
+            stats = new Stats(100, 20);
         }
-    
+
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {
@@ -76,12 +82,12 @@ namespace GameEngine
                 if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
                 {
                     this.Movement.Velocity.Y = 0;
-                    position += new Vector2(0 , direction.Item2.Height);
+                    position += new Vector2(0, direction.Item2.Height);
                 }
 
                 if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
                 {
-                    position += new Vector2(0 , -direction.Item2.Height);
+                    position += new Vector2(0, -direction.Item2.Height);
 
                     this.Movement.Velocity.Y = 0;
                     this.Movement.InAir = false;
@@ -178,7 +184,7 @@ namespace GameEngine
         {
             var spriteEffects = SpriteEffects.None;
 
-            if (lookingRight)
+            if (lookingLeft)
             {
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
@@ -190,6 +196,41 @@ namespace GameEngine
         {
             throw new NotImplementedException();
         }
-    }
 
+        public void attack1(List<Enemy> enemies)
+        {
+            if (currentAnimation.count == 2 && currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            {
+
+                Rectangle attackCollsionRectangle;
+                if (lookingLeft)
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - 36 * 3, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+                else
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+
+                foreach (var enemy in enemies)
+                {
+                    if (CollisionManager.Detection(enemy.GetCollisionRectangle(), attackCollsionRectangle))
+                    {
+                        enemy.Hit(stats.damage);
+                    }
+                }
+            }
+
+        }
+
+        public void Hit(int damage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void changeAnimation(AnimationsTypes animationsTypes)
+        {
+            this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
+        }
+    }
 }
