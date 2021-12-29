@@ -199,10 +199,10 @@ namespace GameEngine
 
         public void attack1(List<Enemy> enemies)
         {
-            if (currentAnimation.count == 3 && currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            if (currentAnimation.count == 2 && currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
             {
 
-                Rectangle attackCollsionRectangle = new Rectangle();
+                Rectangle attackCollsionRectangle;
                 if (lookingLeft)
                 {
                     attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - 36 * 3, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
