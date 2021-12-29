@@ -29,6 +29,13 @@ namespace GameEngine
         public double invisibleTimer { get; set; }
         public bool invisible { get; set; }
 
+        public int health { get; set; }
+
+        public int visualHealth { get; set; }
+
+        public Texture2D hartjeVol { get; set; }
+        public Texture2D hartjeLeeg { get; set; }
+
         public Hero(List<Animatie> animaties)
         {
             this.Animaties = animaties;
@@ -81,10 +88,12 @@ namespace GameEngine
                     }
                 }
             }
+
             else
             {
                 this.Movement.Velocity = new Vector2(0, 0);
             }
+
 
             if (this.Movement.InAir == false)
             {
@@ -138,6 +147,9 @@ namespace GameEngine
 
         public void draw(SpriteBatch _spriteBatch)
         {
+
+     
+          
             var spriteEffects = SpriteEffects.None;
 
             if (lookingLeft)
@@ -146,6 +158,20 @@ namespace GameEngine
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            health = 7;
+           for (int i = 0; i < health; i++)
+            {
+                _spriteBatch.Draw(hartjeVol, new Vector2(29 * (i + 1) + GetCollisionRectangle().Center.X - Settings.ScreenW / 2 - 10, GetCollisionRectangle().Center.Y - Settings.ScreenH / 2 + 20), hartjeVol.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+            }
+
+            if (health < 7)
+            {
+                for (int i = 7; i > health; i--)
+                {
+                    _spriteBatch.Draw(hartjeLeeg, new Vector2(10 * i, 500), hartjeLeeg.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+                }
+            }
+            
         }
 
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
@@ -184,6 +210,14 @@ namespace GameEngine
         {
             throw new NotImplementedException();
         }
+
+
+        public void ResetHealth(int health)
+        {
+            health = 7;
+            visualHealth = health;
+        }
+
 
         public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
         {

@@ -11,10 +11,12 @@ namespace GameEngine.Scenes
     public class MenuState : SceneState
     {
 
-        Background background2;
+        List<Background> background2;
         Background backgroundCharacterSelect;
         Texture2D image;
-
+        Texture2D imageTitel;
+        int count = 0;
+        public double ElapsedGameTime { get; set; }
         public MenuState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
             LoadContent();
@@ -23,26 +25,44 @@ namespace GameEngine.Scenes
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
+            ElapsedGameTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+            background2[count].Draw(_spriteBatch);
+            if (ElapsedGameTime >= 120)
+            {
+                count++;
+                ElapsedGameTime = 0;
+            }
 
-            background2.Draw(_spriteBatch);
-
-            _spriteBatch.Draw(image, new Vector2(620, 400), image.Bounds, Color.White, 0, Vector2.Zero, 4f, SpriteEffects.None, 0f);
+            if (count >= 39) 
+            {
+                count = 0;
+            }
+            _spriteBatch.Draw(imageTitel, new Vector2(310, 100), imageTitel.Bounds, Color.White, 0, Vector2.Zero, 1.2f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(image, new Vector2(510,700), image.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
 
             _spriteBatch.End();
         }
 
         public override void Initialize()
         {
+            
             throw new NotImplementedException();
         }
 
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
-            background2 = new Background(MainGame.Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
-            backgroundCharacterSelect = new Background(MainGame.Content.Load<Texture2D>("hills"), new Rectangle(0, 0, 1600, 900));
+            background2 = new List<Background>();
 
-            image = MainGame.Content.Load<Texture2D>("press-enter-text");
+            for (int i = 0; i < 39; i++)
+            {
+                background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
+
+             
+            }
+
+            imageTitel = MainGame.Content.Load<Texture2D>("TitelNieuw");
+            image = MainGame.Content.Load<Texture2D>("PressEnter2");
         }
 
         public override void Update(GameTime gameTime)

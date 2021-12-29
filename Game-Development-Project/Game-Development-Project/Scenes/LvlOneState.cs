@@ -5,8 +5,10 @@ using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +20,8 @@ namespace GameEngine.Scenes
     public class LvlOneState : SceneState
     {
         private Hero hero { get; set; }
+
+        public Song song1 { get; set; }
 
         private List<Enemy> Monsters { get; set; }
 
@@ -42,6 +46,12 @@ namespace GameEngine.Scenes
             hero = new Hero(HeroAnimations.AllAnimation(Content));
             Monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 950), 500));
 
+
+            song1 = Content.Load<Song>("Adventure1");
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Play(song1);
+            hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
+            hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
 
             _scrollingBackgrounds = new List<Scrolling>()
             {
