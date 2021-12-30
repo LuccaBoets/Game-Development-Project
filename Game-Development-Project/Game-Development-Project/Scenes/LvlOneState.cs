@@ -54,43 +54,43 @@ namespace GameEngine.Scenes
 
             _scrollingBackgrounds = new List<Scrolling>()
             {
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 15f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 15f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 15f)
                 {
                     Layer = 0.47f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 15f)
                 {
                     Layer = 0.40f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 60f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 15f)
                 {
                     Layer = 0.40f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 40f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 10f)
                 {
                 Layer = 0.39f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 30f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 7.5f)
                 {
                 Layer = 0.39f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 30f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 7.5f)
                 {
                     Layer = 0.39f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 15f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 4f)
                 {
                     Layer = 0.37f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 10f)
+                new Scrolling(Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 2f)
                 {
                     Layer = 0.35f,
                 },
@@ -102,7 +102,7 @@ namespace GameEngine.Scenes
                 {
                     Layer = 0.30f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 20f)
+                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 5f)
                 {
                     Layer = 0.35f,
                 },
