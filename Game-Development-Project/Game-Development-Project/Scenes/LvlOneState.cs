@@ -197,7 +197,7 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
         }
         public override void Draw(GameTime gameTime)

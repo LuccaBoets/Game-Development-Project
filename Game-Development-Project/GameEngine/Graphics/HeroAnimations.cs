@@ -22,6 +22,7 @@ namespace GameEngine.Graphics
                 HeroAnimations.GetJumpAnimatieFromHero(content),
                 HeroAnimations.GetAttack1FromHero(content),
                 HeroAnimations.GetHitFromHero(content),
+                HeroAnimations.GetDeathFromHero(content),
                 HeroAnimations.GetAttack2AnimatieFromHero(content)
             };
 
@@ -134,6 +135,22 @@ namespace GameEngine.Graphics
             animation.AnimatieNaam = AnimationsTypes.hit;
 
             for (int i = 0; i < 4; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetDeathFromHero(ContentManager content)
+        {
+            Texture2D texture = content.Load<Texture2D>("Death");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = AnimationsTypes.death;
+
+            for (int i = 0; i < 6; i++)
             {
                 animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
