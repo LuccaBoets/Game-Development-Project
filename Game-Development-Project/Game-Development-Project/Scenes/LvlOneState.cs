@@ -44,8 +44,7 @@ namespace GameEngine.Scenes
         {
             Monsters = new List<Enemy>();
             hero = new Hero(HeroAnimations.AllAnimation(Content));
-            Monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 950), 500));
-
+            Monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 700)));
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
@@ -154,7 +153,8 @@ namespace GameEngine.Scenes
                 hero.attack1(this.Monsters);
 
                 hero.changeAnimation(AnimationsTypes.attack1);
-            } else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 hero.changeAnimation(AnimationsTypes.hit);
             }
@@ -195,7 +195,7 @@ namespace GameEngine.Scenes
 
             foreach (var monster in this.Monsters)
             {
-                monster.Update(gameTime, hero);
+                monster.Update(gameTime, hero, tilemap);
             }
 
         }
@@ -205,7 +205,7 @@ namespace GameEngine.Scenes
                   -hero.GetCollisionRectangle().Center.X,
                   -hero.GetCollisionRectangle().Center.Y,
                   0);
-    
+
             var offset = Matrix.CreateTranslation(
                 Settings.ScreenW / 2,
                 Settings.ScreenH / 2,
@@ -215,10 +215,12 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
+            //Rectangle aa = 
+
             //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
             //Texture2D.SetData(new[] { Color.Red });
-            //_spriteBatch.Draw(Texture2D, new Vector2(hero.GetCollisionRectangle().Right,hero.GetCollisionRectangle().Top+10), new Rectangle(0, 0, 54 * 2, 36 * 2), Color.Red, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
-            //// new Vector2(hero.position.X+10,hero.position.Y+36*2),
+            //_spriteBatch.Draw(Texture2D, aa.Location.ToVector2(), aa, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
+            // new Vector2(hero.position.X+10,hero.position.Y+36*2),
 
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 

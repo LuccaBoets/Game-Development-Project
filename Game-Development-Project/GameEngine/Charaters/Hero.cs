@@ -53,6 +53,15 @@ namespace GameEngine
 
         public void update(GameTime gameTime, Tilemap tilemap)
         {
+            move(gameTime, tilemap);
+
+            currentAnimation.update(gameTime);
+
+            endOfAnimation();
+        }
+
+        public void move(GameTime gameTime, Tilemap tilemap)
+        {
             if (currentAnimation.AnimatieNaam.canMove())
             {
 
@@ -88,7 +97,6 @@ namespace GameEngine
                     }
                 }
             }
-
             else
             {
                 this.Movement.Velocity = new Vector2(0, 0);
@@ -102,10 +110,6 @@ namespace GameEngine
                     this.Movement.InAir = true;
                 }
             }
-
-            currentAnimation.update(gameTime);
-
-            endOfAnimation();
         }
 
         public Rectangle GetNextCollisionRectangle()
@@ -211,21 +215,12 @@ namespace GameEngine
             throw new NotImplementedException();
         }
 
-
-        public void ResetHealth(int health)
-        {
-            health = 7;
-            visualHealth = health;
-        }
-
-
         public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
         {
-
             if (!(this.currentAnimation.AnimatieNaam == animationsTypes) && (this.currentAnimation.AnimatieNaam.isHigherPriority(animationsTypes) || ignorePriority))
             {
                 this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
-                this.currentAnimation.count = 0;
+                this.currentAnimation.reset();
             }
 
 

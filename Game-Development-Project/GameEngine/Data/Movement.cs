@@ -11,11 +11,13 @@ namespace GameEngine.Data
 {
     public class Movement
     {
-        public const int Speed = 3;
-        public const float Gravity = 1;
+        public float acceleration { get; set; } = 1f;
+        public float deceleration { get; set; } = 0.5f;
+        public float jumpSpeed { get; set; } = 5f;
+        public const float Gravity = 1f;
         public bool InAir;
         public Vector2 Velocity;
-        public int MaxSpeedX { get; set; } = 5;
+        public float MaxSpeedX { get; set; } = 4f;
         public bool IsButtonXPressed { get; set; } = false;
 
         public void right(IAnimationable animationable)
@@ -23,7 +25,7 @@ namespace GameEngine.Data
 
             if (animationable.currentAnimation.AnimatieNaam.canMove())
             {
-                Velocity.X += 1f;
+                Velocity.X += acceleration;
                 IsButtonXPressed = true;
 
                 animationable.lookingLeft = false;
@@ -39,7 +41,7 @@ namespace GameEngine.Data
         {
             if (animationable.currentAnimation.AnimatieNaam.canMove())
             {
-                Velocity.X -= 1f;
+                Velocity.X -= acceleration;
                 IsButtonXPressed = true;
 
                 animationable.lookingLeft = true;
@@ -53,7 +55,7 @@ namespace GameEngine.Data
 
         public void jump()
         {
-            Velocity.Y = -6f;
+            Velocity.Y = -jumpSpeed;
             InAir = true;
 
         }
@@ -78,12 +80,12 @@ namespace GameEngine.Data
             {
                 if (Velocity.X > 0)
                 {
-                    Velocity.X -= 0.5f;
+                    Velocity.X -= deceleration;
 
                 }
                 else if (Velocity.X < 0)
                 {
-                    Velocity.X += 0.5f;
+                    Velocity.X += deceleration;
                 }
             }
 

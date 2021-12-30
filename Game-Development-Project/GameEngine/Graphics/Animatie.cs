@@ -38,6 +38,8 @@ namespace GameEngine.Graphics
 
         public Vector2 bounds { get; set; }
 
+        public bool isFinished { get; set; }
+
         public Animatie(List<AnimatieFrame> frames, Texture2D texture)
         {
             this.frames = frames;
@@ -47,6 +49,7 @@ namespace GameEngine.Graphics
             currentFrame = frames[0];
             bounds = new Vector2(frames[0].borders.Width, frames[0].borders.Height);
             count = 0;
+            isFinished = false;
         }
 
         public Animatie(Texture2D texture)
@@ -56,6 +59,7 @@ namespace GameEngine.Graphics
             this.offset = new Vector2();
 
             count = 0;
+            isFinished = false;
         }
 
         public void addFrame(AnimatieFrame animatieFrame)
@@ -79,9 +83,16 @@ namespace GameEngine.Graphics
             if (count > frames.Count - 1)
             {
                 count = 0;
+                isFinished = true;
             }
 
             currentFrame = frames[count];
+        }
+
+        public void reset()
+        {
+            count = 0;
+            isFinished = false;
         }
     }
 }

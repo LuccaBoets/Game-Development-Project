@@ -62,14 +62,21 @@ namespace GameEngine.Environment
         {
 
             //Rectangle rectangle1 = this.GetNextCollisionRectangle();
-            var temp = CollisionManager.DetectionAndDirection(GetNextCollisionRectangle(), rectangle);
+            var temp = CollisionManager.DetectionAndDirection(GetCollisionRectangle(), rectangle);
             return temp;
             //return CollisionManager.detection(this.getCollsionRectangle(), rectangle);
         }
 
         public Rectangle GetCollisionRectangle()
         {
-            throw new NotImplementedException();
+            var rectangle = tileType.texture.Bounds;
+
+            rectangle.X = (int)position.X;
+            rectangle.Y = (int)position.Y;
+            rectangle.Width *= 2;
+            rectangle.Height *= 2;
+
+            return rectangle;
         }
     }
 }
