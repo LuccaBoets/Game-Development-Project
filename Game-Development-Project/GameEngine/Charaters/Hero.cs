@@ -29,12 +29,10 @@ namespace GameEngine
         public double invisibleTimer { get; set; }
         public bool invisible { get; set; }
 
-        public int health { get; set; }
-
-        public int visualHealth { get; set; }
-
         public Texture2D hartjeVol { get; set; }
         public Texture2D hartjeLeeg { get; set; }
+
+        public bool isDead { get; set; }
 
         public Hero(List<Animatie> animaties)
         {
@@ -48,16 +46,38 @@ namespace GameEngine
 
             this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == AnimationsTypes.idle);
 
-            stats = new Stats(100, 20);
+            stats = new Stats(10, 2); 
         }
 
-        public void update(GameTime gameTime, Tilemap tilemap)
+        public void update(GameTime gameTime, Tilemap tilemap, List<Enemy> enemies)
         {
             move(gameTime, tilemap);
 
             currentAnimation.update(gameTime);
 
             endOfAnimation();
+
+            if (stats.health <= 0)
+            {
+                changeAnimation(AnimationsTypes.death);
+            }
+
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            {
+                attack1(enemies);
+            }
+
+
+            if (invisible)
+            {
+                invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            if (invisibleTimer >= 1000)
+            {
+                invisible = false;
+                invisibleTimer = 0;
+            }
         }
 
         public void move(GameTime gameTime, Tilemap tilemap)
@@ -151,9 +171,6 @@ namespace GameEngine
 
         public void draw(SpriteBatch _spriteBatch)
         {
-
-     
-          
             var spriteEffects = SpriteEffects.None;
 
             if (lookingLeft)
@@ -162,20 +179,21 @@ namespace GameEngine
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
-            health = 7;
-           for (int i = 0; i < health; i++)
-            {
-                _spriteBatch.Draw(hartjeVol, new Vector2(29 * (i + 1) + GetCollisionRectangle().Center.X - Settings.ScreenW / 2 - 10, GetCollisionRectangle().Center.Y - Settings.ScreenH / 2 + 20), hartjeVol.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
-            }
 
-            if (health < 7)
+            for (int i = 0; i < stats.maxHealth; i++)
             {
-                for (int i = 7; i > health; i--)
+                Texture2D heart;
+                if (stats.health > i)
                 {
-                    _spriteBatch.Draw(hartjeLeeg, new Vector2(10 * i, 500), hartjeLeeg.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+                    heart = hartjeVol;
                 }
+                else
+                {
+                    heart = hartjeLeeg;
+                }
+
+                _spriteBatch.Draw(heart, new Vector2(29 * (i + 1) + GetCollisionRectangle().Center.X - Settings.ScreenW / 2 - 10, GetCollisionRectangle().Center.Y - Settings.ScreenH / 2 + 20), hartjeVol.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 1f);
             }
-            
         }
 
         public Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
@@ -185,9 +203,7 @@ namespace GameEngine
 
         public void attack1(List<Enemy> enemies)
         {
-            Debug.WriteLine(currentAnimation.count);
-
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 2)
             {
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
@@ -207,12 +223,21 @@ namespace GameEngine
                     }
                 }
             }
-
         }
 
         public void Hit(int damage)
         {
-            throw new NotImplementedException();
+            if (!invisible)
+            {
+                Debug.WriteLine("hit");
+                stats.health -= damage;
+                invisible = true;
+                changeAnimation(AnimationsTypes.hit);
+                if (stats.health <= 0)
+                {
+                    changeAnimation(AnimationsTypes.death);
+                }
+            }
         }
 
         public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
@@ -222,8 +247,6 @@ namespace GameEngine
                 this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
                 this.currentAnimation.reset();
             }
-
-
         }
 
         public void endOfAnimation()
@@ -242,6 +265,7 @@ namespace GameEngine
                         changeAnimation(AnimationsTypes.idle, true);
                         break;
                     case AnimationsTypes.death:
+                        isDead = true;
                         break;
                     default:
                         break;

@@ -22,9 +22,6 @@ namespace GameEngine.Charaters
 
         public override Vector2 position { get; set; }
 
-        int state = 0;
-
-
         public override Movement Movement { get; set; }
         public override Stats stats { get; set; }
         public override double invisibleTimer { get; set; }
@@ -44,7 +41,7 @@ namespace GameEngine.Charaters
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
 
-            this.stats = new Stats(50, 10);
+            this.stats = new Stats(5, 1);
         }
         public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
@@ -66,11 +63,13 @@ namespace GameEngine.Charaters
                 invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
             }
 
-            if (invisibleTimer >= 1000)
+            if (invisibleTimer >= 2000)
             {
                 invisible = false;
                 invisibleTimer = 0;
             }
+
+            //changeAnimation(AnimationsTypes.attack1);
         }
 
         public void move(GameTime gameTime, Tilemap tilemap)
@@ -144,11 +143,15 @@ namespace GameEngine.Charaters
                 if (hero.position.X >= position.X)
                 {
                     Movement.right(this);
-
                 }
                 else
                 {
                     Movement.left(this);
+                }
+
+                if (position.X < hero.position.X + 100 && position.X > hero.position.X - 100)
+                {
+                    attack1(hero);
                 }
             }
         }
@@ -244,6 +247,33 @@ namespace GameEngine.Charaters
                         break;
                     default:
                         break;
+                }
+            }
+        }
+
+        public void attack1(Hero hero)
+        {
+            changeAnimation(AnimationsTypes.attack1);
+
+            const int Width = 25 * 2;
+            const int Height = 36 * 2;
+            const int yOffset = 0;
+
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 6)
+            {
+                Rectangle attackCollsionRectangle;
+                if (lookingLeft)
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - Width, GetCollisionRectangle().Top + yOffset, Width, Height);
+                }
+                else
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + yOffset, Width, Height);
+                }
+
+                if (CollisionManager.Detection(hero.GetCollisionRectangle(), attackCollsionRectangle))
+                {
+                    hero.Hit(stats.damage);
                 }
             }
         }

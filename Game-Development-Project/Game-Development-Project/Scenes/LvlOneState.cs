@@ -23,7 +23,7 @@ namespace GameEngine.Scenes
 
         public Song song1 { get; set; }
 
-        private List<Enemy> Monsters { get; set; }
+        private List<Enemy> monsters { get; set; }
 
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
@@ -42,9 +42,9 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            Monsters = new List<Enemy>();
+            monsters = new List<Enemy>();
             hero = new Hero(HeroAnimations.AllAnimation(Content));
-            Monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 700)));
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
@@ -150,7 +150,7 @@ namespace GameEngine.Scenes
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                hero.attack1(this.Monsters);
+                //hero.attack1(this.Monsters);
 
                 hero.changeAnimation(AnimationsTypes.attack1);
             }
@@ -188,16 +188,17 @@ namespace GameEngine.Scenes
 
             }
 
+            hero.update(gameTime, tilemap, monsters);
 
-
-            hero.update(gameTime, tilemap);
-
-
-            foreach (var monster in this.Monsters)
+            foreach (var monster in this.monsters)
             {
                 monster.Update(gameTime, hero, tilemap);
             }
 
+            if (hero.isDead)
+            {
+                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
+            }
         }
         public override void Draw(GameTime gameTime)
         {
@@ -215,18 +216,20 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            //Rectangle aa = 
+            //const int Width = 25 * 2;
+            //const int Height = 36 * 2;
+            //const int yOffset = 0;
 
+            //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
             //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
             //Texture2D.SetData(new[] { Color.Red });
-            //_spriteBatch.Draw(Texture2D, aa.Location.ToVector2(), aa, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
-            // new Vector2(hero.position.X+10,hero.position.Y+36*2),
+            //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
 
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             hero.draw(_spriteBatch);
 
-            foreach (var monster in this.Monsters)
+            foreach (var monster in this.monsters)
             {
                 monster.Draw(_spriteBatch);
             }
