@@ -21,14 +21,11 @@ namespace GameEngine
         public Animatie currentAnimation { get; set; }
         public List<Animatie> Animaties { get; set; }
         public bool lookingLeft { get; set; }
-
         public Vector2 position { get; set; }
-
         public Movement Movement { get; set; }
         public Stats stats { get; set; }
         public double invisibleTimer { get; set; }
         public bool invisible { get; set; }
-
         public Texture2D hartjeVol { get; set; }
         public Texture2D hartjeLeeg { get; set; }
 
@@ -114,6 +111,7 @@ namespace GameEngine
 
                         this.Movement.Velocity.Y = 0;
                         this.Movement.InAir = false;
+                        this.changeAnimation(AnimationsTypes.run, true);
                     }
                 }
             }
@@ -235,6 +233,7 @@ namespace GameEngine
                 changeAnimation(AnimationsTypes.hit);
                 if (stats.health <= 0)
                 {
+                    isDead = true;
                     changeAnimation(AnimationsTypes.death);
                 }
             }

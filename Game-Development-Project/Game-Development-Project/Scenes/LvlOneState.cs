@@ -44,7 +44,8 @@ namespace GameEngine.Scenes
         {
             monsters = new List<Enemy>();
             hero = new Hero(HeroAnimations.AllAnimation(Content));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1100, 700)));
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
@@ -216,14 +217,15 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            //const int Width = 25 * 2;
-            //const int Height = 36 * 2;
-            //const int yOffset = 0;
+            const int Width = 0;
+            const int Height = 0;
+            const int yOffset = 0;
 
             //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
-            //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
-            //Texture2D.SetData(new[] { Color.Red });
-            //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
+            var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
+            var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            Texture2D.SetData(new[] { Color.Red });
+            _spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
 
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 

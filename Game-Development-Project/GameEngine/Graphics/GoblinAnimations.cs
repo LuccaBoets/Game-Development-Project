@@ -31,7 +31,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetIdleAnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Goblin/Idle");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Idle");
 
             var animation = new Animatie(texture);
 
@@ -48,7 +48,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetRunAnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Goblin/Run");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Run");
 
             var animation = new Animatie(texture);
 
@@ -63,7 +63,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetTakeHitAnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Goblin/Take Hit");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Take Hit");
 
             var animation = new Animatie(texture);
 
@@ -78,7 +78,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetDeathAnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Goblin/Death");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Death");
 
             var animation = new Animatie(texture);
 
@@ -93,7 +93,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack1AnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Goblin/Attack");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Attack");
 
             var animation = new Animatie(texture);
 
@@ -110,7 +110,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetAttack2AnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.2)/Goblin/Attack2");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Attack2");
 
             var animation = new Animatie(texture);
 
@@ -125,7 +125,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack3AnimatieFromGoblinMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.3)/Goblin/Attack3");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Goblin/Attack3");
 
             var animation = new Animatie(texture);
 

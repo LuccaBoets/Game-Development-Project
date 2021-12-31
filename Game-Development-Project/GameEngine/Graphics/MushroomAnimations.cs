@@ -27,10 +27,9 @@ namespace GameEngine.Graphics
             return mushroomAnimaties;
         }
 
-
         public static Animatie GetIdleAnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Mushroom/Idle");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Idle");
 
             var animation = new Animatie(texture);
 
@@ -44,10 +43,9 @@ namespace GameEngine.Graphics
             return animation;
         }
 
-
         public static Animatie GetRunAnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Mushroom/Run");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Run");
 
             var animation = new Animatie(texture);
 
@@ -60,9 +58,10 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
         public static Animatie GetTakeHitAnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Mushroom/Take Hit");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Take Hit");
 
             var animation = new Animatie(texture);
 
@@ -75,9 +74,10 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
         public static Animatie GetDeathAnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Mushroom/Death");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Death");
 
             var animation = new Animatie(texture);
 
@@ -90,9 +90,10 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
         public static Animatie GetAttack1AnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Mushroom/Attack");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Attack");
 
             var animation = new Animatie(texture);
 
@@ -106,10 +107,9 @@ namespace GameEngine.Graphics
             return animation;
         }
 
-
         public static Animatie GetAttack2AnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.2)/Mushroom/Attack2");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Attack2");
 
             var animation = new Animatie(texture);
 
@@ -122,9 +122,10 @@ namespace GameEngine.Graphics
 
             return animation;
         }
+
         public static Animatie GetAttack3AnimatieFromMushroomMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.3)/Mushroom/Attack3");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Mushroom/Attack3");
 
             var animation = new Animatie(texture);
 
@@ -140,28 +141,5 @@ namespace GameEngine.Graphics
 
             return animation;
         }
-
-        
-        
-        //public static Animatie GetAttack3AnimatieFromMushroomMonster(ContentManager content)
-        //{
-        //    Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy(Version 1.3)/Mushroom/Attack");
-
-        //    var animation = new Animatie(texture);
-
-        //    animation.AnimatieNaam = AnimationsTypes.attack1;
-
-        //    for (int i = 0; i < 11; i++)
-        //    {
-        //        animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
-        //    }
-
-
-
-
-        //    return animation;
-        //}
-
-
     }
 }
