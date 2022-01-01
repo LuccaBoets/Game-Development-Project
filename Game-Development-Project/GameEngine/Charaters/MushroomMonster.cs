@@ -57,7 +57,7 @@ namespace GameEngine.Charaters
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
-            Follow(hero);
+            Follow(hero, tilemap);
 
             move(gameTime, tilemap);
 
@@ -109,57 +109,6 @@ namespace GameEngine.Charaters
             }
 
             projectiles.RemoveAll(x => x.isRemove);
-        }
-
-        public void move(GameTime gameTime, Tilemap tilemap)
-        {
-            if (currentAnimation.AnimatieNaam.canMove())
-            {
-
-                this.Movement.update(gameTime, this, this);
-
-                List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
-                foreach (var direction in directions)
-                {
-                    if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)
-                    {
-                        this.Movement.Velocity.X = 0;
-                        position += new Vector2(direction.Item2.Width, 0);
-                    }
-
-                    if (this.Movement.Velocity.X > 0 & direction.Item1 == CollisionDirection.right)
-                    {
-                        this.Movement.Velocity.X = 0;
-                        position += new Vector2(-direction.Item2.Width, 0);
-                    }
-
-                    if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
-                    {
-                        this.Movement.Velocity.Y = 0;
-                        position += new Vector2(0, direction.Item2.Height);
-                    }
-
-                    if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
-                    {
-                        position += new Vector2(0, -direction.Item2.Height);
-
-                        this.Movement.Velocity.Y = 0;
-                        this.Movement.InAir = false;
-                    }
-                }
-            }
-            else
-            {
-                this.Movement.Velocity.X = 0;
-            }
-
-            if (this.Movement.InAir == false)
-            {
-                if (tilemap.hitAnyTile(GetUnderCollisionRectangle()).Count <= 0)
-                {
-                    this.Movement.InAir = true;
-                }
-            }
         }
 
         public void Follow(Hero hero, Tilemap tilemap)
