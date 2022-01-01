@@ -27,7 +27,7 @@ namespace GameEngine.Scenes
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
             backgroundDeath.Draw(_spriteBatch);
 
-            _spriteBatch.Draw(imageYouDied, new Vector2(310, 100), imageYouDied.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(imageYouDied, new Vector2(510, 100), imageYouDied.Bounds, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0f);
 
             _spriteBatch.Draw(heroDeath.texture, new Vector2(Settings.ScreenW / 2 - heroDeath.bounds.X +30, Settings.ScreenH / 2 - heroDeath.bounds.Y + 75) + heroDeath.offset, heroDeath.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0.5f);
 
