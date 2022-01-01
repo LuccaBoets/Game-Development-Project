@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using GameEngine.Behavior;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +25,14 @@ namespace GameEngine.Environment
             Load(reader);
         }
 
-        internal void Draw(SpriteBatch _spriteBatch)
+        internal void Draw(SpriteBatch _spriteBatch, Rectangle screen)
         {
             foreach (var tile in Tiles)
             {
-                tile.Draw(_spriteBatch, 0.5f + ((float)LayerDepth / 100f));
+                if (CollisionManager.Detection(screen, tile.GetCollisionRectangle()))
+                {
+                    tile.Draw(_spriteBatch, 0.5f + ((float)LayerDepth / 100f));
+                }
             }
         }
 

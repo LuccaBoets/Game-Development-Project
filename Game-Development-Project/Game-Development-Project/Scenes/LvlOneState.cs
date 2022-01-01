@@ -57,15 +57,15 @@ namespace GameEngine.Scenes
             {
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 15f)
                 {
@@ -120,21 +120,16 @@ namespace GameEngine.Scenes
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.1"), MainGame.GraphicsDevice, 1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.2"), MainGame.GraphicsDevice, 2);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.3"), MainGame.GraphicsDevice, 3);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.4"), MainGame.GraphicsDevice, 4);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-1"), MainGame.GraphicsDevice, -1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-2"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-3"), MainGame.GraphicsDevice, -3);
 
-
-            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("ExportedTileSet"));
-            using (FileStream fs = File.OpenRead(@"../../../Content/ExportedTilemapData.txt"))
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Grass/ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Grass/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }
-
-            //TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
-            //using (FileStream fs = File.OpenRead(@"ExportedTilemapData.txt"))
-            //{
-            //    tilemap = new Tilemap(fs);
-            //}
         }
 
         public override void Update(GameTime gameTime)
@@ -236,7 +231,7 @@ namespace GameEngine.Scenes
                 monster.Draw(_spriteBatch);
             }
 
-            tilemap.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch, getScreen());
 
 
             foreach (var sb in _scrollingBackgrounds)
@@ -246,5 +241,11 @@ namespace GameEngine.Scenes
             _spriteBatch.End();
         }
 
+        public Rectangle getScreen()
+        {
+            var position = new Point(hero.GetCollisionRectangle().Center.X - Settings.ScreenW / 2, hero.GetCollisionRectangle().Center.Y - Settings.ScreenH / 2);
+
+            return new Rectangle(position, new Point(Settings.ScreenW, Settings.ScreenH));
+        }
     }
 }

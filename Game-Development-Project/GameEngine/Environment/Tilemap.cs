@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,7 @@ namespace GameEngine.Environment
 
         public void addTiles(Texture2D map, GraphicsDevice graphicsDevice, int layer = 0)
         {
+            Debug.WriteLine("Beginning " + layer);
             for (int i = 0; i < map.Width / 16; i++)
             {
                 for (int j = 0; j < map.Height / 16; j++)
@@ -45,6 +47,7 @@ namespace GameEngine.Environment
                     }
                 }
             }
+            Debug.WriteLine("Finised " + layer);
         }
 
         public void addTile(Texture2D texture, Vector2 position, int layer = 0)
@@ -62,21 +65,24 @@ namespace GameEngine.Environment
             }
         }
 
-        public void draw(SpriteBatch _spriteBatch)
+        public void draw(SpriteBatch _spriteBatch, Rectangle screen)
         {
             foreach (var tile in MiddleGround.Tiles)
             {
-                tile.Draw(_spriteBatch);
+                if (CollisionManager.Detection(screen ,tile.GetCollisionRectangle()))
+                {
+                    tile.Draw(_spriteBatch);
+                }
             }
 
             foreach (var foreGround in this.ForeGrounds)
             {
-                foreGround.Draw(_spriteBatch);
+                foreGround.Draw(_spriteBatch, screen);
             }
 
             foreach (var background in this.Backgrounds)
             {
-                background.Draw(_spriteBatch);
+                background.Draw(_spriteBatch, screen);
             }
         }
 
