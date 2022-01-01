@@ -29,6 +29,14 @@ namespace GameEngine.Behavior
             return new Tuple<CollisionDirection, Rectangle>(CollisionDirection.noHit, intersectRectangle);
         }
 
+        public static bool Detection(Rectangle rectangle1, Point center, int width, int height)
+        {
+            var rectangle2 = new Rectangle(center, new Point(width, height));
+            rectangle2.X -= width / 2;
+            rectangle2.Y -= height / 2;
+            return Detection(rectangle1, rectangle2);
+        }
+
         public static bool Detection(Rectangle rectangle1, Rectangle rectangle2)
         {
             return rectangle1.Intersects(rectangle2);

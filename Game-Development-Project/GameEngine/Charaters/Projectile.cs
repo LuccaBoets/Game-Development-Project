@@ -23,13 +23,15 @@ namespace GameEngine.Charaters
         public bool isHit { get; set; } = false;
         public float speed = 5f;
         public bool isRemove { get; set; } = false;
+        public Rectangle collisionRectangle { get; set; }
 
-        public Projectile(Animatie inAirAnimation, Animatie hitAnimation, bool lookingLeft, Vector2 position)
+        public Projectile(Animatie inAirAnimation, Animatie hitAnimation, bool lookingLeft, Vector2 position, Rectangle collisionRectangle)
         {
             this.inAirAnimation = inAirAnimation;
             this.hitAnimation = hitAnimation;
             this.lookingLeft = lookingLeft;
             this.position = position;
+            this.collisionRectangle = collisionRectangle;
 
             this.currentAnimation = inAirAnimation;
         }
@@ -92,12 +94,12 @@ namespace GameEngine.Charaters
             }
 
             _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
-
         }
 
         public Rectangle GetCollisionRectangle()
         {
-            Rectangle rectangle = new Rectangle((int)position.X + 44, (int)position.Y + 44, 16, 16);
+            Rectangle rectangle = new Rectangle((int)position.X + collisionRectangle.X, (int)position.Y + collisionRectangle.Y, collisionRectangle.Width, collisionRectangle.Height);
+
             return rectangle;
         }
     }

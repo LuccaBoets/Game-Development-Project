@@ -201,6 +201,7 @@ namespace GameEngine.Scenes
                 MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
         }
+
         public override void Draw(GameTime gameTime)
         {
             var position = Matrix.CreateTranslation(
@@ -217,16 +218,15 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            const int Width = 0;
-            const int Height = 0;
+            const int Width = 53 * 2;
+            const int Height = 79 * 2;
             const int yOffset = 0;
 
             //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
-            var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
+
             var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
             Texture2D.SetData(new[] { Color.Red });
-            _spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
-
+            //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             hero.draw(_spriteBatch);
