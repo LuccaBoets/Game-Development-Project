@@ -214,13 +214,6 @@ namespace GameEngine.Charaters
             }
         }
 
-        public Rectangle GetUnderCollisionRectangle()
-        {
-            var rectangle = GetCollisionRectangle();
-            rectangle.Height += 10;
-            return rectangle;
-        }
-
         public override Rectangle GetMonsterRangeRectangle()
         {
             var center = GetCollisionRectangle().Center.ToVector2();
@@ -271,19 +264,6 @@ namespace GameEngine.Charaters
             }
         }
 
-        public override void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
-        {
-            if (!(this.currentAnimation.AnimatieNaam == animationsTypes) && (this.currentAnimation.AnimatieNaam.isHigherPriority(animationsTypes) || ignorePriority))
-            {
-                this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
-                if (this.currentAnimation == null)
-                {
-                    this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == AnimationsTypes.idle);
-                }
-                this.currentAnimation.reset();
-            }
-        }
-
         public override void Hit(int damage)
         {
             if (!invisible)
@@ -295,31 +275,6 @@ namespace GameEngine.Charaters
                 if (stats.health <= 0)
                 {
                     changeAnimation(AnimationsTypes.death);
-                }
-            }
-        }
-
-        public override void endOfAnimation()
-        {
-            if (this.currentAnimation.isFinished)
-            {
-                Debug.WriteLine("test");
-                switch (this.currentAnimation.AnimatieNaam)
-                {
-                    case AnimationsTypes.attack1:
-                    case AnimationsTypes.attack2:
-                    case AnimationsTypes.attack3:
-                        changeAnimation(AnimationsTypes.idle, true);
-                        attackCooldown = true;
-                        break;
-                    case AnimationsTypes.hit:
-                        changeAnimation(AnimationsTypes.idle, true);
-                        break;
-                    case AnimationsTypes.death:
-                        position = new Vector2(100, 100);
-                        break;
-                    default:
-                        break;
                 }
             }
         }

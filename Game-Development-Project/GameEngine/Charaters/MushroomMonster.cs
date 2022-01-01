@@ -150,20 +150,7 @@ namespace GameEngine.Charaters
             }
             else
             {
-                this.Movement.Velocity = new Vector2(0, 0);
-            }
-
-            foreach (var tile in tilemap.MiddleGround.Tiles)
-            {
-
-                if (CollisionManager.Detection(new Rectangle((int)GetCollisionRectangle().Left - 45, (int)GetCollisionRectangle().Bottom - 30, 45, 16), tile.GetCollisionRectangle()) && Movement.Velocity.X < 0)
-                {
-                    Movement.jump();
-                }
-                else if (CollisionManager.Detection(new Rectangle((int)GetCollisionRectangle().Right, (int)GetCollisionRectangle().Bottom - 30, 45, 16), tile.GetCollisionRectangle()) && Movement.Velocity.X > 0)
-                {
-                    Movement.jump();
-                }
+                this.Movement.Velocity.X = 0;
             }
 
             if (this.Movement.InAir == false)
@@ -175,7 +162,7 @@ namespace GameEngine.Charaters
             }
         }
 
-        public void Follow(Hero hero)
+        public void Follow(Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
@@ -212,13 +199,19 @@ namespace GameEngine.Charaters
                     }
                 }
             }
-        }
 
-        public Rectangle GetUnderCollisionRectangle()
-        {
-            var rectangle = GetCollisionRectangle();
-            rectangle.Height += 10;
-            return rectangle;
+            foreach (var tile in tilemap.MiddleGround.Tiles)
+            {
+
+                if (CollisionManager.Detection(new Rectangle((int)GetCollisionRectangle().Left - 45, (int)GetCollisionRectangle().Bottom - 30, 45, 16), tile.GetCollisionRectangle()) && Movement.Velocity.X < 0)
+                {
+                    Movement.jump();
+                }
+                else if (CollisionManager.Detection(new Rectangle((int)GetCollisionRectangle().Right, (int)GetCollisionRectangle().Bottom - 30, 45, 16), tile.GetCollisionRectangle()) && Movement.Velocity.X > 0)
+                {
+                    Movement.jump();
+                }
+            }
         }
 
         public override Rectangle GetMonsterRangeRectangle()
@@ -262,19 +255,6 @@ namespace GameEngine.Charaters
             }
         }
 
-        public override void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
-        {
-            if (!(this.currentAnimation.AnimatieNaam == animationsTypes) && (this.currentAnimation.AnimatieNaam.isHigherPriority(animationsTypes) || ignorePriority))
-            {
-                this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == animationsTypes);
-                if (this.currentAnimation == null)
-                {
-                    this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == AnimationsTypes.idle);
-                }
-                this.currentAnimation.reset();
-            }
-        }
-
         public override void Hit(int damage)
         {
             if (!invisible)
@@ -286,31 +266,6 @@ namespace GameEngine.Charaters
                 if (stats.health <= 0)
                 {
                     changeAnimation(AnimationsTypes.death);
-                }
-            }
-        }
-
-        public override void endOfAnimation()
-        {
-            if (this.currentAnimation.isFinished)
-            {
-                Debug.WriteLine("test");
-                switch (this.currentAnimation.AnimatieNaam)
-                {
-                    case AnimationsTypes.attack1:
-                    case AnimationsTypes.attack2:
-                    case AnimationsTypes.attack3:
-                        changeAnimation(AnimationsTypes.idle, true);
-                        attackCooldown = true;
-                        break;
-                    case AnimationsTypes.hit:
-                        changeAnimation(AnimationsTypes.idle, true);
-                        break;
-                    case AnimationsTypes.death:
-                        position = new Vector2(100, 100);
-                        break;
-                    default:
-                        break;
                 }
             }
         }

@@ -23,6 +23,7 @@ namespace GameEngine
         {
             _graphics = new GraphicsDeviceManager(this);
             //_graphics.ToggleFullScreen();
+            _graphics.GraphicsProfile = GraphicsProfile.HiDef;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
