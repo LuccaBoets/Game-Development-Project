@@ -21,6 +21,11 @@ namespace GameEngine.Charaters
         public abstract bool invisible { get; set; }
         public abstract Movement Movement { get; set; }
         public abstract Vector2 position { get; set; }
+        public abstract Animatie projectileHitAnimation { get; set; }
+        public abstract Animatie projectileInAirAnimation { get; set; }
+        public abstract List<Projectile> projectiles { get; set; }
+        public abstract double attackCooldownTimer { get; set; }
+        public abstract bool attackCooldown { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBacth);
 

@@ -271,18 +271,6 @@
 /processorParam:TextureFormat=Color
 /build:Death.png
 
-#begin ExportedTileSet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ExportedTileSet.png
-
 #begin Fall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -463,7 +451,7 @@
 /processorParam:TextureFormat=Color
 /build:lvl1.3.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.2)/Flying eye/Attack2.png
+#begin lvl1.-3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -473,9 +461,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.2)/Flying eye/Attack2.png
+/build:lvl1.-3.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.2)/Goblin/Attack2.png
+#begin lvl1.4.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -485,9 +473,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.2)/Goblin/Attack2.png
+/build:lvl1.4.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.2)/Mushroom/Attack2.png
+#begin Monsters/Flying eye/Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -497,9 +485,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.2)/Mushroom/Attack2.png
+/build:Monsters/Flying eye/Attack.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.2)/Skeleton/Attack2.png
+#begin Monsters/Flying eye/Attack2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -509,9 +497,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.2)/Skeleton/Attack2.png
+/build:Monsters/Flying eye/Attack2.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Flying eye/Attack3.png
+#begin Monsters/Flying eye/Attack3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -521,9 +509,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Flying eye/Attack3.png
+/build:Monsters/Flying eye/Attack3.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Flying eye/projectile_sprite.png
+#begin Monsters/Flying eye/Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -533,9 +521,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Flying eye/projectile_sprite.png
+/build:Monsters/Flying eye/Death.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Goblin/Attack3.png
+#begin Monsters/Flying eye/Flight.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -545,9 +533,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Goblin/Attack3.png
+/build:Monsters/Flying eye/Flight.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Goblin/Bomb_sprite.png
+#begin Monsters/Flying eye/projectile_sprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -557,9 +545,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Goblin/Bomb_sprite.png
+/build:Monsters/Flying eye/projectile_sprite.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Mushroom/Attack3.png
+#begin Monsters/Flying eye/Take Hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -569,9 +557,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Mushroom/Attack3.png
+/build:Monsters/Flying eye/Take Hit.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Mushroom/Projectile_sprite.png
+#begin Monsters/Goblin/Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -581,9 +569,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Mushroom/Projectile_sprite.png
+/build:Monsters/Goblin/Attack.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Skeleton/Attack3.png
+#begin Monsters/Goblin/Attack2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -593,9 +581,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Skeleton/Attack3.png
+/build:Monsters/Goblin/Attack2.png
 
-#begin Monsters/Monster_Creatures_Fantasy(Version 1.3)/Skeleton/Sword_sprite.png
+#begin Monsters/Goblin/Attack3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -605,9 +593,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monster_Creatures_Fantasy(Version 1.3)/Skeleton/Sword_sprite.png
+/build:Monsters/Goblin/Attack3.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/All Characters.png
+#begin Monsters/Goblin/Bomb_sprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -617,9 +605,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/All Characters.png
+/build:Monsters/Goblin/Bomb_sprite.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Flying eye/Attack.png
+#begin Monsters/Goblin/Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -629,9 +617,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Flying eye/Attack.png
+/build:Monsters/Goblin/Death.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Flying eye/Death.png
+#begin Monsters/Goblin/Idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -641,9 +629,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Flying eye/Death.png
+/build:Monsters/Goblin/Idle.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Flying eye/Flight.png
+#begin Monsters/Goblin/Run.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -653,9 +641,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Flying eye/Flight.png
+/build:Monsters/Goblin/Run.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Flying eye/Take Hit.png
+#begin Monsters/Goblin/Take Hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -665,9 +653,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Flying eye/Take Hit.png
+/build:Monsters/Goblin/Take Hit.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Goblin/Attack.png
+#begin Monsters/Mushroom/Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -677,9 +665,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Goblin/Attack.png
+/build:Monsters/Mushroom/Attack.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Goblin/Death.png
+#begin Monsters/Mushroom/Attack2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -689,9 +677,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Goblin/Death.png
+/build:Monsters/Mushroom/Attack2.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Goblin/Idle.png
+#begin Monsters/Mushroom/Attack3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -701,9 +689,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Goblin/Idle.png
+/build:Monsters/Mushroom/Attack3.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Goblin/Run.png
+#begin Monsters/Mushroom/Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -713,9 +701,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Goblin/Run.png
+/build:Monsters/Mushroom/Death.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Goblin/Take Hit.png
+#begin Monsters/Mushroom/Idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -725,9 +713,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Goblin/Take Hit.png
+/build:Monsters/Mushroom/Idle.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Mushroom/Attack.png
+#begin Monsters/Mushroom/ProjectileHit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -737,9 +725,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Mushroom/Attack.png
+/build:Monsters/Mushroom/ProjectileHit.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Mushroom/Death.png
+#begin Monsters/Mushroom/ProjectileInAir.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -749,9 +737,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Mushroom/Death.png
+/build:Monsters/Mushroom/ProjectileInAir.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Mushroom/Idle.png
+#begin Monsters/Mushroom/Run.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -761,9 +749,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Mushroom/Idle.png
+/build:Monsters/Mushroom/Run.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Mushroom/Run.png
+#begin Monsters/Mushroom/Take Hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -773,9 +761,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Mushroom/Run.png
+/build:Monsters/Mushroom/Take Hit.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Mushroom/Take Hit.png
+#begin Monsters/Skeleton/Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -785,9 +773,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Mushroom/Take Hit.png
+/build:Monsters/Skeleton/Attack.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Attack.png
+#begin Monsters/Skeleton/Attack2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -797,9 +785,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Attack.png
+/build:Monsters/Skeleton/Attack2.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Death.png
+#begin Monsters/Skeleton/Attack3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -809,9 +797,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Death.png
+/build:Monsters/Skeleton/Attack3.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Idle.png
+#begin Monsters/Skeleton/Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -821,9 +809,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Idle.png
+/build:Monsters/Skeleton/Death.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Shield.png
+#begin Monsters/Skeleton/Idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -833,9 +821,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Shield.png
+/build:Monsters/Skeleton/Idle.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Take Hit.png
+#begin Monsters/Skeleton/ProjectileHit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -845,9 +833,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Take Hit.png
+/build:Monsters/Skeleton/ProjectileHit.png
 
-#begin Monsters/Monsters_Creatures_Fantasy/Skeleton/Walk.png
+#begin Monsters/Skeleton/ProjectileInAir.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -857,9 +845,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Monsters_Creatures_Fantasy/Skeleton/Walk.png
+/build:Monsters/Skeleton/ProjectileInAir.png
 
-#begin naamloosBackground.png
+#begin Monsters/Skeleton/Shield.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -869,9 +857,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:naamloosBackground.png
+/build:Monsters/Skeleton/Shield.png
 
-#begin naamloosForeground.png
+#begin Monsters/Skeleton/Take Hit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -881,9 +869,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:naamloosForeground.png
+/build:Monsters/Skeleton/Take Hit.png
 
-#begin naamloosMain.png
+#begin Monsters/Skeleton/Walk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -893,7 +881,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:naamloosMain.png
+/build:Monsters/Skeleton/Walk.png
 
 #begin PressEnter2.png
 /importer:TextureImporter
@@ -1458,6 +1446,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:test2.png
+
+#begin Tilemap/Grass/ExportedTileSet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tilemap/Grass/ExportedTileSet.png
 
 #begin TitelNieuw.png
 /importer:TextureImporter

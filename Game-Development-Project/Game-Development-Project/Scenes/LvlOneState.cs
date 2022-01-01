@@ -44,7 +44,8 @@ namespace GameEngine.Scenes
         {
             monsters = new List<Enemy>();
             hero = new Hero(HeroAnimations.AllAnimation(Content));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1100, 700)));
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
@@ -56,15 +57,15 @@ namespace GameEngine.Scenes
             {
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 15f)
                 {
-                    Layer = 0.47f,
+                    Layer = 0.46f,
                 },
                 new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 15f)
                 {
@@ -119,21 +120,16 @@ namespace GameEngine.Scenes
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.1"), MainGame.GraphicsDevice, 1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.2"), MainGame.GraphicsDevice, 2);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.3"), MainGame.GraphicsDevice, 3);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.4"), MainGame.GraphicsDevice, 4);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-1"), MainGame.GraphicsDevice, -1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-2"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl1.-3"), MainGame.GraphicsDevice, -3);
 
-
-            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("ExportedTileSet"));
-            using (FileStream fs = File.OpenRead(@"../../../Content/ExportedTilemapData.txt"))
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Grass/ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Grass/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }
-
-            //TileFactory.load(MainGame.GraphicsDevice, MainGame.Content.Load<Texture2D>("ExportedTileSet"));
-            //using (FileStream fs = File.OpenRead(@"ExportedTilemapData.txt"))
-            //{
-            //    tilemap = new Tilemap(fs);
-            //}
         }
 
         public override void Update(GameTime gameTime)
@@ -200,6 +196,7 @@ namespace GameEngine.Scenes
                 MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
         }
+
         public override void Draw(GameTime gameTime)
         {
             var position = Matrix.CreateTranslation(
@@ -216,15 +213,15 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            //const int Width = 25 * 2;
-            //const int Height = 36 * 2;
-            //const int yOffset = 0;
+            const int Width = 53 * 2;
+            const int Height = 79 * 2;
+            const int yOffset = 0;
 
             //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
-            //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
-            //Texture2D.SetData(new[] { Color.Red });
-            //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
 
+            var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            Texture2D.SetData(new[] { Color.Red });
+            //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
             hero.draw(_spriteBatch);
@@ -234,7 +231,7 @@ namespace GameEngine.Scenes
                 monster.Draw(_spriteBatch);
             }
 
-            tilemap.draw(_spriteBatch);
+            tilemap.draw(_spriteBatch, getScreen());
 
 
             foreach (var sb in _scrollingBackgrounds)
@@ -244,5 +241,11 @@ namespace GameEngine.Scenes
             _spriteBatch.End();
         }
 
+        public Rectangle getScreen()
+        {
+            var position = new Point(hero.GetCollisionRectangle().Center.X - Settings.ScreenW / 2, hero.GetCollisionRectangle().Center.Y - Settings.ScreenH / 2);
+
+            return new Rectangle(position, new Point(Settings.ScreenW, Settings.ScreenH));
+        }
     }
 }

@@ -62,6 +62,19 @@ namespace GameEngine.Graphics
             isFinished = false;
         }
 
+        public Animatie(Animatie animatie)
+        {
+            this.AnimatieNaam = animatie.AnimatieNaam;
+            this.bounds = animatie.bounds;
+            this.count = animatie.count;
+            this.currentFrame = animatie.currentFrame;
+            this.ElapsedGameTime = animatie.ElapsedGameTime;
+            this.frames = animatie.frames;
+            this.isFinished = animatie.isFinished;
+            this.offset = animatie.offset;
+            this.texture = animatie.texture;
+        }
+
         public void addFrame(AnimatieFrame animatieFrame)
         {
             this.frames.Add(animatieFrame);
@@ -93,6 +106,11 @@ namespace GameEngine.Graphics
         {
             count = 0;
             isFinished = false;
+        }
+
+        public Animatie clone()
+        {
+            return new Animatie(this);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace GameEngine.Graphics
 {
     public class SkeletonAnimations
     {
-        public static int _width { get; set; } = 160;
-        public static int _height { get; set; } = 111;
+        public static int _width { get; set; } = 150;
+        public static int _height { get; set; } = 150;
 
         public static List<Animatie> AllAnimation(ContentManager content)
         {
@@ -29,7 +29,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetIdleAnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Skeleton/Idle");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Idle");
 
             var animation = new Animatie(texture);
 
@@ -46,7 +46,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetRunAnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Skeleton/Walk");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Walk");
 
             var animation = new Animatie(texture);
 
@@ -61,7 +61,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetTakeHitAnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Skeleton/Take Hit");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Take Hit");
 
             var animation = new Animatie(texture);
 
@@ -76,7 +76,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetDeathAnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Skeleton/Death");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Death");
 
             var animation = new Animatie(texture);
 
@@ -91,7 +91,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack1AnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/Skeleton/Attack");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Attack");
 
             var animation = new Animatie(texture);
 
@@ -108,7 +108,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetAttack2AnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.2)/Skeleton/Attack2");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Attack2");
 
             var animation = new Animatie(texture);
 
@@ -123,19 +123,16 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack3AnimatieFromSkeletonMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.3)/Skeleton/Attack3");
+            Texture2D texture = content.Load<Texture2D>("Monsters/Skeleton/Attack3");
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = AnimationsTypes.attack1;
+            animation.AnimatieNaam = AnimationsTypes.attack3;
 
             for (int i = 0; i < 6; i++)
             {
                 animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }
-
-
-
 
             return animation;
         }

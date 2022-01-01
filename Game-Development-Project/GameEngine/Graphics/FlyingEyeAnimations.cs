@@ -29,7 +29,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetIdleAnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/FlyingEye/Flight");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Flight");
 
             var animation = new Animatie(texture);
 
@@ -46,7 +46,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetRunAnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/FlyingEye/Flight");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Flight");
 
             var animation = new Animatie(texture);
 
@@ -61,7 +61,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetTakeHitAnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/FlyingEye/Take Hit");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Take Hit");
 
             var animation = new Animatie(texture);
 
@@ -76,7 +76,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetDeathAnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/FlyingEye/Death");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Death");
 
             var animation = new Animatie(texture);
 
@@ -91,7 +91,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack1AnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monsters_Creatures_Fantasy/FlyingEye/Attack");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Attack");
 
             var animation = new Animatie(texture);
 
@@ -108,7 +108,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetAttack2AnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.2)/FlyingEye/Attack2");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Attack2");
 
             var animation = new Animatie(texture);
 
@@ -123,7 +123,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetAttack3AnimatieFromFlyingEyeMonster(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Monsters/Monster_Creatures_Fantasy(Version 1.3)/FlyingEye/Attack3");
+            Texture2D texture = content.Load<Texture2D>("Monsters/FlyingEye/Attack3");
 
             var animation = new Animatie(texture);
 
