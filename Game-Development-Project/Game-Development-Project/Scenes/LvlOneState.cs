@@ -30,6 +30,8 @@ namespace GameEngine.Scenes
 
         const int speed = 3;
 
+
+        private MouseState lastMouseState = new MouseState();
         public LvlOneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
             LoadContent();
@@ -140,6 +142,9 @@ namespace GameEngine.Scenes
 
         public override void Update(GameTime gameTime)
         {
+
+            MouseState currentState = Mouse.GetState();
+
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 hero.Movement.left(hero);
@@ -150,11 +155,13 @@ namespace GameEngine.Scenes
                 hero.Movement.right(hero);
             }
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && currentState.LeftButton == ButtonState.Pressed &&
+        lastMouseState.LeftButton == ButtonState.Released)
             {
                 //hero.attack1(this.Monsters);
 
                 hero.changeAnimation(AnimationsTypes.attack1);
+                
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
@@ -182,6 +189,8 @@ namespace GameEngine.Scenes
                     tilemap.Save(fs);
                 }
             }
+
+            lastMouseState = currentState;
 
             foreach (var sb in _scrollingBackgrounds)
             {
