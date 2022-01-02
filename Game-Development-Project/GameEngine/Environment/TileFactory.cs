@@ -75,6 +75,7 @@ namespace GameEngine.Environment
 
         public static void load(GraphicsDevice graphicsDevice, Texture2D tileSet)
         {
+            TileTypes = new List<TileType>();
             for (int i = 0; i < tileSet.Height / 16; i++)
             {
                 for (int j = 0; j < tileSet.Width / 16; j++)

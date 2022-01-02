@@ -26,7 +26,7 @@ namespace GameEngine.Charaters
 
             move(gameTime, tilemap);
 
-            currentAnimation.update(gameTime);
+            currentAnimation.update(gameTime,150);
 
             endOfAnimation();
 
@@ -188,7 +188,7 @@ namespace GameEngine.Charaters
             {
                 Random random = new Random();
 
-                attackCooldownTimer = random.Next(0, 2) * 500;
+                attackCooldownTimer = random.Next(0, 1) * 500;
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
                 {
@@ -218,7 +218,7 @@ namespace GameEngine.Charaters
             {
                 Random random = new Random();
 
-                attackCooldownTimer = random.Next(0, 3) * 500;
+                attackCooldownTimer = random.Next(0, 2) * 500;
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
                 {
@@ -239,10 +239,10 @@ namespace GameEngine.Charaters
         public void attack3(Hero hero)
         {
             Random random = new Random();
-            attackCooldownTimer = 2000 + (random.Next(0, 10) * 500);
+            attackCooldownTimer = 2000 + (random.Next(0, 5) * 500);
 
             changeAnimation(AnimationsTypes.attack3);
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 3)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 10)
             {
                 shoot();
             }
