@@ -156,7 +156,7 @@ namespace GameEngine.Scenes
 
             }
      
-            }
+            
             else if (Mouse.GetState().RightButton == ButtonState.Pressed && currentState.RightButton == ButtonState.Pressed &&
         lastMouseStateRight.RightButton == ButtonState.Released)
             {
