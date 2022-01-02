@@ -10,8 +10,8 @@ namespace GameEngine.Graphics
     public class GoblinAnimations
     {
 
-        public static int _width { get; set; } = 160;
-        public static int _height { get; set; } = 111;
+        public static int _width { get; set; } = 150;
+        public static int _height { get; set; } = 150;
 
         public static List<Animatie> AllAnimation(ContentManager content)
         {
@@ -129,7 +129,7 @@ namespace GameEngine.Graphics
 
             var animation = new Animatie(texture);
 
-            animation.AnimatieNaam = AnimationsTypes.attack1;
+            animation.AnimatieNaam = AnimationsTypes.attack3;
 
             for (int i = 0; i < 12; i++)
             {

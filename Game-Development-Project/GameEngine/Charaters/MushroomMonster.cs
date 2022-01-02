@@ -31,6 +31,7 @@ namespace GameEngine.Charaters
         public override List<Projectile> projectiles { get; set; }
         public override double attackCooldownTimer { get; set; }
         public override bool attackCooldown { get; set; }
+        public override bool isDead { get; set; }
 
         public MushroomMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
         {
@@ -87,7 +88,6 @@ namespace GameEngine.Charaters
                 invisibleTimer = 0;
             }
 
-            //changeAnimation(AnimationsTypes.attack1);
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
             {
                 attack1(hero);
@@ -196,26 +196,11 @@ namespace GameEngine.Charaters
 
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.49f);
 
             foreach (var projectile in projectiles)
             {
                 projectile.Draw(_spriteBatch);
-            }
-        }
-
-        public override void Hit(int damage)
-        {
-            if (!invisible)
-            {
-                Debug.WriteLine("hit");
-                stats.health -= damage;
-                invisible = true;
-                changeAnimation(AnimationsTypes.hit);
-                if (stats.health <= 0)
-                {
-                    changeAnimation(AnimationsTypes.death);
-                }
             }
         }
 
@@ -224,8 +209,8 @@ namespace GameEngine.Charaters
 
             changeAnimation(AnimationsTypes.attack1);
 
-            const int Width = 25 * 2;
-            const int Height = 36 * 2;
+            const int Width = 34 * 2;
+            const int Height = 26 * 2;
             const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 6)
@@ -254,11 +239,11 @@ namespace GameEngine.Charaters
         {
             changeAnimation(AnimationsTypes.attack2);
 
-            const int Width = 25 * 2;
-            const int Height = 36 * 2;
+            const int Width = 34 * 2;
+            const int Height = 26 * 2;
             const int yOffset = 0;
 
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 6)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 8)
             {
                 Random random = new Random();
 
@@ -305,6 +290,3 @@ namespace GameEngine.Charaters
         }
     }
 }
-
-
-

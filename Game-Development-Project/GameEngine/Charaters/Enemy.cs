@@ -28,6 +28,7 @@ namespace GameEngine.Charaters
         public abstract List<Projectile> projectiles { get; set; }
         public abstract double attackCooldownTimer { get; set; }
         public abstract bool attackCooldown { get; set; }
+        public abstract bool isDead { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBacth);
         public abstract void Update(GameTime gameTime, Hero hero, Tilemap tilemap);
@@ -103,7 +104,19 @@ namespace GameEngine.Charaters
         public abstract Rectangle GetMonsterRangeRectangle();
         public abstract Rectangle GetCollisionRectangle();
         public abstract Rectangle GetNextCollisionRectangle();
-        public abstract void Hit(int damage);
+        public void Hit(int damage)
+        {
+            if (!invisible)
+            {
+                stats.health -= damage;
+                invisible = true;
+                changeAnimation(AnimationsTypes.hit);
+                if (stats.health <= 0)
+                {
+                    changeAnimation(AnimationsTypes.death);
+                }
+            }
+        }
         public void endOfAnimation()
         {
             if (this.currentAnimation.isFinished)
@@ -121,6 +134,7 @@ namespace GameEngine.Charaters
                         break;
                     case AnimationsTypes.death:
                         position = new Vector2(100, 100);
+                        isDead = true;
                         break;
                     default:
                         break;

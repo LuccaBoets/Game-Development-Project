@@ -547,18 +547,6 @@
 /processorParam:TextureFormat=Color
 /build:Monsters/Goblin/Attack3.png
 
-#begin Monsters/Goblin/Bomb_sprite.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Monsters/Goblin/Bomb_sprite.png
-
 #begin Monsters/Goblin/Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -582,6 +570,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Monsters/Goblin/Idle.png
+
+#begin Monsters/Goblin/ProjectileHit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Monsters/Goblin/ProjectileHit.png
+
+#begin Monsters/Goblin/ProjectileInAir.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Monsters/Goblin/ProjectileInAir.png
 
 #begin Monsters/Goblin/Run.png
 /importer:TextureImporter

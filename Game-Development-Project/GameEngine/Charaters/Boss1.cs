@@ -1,59 +1,23 @@
 ﻿using GameEngine.Behavior;
-using GameEngine.Characters;
+using GameEngine.Data;
 using GameEngine.Environment;
+using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using GameEngine.Data;
-using GameEngine.ExtensionMethods;
 
 namespace GameEngine.Charaters
 {
-    public class SkeletonMonster : Enemy
+    public class Boss1 : MushroomMonster
     {
-        public override Animatie currentAnimation { get; set; }
-        public override List<Animatie> Animaties { get; set; }
-        public override bool lookingLeft { get; set; }
-
-        public override Vector2 position { get; set; }
-
-        public override Movement Movement { get; set; }
-        public override Stats stats { get; set; }
-        public override double invisibleTimer { get; set; }
-        public override bool invisible { get; set; } = false;
-        public override Animatie projectileHitAnimation { get; set; }
-        public override Animatie projectileInAirAnimation { get; set; }
-        public override List<Projectile> projectiles { get; set; }
-        public override double attackCooldownTimer { get; set; }
-        public override bool attackCooldown { get; set; }
-        public override bool isDead { get; set; }
-
-        public SkeletonMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
+        public Boss1(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition) : base(animaties, projectileAnimation, newPosition)
         {
-            this.Animaties = animaties;
-            this.projectileHitAnimation = projectileAnimation[1];
-            this.projectileInAirAnimation = projectileAnimation[0];
-            this.position = newPosition;
-
-            this.Movement = new Movement();
-            this.Movement.MaxSpeedX = 1.5f;
-            this.Movement.jumpSpeed = 3f;
-
-            this.lookingLeft = true;
-
-            this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
-
-            this.stats = new Stats(7, 1);
-            this.projectiles = new List<Projectile>();
-        }
-        public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
-        {
-            throw new NotImplementedException();
+            stats.maxHealth = 20;
+            stats.health = 20;
         }
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
@@ -116,9 +80,9 @@ namespace GameEngine.Charaters
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
-                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 100, 50))
+                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 200, 50))
                 {
-                    if (hero.position.X >= position.X)
+                    if (hero.GetCollisionRectangle().Center.X >= GetCollisionRectangle().Center.X)
                     {
                         Movement.right(this);
                     }
@@ -127,7 +91,6 @@ namespace GameEngine.Charaters
                         Movement.left(this);
                     }
                 }
-
 
                 if (!attackCooldown)
                 {
@@ -178,17 +141,16 @@ namespace GameEngine.Charaters
             var beginPoint = position.ToPoint();
             if (lookingLeft)
             {
-                beginPoint.X += 54 * 2;
-                beginPoint.Y += 51 * 2 - 1;
+                beginPoint.X += 256;
+                beginPoint.Y += 256;
             }
             else
             {
-                beginPoint.X += 60 * 2;
-                beginPoint.Y += 50 * 2 - 1;
+                beginPoint.X += 252;
+                beginPoint.Y += 256;
             }
 
-            return new Rectangle(beginPoint, new Point(36 * 2, 51 * 2));
-            //return new Rectangle((int)position.X, (int)position.Y, (int)currentAnimation.bounds.X, (int)currentAnimation.bounds.Y);
+            return new Rectangle(beginPoint, new Point(23 * 4, 37 * 4));
         }
 
         public override Rectangle GetNextCollisionRectangle()
@@ -206,7 +168,7 @@ namespace GameEngine.Charaters
 
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 4f, spriteEffects, 0.5f);
 
             foreach (var projectile in projectiles)
             {
@@ -216,7 +178,6 @@ namespace GameEngine.Charaters
 
         public void attack1(Hero hero)
         {
-
             changeAnimation(AnimationsTypes.attack1);
 
             const int Width = 47 * 2;
@@ -278,24 +239,12 @@ namespace GameEngine.Charaters
         public void attack3(Hero hero)
         {
             Random random = new Random();
-            attackCooldownTimer = 2000 + (random.Next(0,10) * 500);
+            attackCooldownTimer = 2000 + (random.Next(0, 10) * 500);
 
             changeAnimation(AnimationsTypes.attack3);
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 3)
             {
                 shoot();
-            }
-        }
-
-        public void shoot()
-        {
-            if (!attackCooldown)
-            {
-                attackCooldown = true;
-
-                var center = GetCollisionRectangle().Center.ToVector2();
-                center -= new Vector2(projectileInAirAnimation.bounds.X, projectileInAirAnimation.bounds.Y);
-                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, new Rectangle(40*2,42*2,24*2,24*2)));
             }
         }
     }
