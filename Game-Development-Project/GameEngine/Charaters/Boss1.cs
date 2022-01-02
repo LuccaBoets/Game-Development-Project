@@ -26,7 +26,7 @@ namespace GameEngine.Charaters
 
             move(gameTime, tilemap);
 
-            currentAnimation.update(gameTime,150);
+            currentAnimation.update(gameTime, 150);
 
             endOfAnimation();
 
@@ -89,6 +89,17 @@ namespace GameEngine.Charaters
                     else
                     {
                         Movement.left(this);
+                    }
+                }
+                else
+                {
+                    if (hero.GetCollisionRectangle().Center.X >= GetCollisionRectangle().Center.X)
+                    {
+                        lookingLeft = false;
+                    }
+                    else
+                    {
+                        lookingLeft = true;
                     }
                 }
 
