@@ -237,6 +237,8 @@ namespace GameEngine.Scenes
 
         public override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(new Color(24, 64, 42));
+
             var position = Matrix.CreateTranslation(
                   -hero.GetCollisionRectangle().Center.X,
                   -hero.GetCollisionRectangle().Center.Y,

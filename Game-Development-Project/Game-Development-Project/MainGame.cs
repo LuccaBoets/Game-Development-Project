@@ -65,7 +65,6 @@ namespace GameEngine
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             this.SceneState.Draw(gameTime);
 
