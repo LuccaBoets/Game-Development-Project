@@ -218,8 +218,6 @@ namespace GameEngine.Scenes
                 MediaPlayer.Play(song1Battle);
             }
 
-            monsters.RemoveAll(x => x.isDead);
-
             //monsters[0].Update(gameTime, hero, tilemap);
 
             if (hero.isDead)
