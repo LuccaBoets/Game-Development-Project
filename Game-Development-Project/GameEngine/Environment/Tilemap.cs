@@ -45,6 +45,10 @@ namespace GameEngine.Environment
                     {
                         addTile(texture, new Vector2(i, j), layer);
                     }
+
+                    
+                    Debug.WriteLine($"{i*j}/{(map.Width/16)* (map.Height)}");
+                    
                 }
             }
             Debug.WriteLine("Finised " + layer);

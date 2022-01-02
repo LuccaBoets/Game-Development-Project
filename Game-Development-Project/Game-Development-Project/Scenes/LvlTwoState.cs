@@ -11,18 +11,20 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace GameEngine.Scenes
 {
-    public class LvlOneState : SceneState
+    public class LvlTwoState : SceneState
     {
         private Hero hero { get; set; }
+
         public Song song1 { get; set; }
+
         private List<Enemy> monsters { get; set; }
+        
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
 
@@ -30,8 +32,7 @@ namespace GameEngine.Scenes
 
 
         private MouseState lastMouseState = new MouseState();
-        private MouseState lastMouseStateRight = new MouseState();
-        public LvlOneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
+        public LvlTwoState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
             LoadContent();
         }
@@ -48,12 +49,10 @@ namespace GameEngine.Scenes
             //monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
 
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
-            //monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
-            monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4213, 1000)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
-            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song1);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
             hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
@@ -116,6 +115,8 @@ namespace GameEngine.Scenes
                 {
                     Layer = 0.10f,
                 },
+
+
             };
 
             //tilemap = new Tilemap();
@@ -124,8 +125,8 @@ namespace GameEngine.Scenes
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-1"), MainGame.GraphicsDevice, -1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-2"), MainGame.GraphicsDevice, -2);
 
-            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Grass/ExportedTileSet"));
-            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Grass/ExportedTilemapData.txt"))
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Castle/ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Castle/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }
@@ -135,7 +136,6 @@ namespace GameEngine.Scenes
         {
 
             MouseState currentState = Mouse.GetState();
-           
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
@@ -148,17 +148,18 @@ namespace GameEngine.Scenes
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && currentState.LeftButton == ButtonState.Pressed &&
-                lastMouseState.LeftButton == ButtonState.Released)
+        lastMouseState.LeftButton == ButtonState.Released)
             {
                 //hero.attack1(this.Monsters);
-                hero.changeAnimation(AnimationsTypes.attack1);  
 
-
+                hero.changeAnimation(AnimationsTypes.attack1);
+                
             }
-     
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                hero.changeAnimation(AnimationsTypes.hit);
             }
-            else if (Mouse.GetState().RightButton == ButtonState.Pressed && currentState.RightButton == ButtonState.Pressed &&
-        lastMouseStateRight.RightButton == ButtonState.Released)
+            else if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 hero.changeAnimation(AnimationsTypes.attack2);
             }
@@ -182,11 +183,12 @@ namespace GameEngine.Scenes
             }
 
             lastMouseState = currentState;
-            lastMouseStateRight = currentState;
 
             foreach (var sb in _scrollingBackgrounds)
             {
                 sb.Update(gameTime);
+
+
             }
 
             hero.update(gameTime, tilemap, monsters);
@@ -196,21 +198,12 @@ namespace GameEngine.Scenes
                 monster.Update(gameTime, hero, tilemap);
             }
 
-            monsters.RemoveAll(x => x.isDead);
-
-            monsters[0].Update(gameTime, hero, tilemap);
-
             if (hero.isDead)
             {
                 MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
 
-            if (monsters[0].isDead)
-            {
-                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
-            }
 
-            Debug.WriteLine($"X:{hero.position.X}, Y:{hero.position.Y}");
         }
 
         public override void Draw(GameTime gameTime)
@@ -236,8 +229,8 @@ namespace GameEngine.Scenes
             //var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
             //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
 
-            //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
-            //Texture2D.SetData(new[] { Color.Red });
+            var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            Texture2D.SetData(new[] { Color.Red });
             //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
@@ -255,7 +248,6 @@ namespace GameEngine.Scenes
             {
                 sb.Draw(_spriteBatch);
             }
-
             _spriteBatch.End();
         }
 

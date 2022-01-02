@@ -31,6 +31,7 @@ namespace GameEngine.Charaters
         public override List<Projectile> projectiles { get; set; }
         public override double attackCooldownTimer { get; set; }
         public override bool attackCooldown { get; set; }
+        public override bool isDead { get; set; }
 
         public MushroomMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
         {
@@ -87,7 +88,6 @@ namespace GameEngine.Charaters
                 invisibleTimer = 0;
             }
 
-            //changeAnimation(AnimationsTypes.attack1);
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
             {
                 attack1(hero);
@@ -109,57 +109,6 @@ namespace GameEngine.Charaters
             }
 
             projectiles.RemoveAll(x => x.isRemove);
-        }
-
-        public void move(GameTime gameTime, Tilemap tilemap)
-        {
-            if (currentAnimation.AnimatieNaam.canMove())
-            {
-
-                this.Movement.update(gameTime, this, this);
-
-                List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
-                foreach (var direction in directions)
-                {
-                    if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)
-                    {
-                        this.Movement.Velocity.X = 0;
-                        position += new Vector2(direction.Item2.Width, 0);
-                    }
-
-                    if (this.Movement.Velocity.X > 0 & direction.Item1 == CollisionDirection.right)
-                    {
-                        this.Movement.Velocity.X = 0;
-                        position += new Vector2(-direction.Item2.Width, 0);
-                    }
-
-                    if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
-                    {
-                        this.Movement.Velocity.Y = 0;
-                        position += new Vector2(0, direction.Item2.Height);
-                    }
-
-                    if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
-                    {
-                        position += new Vector2(0, -direction.Item2.Height);
-
-                        this.Movement.Velocity.Y = 0;
-                        this.Movement.InAir = false;
-                    }
-                }
-            }
-            else
-            {
-                this.Movement.Velocity.X = 0;
-            }
-
-            if (this.Movement.InAir == false)
-            {
-                if (tilemap.hitAnyTile(GetUnderCollisionRectangle()).Count <= 0)
-                {
-                    this.Movement.InAir = true;
-                }
-            }
         }
 
         public void Follow(Hero hero, Tilemap tilemap)
@@ -247,26 +196,11 @@ namespace GameEngine.Charaters
 
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.49f);
 
             foreach (var projectile in projectiles)
             {
                 projectile.Draw(_spriteBatch);
-            }
-        }
-
-        public override void Hit(int damage)
-        {
-            if (!invisible)
-            {
-                Debug.WriteLine("hit");
-                stats.health -= damage;
-                invisible = true;
-                changeAnimation(AnimationsTypes.hit);
-                if (stats.health <= 0)
-                {
-                    changeAnimation(AnimationsTypes.death);
-                }
             }
         }
 
@@ -275,8 +209,8 @@ namespace GameEngine.Charaters
 
             changeAnimation(AnimationsTypes.attack1);
 
-            const int Width = 25 * 2;
-            const int Height = 36 * 2;
+            const int Width = 34 * 2;
+            const int Height = 26 * 2;
             const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 6)
@@ -305,11 +239,11 @@ namespace GameEngine.Charaters
         {
             changeAnimation(AnimationsTypes.attack2);
 
-            const int Width = 25 * 2;
-            const int Height = 36 * 2;
+            const int Width = 34 * 2;
+            const int Height = 26 * 2;
             const int yOffset = 0;
 
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 6)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 8)
             {
                 Random random = new Random();
 
@@ -356,6 +290,3 @@ namespace GameEngine.Charaters
         }
     }
 }
-
-
-

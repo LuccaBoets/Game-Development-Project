@@ -64,7 +64,6 @@ namespace GameEngine
                 attack1(enemies);
             }
 
-
             if (invisible)
             {
                 invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -176,7 +175,7 @@ namespace GameEngine
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.48f);
 
             for (int i = 0; i < stats.maxHealth; i++)
             {
