@@ -153,11 +153,7 @@ namespace GameEngine.Scenes
                 //hero.attack1(this.Monsters);
 
                 hero.changeAnimation(AnimationsTypes.attack1);
-                
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                hero.changeAnimation(AnimationsTypes.hit);
+
             }
             else if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
