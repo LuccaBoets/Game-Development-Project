@@ -102,6 +102,26 @@ namespace GameEngine.Graphics
             currentFrame = frames[count];
         }
 
+        public void update(GameTime gameTime, int time)
+        {
+            ElapsedGameTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (ElapsedGameTime >= time)
+            {
+                count++;
+                ElapsedGameTime = 0;
+            }
+
+
+            if (count > frames.Count - 1)
+            {
+                count = 0;
+                isFinished = true;
+            }
+
+            currentFrame = frames[count];
+        }
+
         public void reset()
         {
             count = 0;

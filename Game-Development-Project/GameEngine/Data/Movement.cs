@@ -55,9 +55,11 @@ namespace GameEngine.Data
 
         public void jump()
         {
-            Velocity.Y = -jumpSpeed;
-            InAir = true;
-
+            if (!InAir)
+            {
+                Velocity.Y = -jumpSpeed;
+                InAir = true;
+            }
         }
 
         public void down()

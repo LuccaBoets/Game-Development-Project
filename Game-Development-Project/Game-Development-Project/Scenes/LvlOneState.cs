@@ -47,11 +47,16 @@ namespace GameEngine.Scenes
         {
             monsters = new List<Enemy>();
             hero = new Hero(HeroAnimations.AllAnimation(Content));
-            //monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4213, 1000)));
+
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2016, 900)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(1649, 900)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2704, 1000)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(1275, 850)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3196, 1000)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(2774, 850)));
 
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
-            //monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
-            monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4213, 1000)));
 
             song1 = Content.Load<Song>("lvl1");
             song1Battle = Content.Load<Song>("newBattleV2");
@@ -213,9 +218,7 @@ namespace GameEngine.Scenes
                 MediaPlayer.Play(song1Battle);
             }
 
-            monsters.RemoveAll(x => x.isDead);
-
-            monsters[0].Update(gameTime, hero, tilemap);
+            //monsters[0].Update(gameTime, hero, tilemap);
 
             if (hero.isDead)
             {
@@ -226,6 +229,8 @@ namespace GameEngine.Scenes
             {
                 MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
             }
+
+            monsters.RemoveAll(x => x.isDead);
 
             Debug.WriteLine($"X:{hero.position.X}, Y:{hero.position.Y}");
         }
