@@ -42,7 +42,7 @@ namespace GameEngine.Charaters
 
             this.Movement = new Movement();
             this.Movement.MaxSpeedX = 1.5f;
-            this.Movement.jumpSpeed = 3f;
+            this.Movement.jumpSpeed = 4f;
 
             this.lookingLeft = true;
 
