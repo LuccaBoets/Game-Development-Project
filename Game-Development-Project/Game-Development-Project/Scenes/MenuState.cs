@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,8 @@ namespace GameEngine.Scenes
 
         List<Background> background2;
         Background backgroundCharacterSelect;
+        public Song songMenu { get; set; }
+
         Texture2D image;
         Texture2D imageTitel;
         int count = 0;
@@ -54,6 +57,10 @@ namespace GameEngine.Scenes
             _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
             background2 = new List<Background>();
 
+            songMenu = Content.Load<Song>("MenuSong");
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(songMenu);
             for (int i = 0; i < 39; i++)
             {
                 background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));

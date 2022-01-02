@@ -32,6 +32,7 @@ namespace GameEngine.Scenes
 
 
         private MouseState lastMouseState = new MouseState();
+        private MouseState lastMouseStateRight = new MouseState();
         public LvlOneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
             LoadContent();
@@ -55,6 +56,7 @@ namespace GameEngine.Scenes
 
             song1 = Content.Load<Song>("Adventure1");
             MediaPlayer.Volume = 0.1f;
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song1);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
             hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
@@ -144,6 +146,7 @@ namespace GameEngine.Scenes
         {
 
             MouseState currentState = Mouse.GetState();
+           
 
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
@@ -159,15 +162,10 @@ namespace GameEngine.Scenes
         lastMouseState.LeftButton == ButtonState.Released)
             {
                 //hero.attack1(this.Monsters);
-
-                hero.changeAnimation(AnimationsTypes.attack1);
-                
+                hero.changeAnimation(AnimationsTypes.attack1);  
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                hero.changeAnimation(AnimationsTypes.hit);
-            }
-            else if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (Mouse.GetState().RightButton == ButtonState.Pressed && currentState.RightButton == ButtonState.Pressed &&
+        lastMouseStateRight.RightButton == ButtonState.Released)
             {
                 hero.changeAnimation(AnimationsTypes.attack2);
             }
@@ -191,6 +189,7 @@ namespace GameEngine.Scenes
             }
 
             lastMouseState = currentState;
+            lastMouseStateRight = currentState;
 
             foreach (var sb in _scrollingBackgrounds)
             {

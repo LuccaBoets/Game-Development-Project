@@ -57,7 +57,7 @@ namespace GameEngine.Charaters
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
-            Follow(hero);
+            Follow(hero, tilemap);
 
             move(gameTime, tilemap);
 
