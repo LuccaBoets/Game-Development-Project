@@ -51,7 +51,7 @@ namespace GameEngine.Scenes
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
             monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
 
-            song1 = Content.Load<Song>("Adventure1");
+            song1 = Content.Load<Song>("lvl2");
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(song1);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
@@ -59,57 +59,18 @@ namespace GameEngine.Scenes
 
             _scrollingBackgrounds = new List<Scrolling>()
             {
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0000_9"), hero, 15f)
+                new Scrolling(Content.Load<Texture2D>("Background/background_night3"), hero, 10f)
                 {
                     Layer = 0.45f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0001_8"), hero, 15f)
-                {
-                    Layer = 0.46f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0002_7"), hero, 15f)
-                {
-                    Layer = 0.44f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0003_6"), hero, 15f)
-                {
-                    Layer = 0.41f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0004_Lights"), hero, 15f)
-                {
-                    Layer = 0.40f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0005_5"), hero, 10f)
-                {
-                Layer = 0.39f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0006_4"), hero, 7.5f)
-                {
-                Layer = 0.38f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0007_Lights"), hero, 7.5f)
-                {
-                    Layer = 0.37f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0008_3"), hero, 4f)
-                {
-                    Layer = 0.36f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0009_2"), hero, 2f)
+               
+                new Scrolling(Content.Load<Texture2D>("Background/background_night2"), hero, 2f)
                 {
                     Layer = 0.35f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0010_1"), hero, 0f)
+                new Scrolling(Content.Load<Texture2D>("Background/background_night1"), hero, 0f)
                 {
                     Layer = 0.31f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/Layer_0011_0"), hero, 0f)
-                {
-                    Layer = 0.30f,
-                },
-                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 5f)
-                {
-                    Layer = 0.34f,
                 },
                  new Scrolling(Content.Load<Texture2D>("Background/SunLayer5"), hero, 0f)
                 {

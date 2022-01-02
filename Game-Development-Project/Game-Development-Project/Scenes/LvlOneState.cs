@@ -113,7 +113,7 @@ namespace GameEngine.Scenes
                 {
                     Layer = 0.30f,
                 },
-                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 5f)
+                new Scrolling(Content.Load<Texture2D>("Background/CloudsLayer"), hero, 5f, 5)
                 {
                     Layer = 0.34f,
                 },
