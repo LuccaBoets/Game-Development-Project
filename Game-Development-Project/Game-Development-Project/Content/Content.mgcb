@@ -385,6 +385,12 @@
 /processorParam:Quality=Best
 /build:Loop_1.ogg
 
+#begin lvl1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:lvl1.mp3
+
 #begin lvl2.0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -432,6 +438,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:lvl2.-2.png
+
+#begin lvl2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:lvl2.mp3
 
 #begin MenuSong.mp3
 /importer:Mp3Importer
@@ -859,11 +871,11 @@
 /processorParam:TextureFormat=Color
 /build:Monsters/Skeleton/Walk.png
 
-#begin newbattle.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin newbattleV2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:newbattle.wav
+/build:newbattleV2.mp3
 
 #begin PressEnter2.png
 /importer:TextureImporter

@@ -22,10 +22,12 @@ namespace GameEngine.Scenes
     {
         private Hero hero { get; set; }
         public Song song1 { get; set; }
+        public Song song1Battle { get; set; }
         private List<Enemy> monsters { get; set; }
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
 
+        private bool muziekBattle = false;
         const int speed = 3;
 
 
@@ -51,9 +53,12 @@ namespace GameEngine.Scenes
             //monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
             monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4213, 1000)));
 
-            song1 = Content.Load<Song>("Adventure1");
+            song1 = Content.Load<Song>("lvl1");
+            song1Battle = Content.Load<Song>("newBattleV2");
+
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Stop();
             MediaPlayer.Play(song1);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
             hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
@@ -181,6 +186,9 @@ namespace GameEngine.Scenes
                 }
             }
 
+
+
+
             lastMouseState = currentState;
             lastMouseStateRight = currentState;
 
@@ -194,6 +202,15 @@ namespace GameEngine.Scenes
             foreach (var monster in this.monsters)
             {
                 monster.Update(gameTime, hero, tilemap);
+            }
+
+
+            if (hero.position.X > 3745 && muziekBattle == false)
+            {
+                muziekBattle = true;
+                MediaPlayer.Stop();
+                MediaPlayer.Volume = 0.5f;
+                MediaPlayer.Play(song1Battle);
             }
 
             monsters.RemoveAll(x => x.isDead);
