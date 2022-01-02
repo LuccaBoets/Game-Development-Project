@@ -205,7 +205,7 @@ namespace GameEngine.Scenes
             }
 
 
-            if (hero.position.X > 3745 && muziekBattle == false)
+            if (hero.position.X > 3741 && muziekBattle == false)
             {
                 muziekBattle = true;
                 MediaPlayer.Stop();
