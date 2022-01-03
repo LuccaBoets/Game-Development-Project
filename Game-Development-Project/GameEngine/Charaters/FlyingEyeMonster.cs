@@ -116,7 +116,7 @@ namespace GameEngine.Charaters
                             attack2(hero);
                         }
                     }
-                    else if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 1000, 50) && currentAnimation.AnimatieNaam.canMove())
+                    else if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 700, 50) && CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 1000, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
                         attack3(hero);
                     }

@@ -183,7 +183,7 @@ namespace GameEngine.Scenes
 
             hero.update(gameTime, tilemap, monsters);
 
-            foreach (var monster in this.monsters)
+            foreach (var monster in this.monsters.Where(x => CollisionManager.Detection(x.GetMonsterRangeRectangle(), getScreen())))
             {
                 monster.Update(gameTime, hero, tilemap);
             }
@@ -203,10 +203,6 @@ namespace GameEngine.Scenes
                 
                 MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
-
-            
-
-
         }
 
         public override void Draw(GameTime gameTime)
@@ -241,7 +237,7 @@ namespace GameEngine.Scenes
 
             hero.draw(_spriteBatch);
 
-            foreach (var monster in this.monsters)
+            foreach (var monster in this.monsters.Where(x => CollisionManager.Detection(x.GetMonsterRangeRectangle(), getScreen())))
             {
                 monster.Draw(_spriteBatch);
             }
