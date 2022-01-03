@@ -31,11 +31,11 @@ namespace GameEngine
 
         public bool isDead { get; set; }
 
-        public Hero(List<Animatie> animaties)
+        public Hero(List<Animatie> animaties, Vector2 position)
         {
             this.Animaties = animaties;
 
-            this.position = new Vector2(700, 300);
+            this.position = position;
 
             Movement = new Movement();
 

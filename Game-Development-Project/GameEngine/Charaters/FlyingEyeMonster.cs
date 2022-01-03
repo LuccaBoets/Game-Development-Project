@@ -14,16 +14,16 @@ using GameEngine.ExtensionMethods;
 
 namespace GameEngine.Charaters
 {
-    public class SkeletonMonster : Enemy
+    public class FlyingEyeMonster : Enemy
     {
-        public SkeletonMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
+        public FlyingEyeMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
         {
             this.Animaties = animaties;
             this.projectileHitAnimation = projectileAnimation[1];
             this.projectileInAirAnimation = projectileAnimation[0];
             this.position = newPosition;
 
-            this.Movement = new Movement();
+            this.Movement = new FlyingMovement();
             this.Movement.MaxSpeedX = 1.5f;
             this.Movement.jumpSpeed = 4f;
 
@@ -34,87 +34,77 @@ namespace GameEngine.Charaters
             this.stats = new Stats(7, 1);
             this.projectiles = new List<Projectile>();
         }
+
         public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
+        public override void move(GameTime gameTime, Tilemap tilemap)
         {
-            Follow(hero, tilemap);
 
-            move(gameTime, tilemap);
-
-            currentAnimation.update(gameTime);
-
-            endOfAnimation();
-
-            if (attackCooldown)
+            if (currentAnimation.AnimatieNaam.canMove())
             {
-                attackCooldownTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            }
 
-            if (attackCooldownTimer <= 0)
+                this.Movement.update(gameTime, this, this);
+
+                List<Tuple<CollisionDirection, Rectangle>> directions = tilemap.hitAnyTile(GetCollisionRectangle());
+                foreach (var direction in directions)
+                {
+                    if (this.Movement.Velocity.X < 0 && direction.Item1 == CollisionDirection.left)
+                    {
+                        this.Movement.Velocity.X = 0;
+                        position += new Vector2(direction.Item2.Width, 0);
+                    }
+
+                    if (this.Movement.Velocity.X > 0 & direction.Item1 == CollisionDirection.right)
+                    {
+                        this.Movement.Velocity.X = 0;
+                        position += new Vector2(-direction.Item2.Width, 0);
+                    }
+
+                    if (this.Movement.Velocity.Y < 0 && direction.Item1 == CollisionDirection.up)
+                    {
+                        this.Movement.Velocity.Y = 0;
+                        position += new Vector2(0, direction.Item2.Height);
+                    }
+
+                    if ((this.Movement.Velocity.Y > 0 & direction.Item1 == CollisionDirection.down))
+                    {
+                        position += new Vector2(0, -direction.Item2.Height);
+
+                        this.Movement.Velocity.Y = 0;
+                        this.Movement.InAir = false;
+                    }
+                }
+            }
+            else
             {
-                attackCooldown = false;
-                attackCooldownTimer = 0;
+                this.Movement.Velocity.X = 0;
             }
-
-            if (invisible)
-            {
-                invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            }
-
-            if (invisibleTimer >= 2000)
-            {
-                invisible = false;
-                invisibleTimer = 0;
-            }
-
-            //changeAnimation(AnimationsTypes.attack1);
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
-            {
-                attack1(hero);
-            }
-
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2)
-            {
-                attack2(hero);
-            }
-
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3)
-            {
-                attack3(hero);
-            }
-
-            foreach (var projectile in projectiles)
-            {
-                projectile.Update(gameTime, hero, tilemap);
-            }
-
-            projectiles.RemoveAll(x => x.isRemove);
         }
 
         public override void Follow(Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
-                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 100, 50))
+                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 30, 50))
                 {
-                    if (hero.position.X >= position.X)
+                    Movement.moveTo(position, hero.position);
+
+                    if (Movement.Velocity.X > 0)
                     {
-                        Movement.right(this);
+                        lookingLeft = false;
                     }
-                    else
+                    else if (Movement.Velocity.X < 0)
                     {
-                        Movement.left(this);
+                        lookingLeft = true;
                     }
                 }
 
-
                 if (!attackCooldown)
                 {
-                    if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 300, 50) && currentAnimation.AnimatieNaam.canMove())
+                    if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 100, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
                         Random rand = new Random();
                         if (rand.Next(0, 2) == 1)
@@ -161,16 +151,16 @@ namespace GameEngine.Charaters
             var beginPoint = position.ToPoint();
             if (lookingLeft)
             {
-                beginPoint.X += 54 * 2;
-                beginPoint.Y += 51 * 2 - 1;
+                beginPoint.X += 52 * 2;
+                beginPoint.Y += 60 * 2 - 1;
             }
             else
             {
-                beginPoint.X += 60 * 2;
-                beginPoint.Y += 50 * 2 - 1;
+                beginPoint.X += 57 * 2;
+                beginPoint.Y += 60 * 2 - 1;
             }
 
-            return new Rectangle(beginPoint, new Point(36 * 2, 51 * 2));
+            return new Rectangle(beginPoint, new Point(41 * 2, 32 * 2));
             //return new Rectangle((int)position.X, (int)position.Y, (int)currentAnimation.bounds.X, (int)currentAnimation.bounds.Y);
         }
 
@@ -202,8 +192,8 @@ namespace GameEngine.Charaters
 
             changeAnimation(AnimationsTypes.attack1);
 
-            const int Width = 47 * 2;
-            const int Height = 43 * 2;
+            const int Width = 30 * 2;
+            const int Height = 32 * 2;
             const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 6)
@@ -214,11 +204,11 @@ namespace GameEngine.Charaters
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
                 {
-                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - Width, GetCollisionRectangle().Top + yOffset, Width, Height);
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - 20, GetCollisionRectangle().Top + yOffset, Width, Height);
                 }
                 else
                 {
-                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + yOffset, Width, Height);
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right - 20, GetCollisionRectangle().Top + yOffset, Width, Height);
                 }
 
                 if (CollisionManager.Detection(hero.GetCollisionRectangle(), attackCollsionRectangle))
@@ -232,24 +222,18 @@ namespace GameEngine.Charaters
         {
             changeAnimation(AnimationsTypes.attack2);
 
-            const int Width = 53 * 2;
-            const int Height = 79 * 2;
-            const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 6)
             {
                 Random random = new Random();
 
                 attackCooldownTimer = random.Next(0, 3) * 500;
-                Rectangle attackCollsionRectangle;
-                if (lookingLeft)
-                {
-                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - Width, GetCollisionRectangle().Top + yOffset, Width, Height);
-                }
-                else
-                {
-                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + yOffset, Width, Height);
-                }
+
+                var attackCollsionRectangle = GetCollisionRectangle();
+                attackCollsionRectangle.X -= 10;
+                attackCollsionRectangle.Y -= 10;
+                attackCollsionRectangle.Width += 20;
+                attackCollsionRectangle.Height += 20;
 
                 if (CollisionManager.Detection(hero.GetCollisionRectangle(), attackCollsionRectangle))
                 {
@@ -261,7 +245,7 @@ namespace GameEngine.Charaters
         public override void attack3(Hero hero)
         {
             Random random = new Random();
-            attackCooldownTimer = 2000 + (random.Next(0,10) * 500);
+            attackCooldownTimer = 2000 + (random.Next(0, 10) * 500);
 
             changeAnimation(AnimationsTypes.attack3);
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 3)
@@ -278,7 +262,7 @@ namespace GameEngine.Charaters
 
                 var center = GetCollisionRectangle().Center.ToVector2();
                 center -= new Vector2(projectileInAirAnimation.bounds.X, projectileInAirAnimation.bounds.Y);
-                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, new Rectangle(40*2,42*2,24*2,24*2)));
+                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, new Rectangle(16 * 2, 16 * 2, 16 * 2, 16 * 2)));
             }
         }
     }

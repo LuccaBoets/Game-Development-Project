@@ -38,6 +38,16 @@ namespace GameEngine.Graphics
             return projectileAnimaties;
         }
 
+        public static List<Animatie> AllFlyingEyeAnimation(ContentManager content)
+        {
+            List<Animatie> projectileAnimaties = new List<Animatie>() {
+                   ProjectileAnimations.GetProjectileInAirAnimatieFromFlyingEyeMonster(content),
+                   ProjectileAnimations.GetProjectileHitAnimatieFromFlyingEyeMonster(content)
+            };
+
+            return projectileAnimaties;
+        }
+
         public static Animatie GetProjectileInAirAnimatieFromMushroomMonster(ContentManager content)
         {
             int _width = 50;
@@ -145,6 +155,44 @@ namespace GameEngine.Graphics
             animation.AnimatieNaam = AnimationsTypes.attack1;
 
             for (int i = 0; i < 10; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetProjectileInAirAnimatieFromFlyingEyeMonster(ContentManager content)
+        {
+            int _width = 48;
+            int _height = 48;
+
+            Texture2D texture = content.Load<Texture2D>("Monsters/Flying eye/ProjectileInAir");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = AnimationsTypes.idle;
+
+            for (int i = 0; i < 3; i++)
+            {
+                animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
+            }
+
+            return animation;
+        }
+
+        public static Animatie GetProjectileHitAnimatieFromFlyingEyeMonster(ContentManager content)
+        {
+            int _width = 48;
+            int _height = 48;
+
+            Texture2D texture = content.Load<Texture2D>("Monsters/Flying eye/ProjectileHit");
+
+            var animation = new Animatie(texture);
+
+            animation.AnimatieNaam = AnimationsTypes.attack1;
+
+            for (int i = 0; i < 5; i++)
             {
                 animation.addFrame(new AnimatieFrame(new Rectangle(_width * i, 0, _width, _height)));
             }

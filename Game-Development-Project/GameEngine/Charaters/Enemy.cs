@@ -15,24 +15,78 @@ namespace GameEngine.Charaters
 {
     public abstract class Enemy : ICollisionable, IAnimationable, IHitable, IMoveable
     {
-        public abstract Animatie currentAnimation { get; set; }
-        public abstract List<Animatie> Animaties { get; set; }
-        public abstract bool lookingLeft { get; set; }
-        public abstract Stats stats { get; set; }
-        public abstract double invisibleTimer { get; set; }
-        public abstract bool invisible { get; set; }
-        public abstract Movement Movement { get; set; }
-        public abstract Vector2 position { get; set; }
-        public abstract Animatie projectileHitAnimation { get; set; }
-        public abstract Animatie projectileInAirAnimation { get; set; }
-        public abstract List<Projectile> projectiles { get; set; }
-        public abstract double attackCooldownTimer { get; set; }
-        public abstract bool attackCooldown { get; set; }
-        public abstract bool isDead { get; set; }
+        public Animatie currentAnimation { get; set; }
+        public List<Animatie> Animaties { get; set; }
+        public bool lookingLeft { get; set; }
+        public Stats stats { get; set; }
+        public double invisibleTimer { get; set; }
+        public bool invisible { get; set; }
+        public virtual Movement Movement { get; set; }
+        public Vector2 position { get; set; }
+        public Animatie projectileHitAnimation { get; set; }
+        public Animatie projectileInAirAnimation { get; set; }
+        public List<Projectile> projectiles { get; set; }
+        public double attackCooldownTimer { get; set; }
+        public bool attackCooldown { get; set; }
+        public bool isDead { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBacth);
-        public abstract void Update(GameTime gameTime, Hero hero, Tilemap tilemap);
-        public void move(GameTime gameTime, Tilemap tilemap)
+        public virtual void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
+        {
+            Follow(hero, tilemap);
+
+            move(gameTime, tilemap);
+
+            currentAnimation.update(gameTime);
+
+            endOfAnimation();
+
+            if (attackCooldown)
+            {
+                attackCooldownTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            if (attackCooldownTimer <= 0)
+            {
+                attackCooldown = false;
+                attackCooldownTimer = 0;
+            }
+
+            if (invisible)
+            {
+                invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            if (invisibleTimer >= 2000)
+            {
+                invisible = false;
+                invisibleTimer = 0;
+            }
+
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
+            {
+                attack1(hero);
+            }
+
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2)
+            {
+                attack2(hero);
+            }
+
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3)
+            {
+                attack3(hero);
+            }
+
+            foreach (var projectile in projectiles)
+            {
+                projectile.Update(gameTime, hero, tilemap);
+            }
+
+            projectiles.RemoveAll(x => x.isRemove);
+        }
+        public abstract void Follow(Hero hero, Tilemap tilemap);
+        public virtual void move(GameTime gameTime, Tilemap tilemap)
         {
             if (currentAnimation.AnimatieNaam.canMove())
             {
@@ -104,6 +158,11 @@ namespace GameEngine.Charaters
         public abstract Rectangle GetMonsterRangeRectangle();
         public abstract Rectangle GetCollisionRectangle();
         public abstract Rectangle GetNextCollisionRectangle();
+
+        public abstract void attack1(Hero hero);
+        public abstract void attack2(Hero hero);
+        public abstract void attack3(Hero hero);
+
         public void Hit(int damage)
         {
             if (!invisible)

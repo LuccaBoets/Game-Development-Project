@@ -16,23 +16,6 @@ namespace GameEngine.Charaters
 {
     public class MushroomMonster : Enemy
     {
-        public override Animatie currentAnimation { get; set; }
-        public override List<Animatie> Animaties { get; set; }
-        public override bool lookingLeft { get; set; }
-
-        public override Vector2 position { get; set; }
-
-        public override Movement Movement { get; set; }
-        public override Stats stats { get; set; }
-        public override double invisibleTimer { get; set; }
-        public override bool invisible { get; set; } = false;
-        public override Animatie projectileHitAnimation { get; set; }
-        public override Animatie projectileInAirAnimation { get; set; }
-        public override List<Projectile> projectiles { get; set; }
-        public override double attackCooldownTimer { get; set; }
-        public override bool attackCooldown { get; set; }
-        public override bool isDead { get; set; }
-
         public MushroomMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
         {
             this.Animaties = animaties;
@@ -111,7 +94,7 @@ namespace GameEngine.Charaters
             projectiles.RemoveAll(x => x.isRemove);
         }
 
-        public void Follow(Hero hero, Tilemap tilemap)
+        public override void Follow(Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
@@ -204,7 +187,7 @@ namespace GameEngine.Charaters
             }
         }
 
-        public void attack1(Hero hero)
+        public override void attack1(Hero hero)
         {
 
             changeAnimation(AnimationsTypes.attack1);
@@ -235,7 +218,7 @@ namespace GameEngine.Charaters
             }
         }
 
-        public void attack2(Hero hero)
+        public override void attack2(Hero hero)
         {
             changeAnimation(AnimationsTypes.attack2);
 
@@ -265,7 +248,7 @@ namespace GameEngine.Charaters
             }
         }
 
-        public void attack3(Hero hero)
+        public override void attack3(Hero hero)
         {
             Random random = new Random();
             attackCooldownTimer = 1000 + (random.Next(0, 6) * 500);

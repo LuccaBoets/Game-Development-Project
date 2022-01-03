@@ -45,7 +45,7 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>();
-            hero = new Hero(HeroAnimations.AllAnimation(Content));
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(700, 300));
             //monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
 
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));

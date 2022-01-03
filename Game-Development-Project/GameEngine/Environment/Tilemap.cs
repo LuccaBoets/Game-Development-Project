@@ -47,7 +47,7 @@ namespace GameEngine.Environment
                     }
 
                     
-                    Debug.WriteLine($"{i*j}/{(map.Width/16)* (map.Height)}");
+                    Debug.WriteLine($"{layer}: {(i* (map.Width / 16)) +j}/{(map.Width/16)* (map.Height/16)}");
                     
                 }
             }
