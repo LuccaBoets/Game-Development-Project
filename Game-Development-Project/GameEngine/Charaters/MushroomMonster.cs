@@ -111,7 +111,7 @@ namespace GameEngine.Charaters
                 }
 
 
-                if (!attackCooldown)
+                if (!attackCooldown && !Movement.InAir)
                 {
                     if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 200, 30) && currentAnimation.AnimatieNaam.canMove())
                     {
@@ -226,7 +226,7 @@ namespace GameEngine.Charaters
             const int Height = 26 * 2;
             const int yOffset = 0;
 
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 8)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 6)
             {
                 Random random = new Random();
 

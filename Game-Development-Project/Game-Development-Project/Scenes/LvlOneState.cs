@@ -48,6 +48,7 @@ namespace GameEngine.Scenes
             monsters = new List<Enemy>(); // 700 300  X:1006.17267, Y:942.92206
             hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 300));
             monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4653, 1000)));
+            //monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4653, 1000)));
 
             monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2516, 900)));
             monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2149, 900)));
@@ -227,13 +228,13 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MenuState.ChangeSceneState(new VictoryState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new VictoryState(MainGame, _graphics, _spriteBatch));
                 //MenuState.ChangeSceneState(new DeathState(MenuState, _graphics, _spriteBatch));
             }
 
             if (monsters[0].isDead)
             {
-                MenuState.ChangeSceneState(new LvlTwoState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
             }
 
             monsters.RemoveAll(x => x.isDead);
@@ -259,11 +260,11 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            //const int Width = 30 * 2;
-            //const int Height = 32 * 2;
+            //const int Width = 34 * 2;
+            //const int Height = 26 * 2;
             //const int yOffset = 0;
 
-            //var attackCollsionRectangle = monsters[1].GetCollisionRectangle();
+            //var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
 
             //var attackCollsionRectangle = new Rectangle(monsters[1].GetCollisionRectangle().Left - Width, monsters[1].GetCollisionRectangle().Top + yOffset, Width, Height);
 

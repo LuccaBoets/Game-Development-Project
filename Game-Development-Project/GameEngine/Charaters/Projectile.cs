@@ -84,7 +84,7 @@ namespace GameEngine.Charaters
             isRemove = true;
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch _spriteBatch, float scale = 2f)
         {
             var spriteEffects = SpriteEffects.None;
 
@@ -93,7 +93,7 @@ namespace GameEngine.Charaters
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, scale, spriteEffects, 0.5f);
         }
 
         public Rectangle GetCollisionRectangle()

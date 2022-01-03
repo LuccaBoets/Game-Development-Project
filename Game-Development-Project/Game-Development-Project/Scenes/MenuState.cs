@@ -54,7 +54,7 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(MenuState.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
             background2 = new List<Background>();
 
             songMenu = Content.Load<Song>("MenuSong");
@@ -63,11 +63,11 @@ namespace GameEngine.Scenes
             MediaPlayer.Play(songMenu);
             for (int i = 0; i < 39; i++)
             {
-                background2.Add(new Background(MenuState.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
+                background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
             }
 
-            imageTitel = MenuState.Content.Load<Texture2D>("TitelNieuw");
-            image = MenuState.Content.Load<Texture2D>("PressEnter2");
+            imageTitel = MainGame.Content.Load<Texture2D>("TitelNieuw");
+            image = MainGame.Content.Load<Texture2D>("PressEnter2");
         }
 
         public override void Update(GameTime gameTime)
@@ -77,7 +77,7 @@ namespace GameEngine.Scenes
 
                
 
-                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
 
             }
 

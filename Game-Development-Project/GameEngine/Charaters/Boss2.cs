@@ -1,43 +1,23 @@
 ﻿using GameEngine.Behavior;
-using GameEngine.Characters;
+using GameEngine.Data;
 using GameEngine.Environment;
+using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using GameEngine.Data;
-using GameEngine.ExtensionMethods;
 
 namespace GameEngine.Charaters
 {
-    public class GoblinMonster : Enemy
+    public class Boss2 : SkeletonMonster
     {
-
-        public GoblinMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
+        public Boss2(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition) : base(animaties, projectileAnimation, newPosition)
         {
-            this.Animaties = animaties;
-            this.projectileHitAnimation = projectileAnimation[1];
-            this.projectileInAirAnimation = projectileAnimation[0];
-            this.position = newPosition;
-
-            this.Movement = new Movement();
-            this.Movement.MaxSpeedX = 1f;
-            this.Movement.jumpSpeed = 4f;
-
-            this.lookingLeft = true;
-
-            this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
-
-            this.stats = new Stats(5, 1);
-            this.projectiles = new List<Projectile>();
-        }
-        public override Tuple<CollisionDirection, Rectangle> CollisionDetection(Rectangle rectangle)
-        {
-            throw new NotImplementedException();
+            stats.maxHealth = 20;
+            stats.health = 20;
         }
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
@@ -46,7 +26,7 @@ namespace GameEngine.Charaters
 
             move(gameTime, tilemap);
 
-            currentAnimation.update(gameTime);
+            currentAnimation.update(gameTime, 150);
 
             endOfAnimation();
 
@@ -72,6 +52,7 @@ namespace GameEngine.Charaters
                 invisibleTimer = 0;
             }
 
+            //changeAnimation(AnimationsTypes.attack1);
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1)
             {
                 attack1(hero);
@@ -95,13 +76,13 @@ namespace GameEngine.Charaters
             projectiles.RemoveAll(x => x.isRemove);
         }
 
-        public override void Follow(Hero hero, Tilemap tilemap)
+        public void Follow(Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
-                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 100, 30))
+                if (!CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 200, 50))
                 {
-                    if (hero.position.X >= position.X)
+                    if (hero.GetCollisionRectangle().Center.X >= GetCollisionRectangle().Center.X)
                     {
                         Movement.right(this);
                     }
@@ -110,11 +91,21 @@ namespace GameEngine.Charaters
                         Movement.left(this);
                     }
                 }
-
+                else
+                {
+                    if (hero.GetCollisionRectangle().Center.X >= GetCollisionRectangle().Center.X)
+                    {
+                        lookingLeft = false;
+                    }
+                    else
+                    {
+                        lookingLeft = true;
+                    }
+                }
 
                 if (!attackCooldown && !Movement.InAir)
                 {
-                    if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 200, 30) && currentAnimation.AnimatieNaam.canMove())
+                    if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 400, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
                         Random rand = new Random();
                         if (rand.Next(0, 2) == 1)
@@ -126,7 +117,7 @@ namespace GameEngine.Charaters
                             attack2(hero);
                         }
                     }
-                    else if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 1000, 30) && currentAnimation.AnimatieNaam.canMove())
+                    else if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 1000, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
                         attack3(hero);
                     }
@@ -159,10 +150,18 @@ namespace GameEngine.Charaters
         public override Rectangle GetCollisionRectangle()
         {
             var beginPoint = position.ToPoint();
-            beginPoint.X += 126;
-            beginPoint.Y += 130;
-            return new Rectangle(beginPoint, new Point(33 * 2, 36 * 2));
-            //return new Rectangle((int)position.X, (int)position.Y, (int)currentAnimation.bounds.X, (int)currentAnimation.bounds.Y);
+            if (lookingLeft)
+            {
+                beginPoint.X += 54 * 3;
+                beginPoint.Y += 51 * 3 - 1;
+            }
+            else
+            {
+                beginPoint.X += 60 * 3;
+                beginPoint.Y += 50 * 3 - 1;
+            }
+
+            return new Rectangle(beginPoint, new Point(36 * 3, 51 * 3));
         }
 
         public override Rectangle GetNextCollisionRectangle()
@@ -180,11 +179,11 @@ namespace GameEngine.Charaters
 
             }
 
-            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 2f, spriteEffects, 0.5f);
+            _spriteBatch.Draw(currentAnimation.texture, position + currentAnimation.offset, currentAnimation.currentFrame.borders, Color.White, 0, Vector2.Zero, 3f, spriteEffects, 0.5f);
 
             foreach (var projectile in projectiles)
             {
-                projectile.Draw(_spriteBatch);
+                projectile.Draw(_spriteBatch, 3f);
             }
         }
 
@@ -193,8 +192,8 @@ namespace GameEngine.Charaters
 
             changeAnimation(AnimationsTypes.attack1);
 
-            const int Width = 25 * 2;
-            const int Height = 36 * 2;
+            const int Width = 160;
+            const int Height = 43 * 4;
             const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 6)
@@ -223,8 +222,8 @@ namespace GameEngine.Charaters
         {
             changeAnimation(AnimationsTypes.attack2);
 
-            const int Width = 50 * 2;
-            const int Height = 29 * 2;
+            const int Width = 160;
+            const int Height = 43 * 4;
             const int yOffset = 0;
 
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 6)
@@ -252,10 +251,10 @@ namespace GameEngine.Charaters
         public override void attack3(Hero hero)
         {
             Random random = new Random();
-            attackCooldownTimer = 1000 + (random.Next(0, 6) * 500);
+            attackCooldownTimer = 2000 + (random.Next(0, 10) * 500);
 
             changeAnimation(AnimationsTypes.attack3);
-            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 10)
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 3)
             {
                 shoot();
             }
@@ -267,9 +266,10 @@ namespace GameEngine.Charaters
             {
                 attackCooldown = true;
 
+                var hitbox = new Rectangle(40 * 3, 42 * 3, 24 * 3, 24 * 3);
                 var center = GetCollisionRectangle().Center.ToVector2();
-                center -= new Vector2(projectileInAirAnimation.bounds.X, projectileInAirAnimation.bounds.Y);
-                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, new Rectangle(48*2, 48*2, 9*2, 9*2)));
+                center -= hitbox.Center.ToVector2();
+                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, hitbox));
             }
         }
     }

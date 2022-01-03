@@ -103,7 +103,7 @@ namespace GameEngine.Charaters
                     }
                 }
 
-                if (!attackCooldown)
+                if (!attackCooldown && !Movement.InAir)
                 {
                     if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 300, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
@@ -183,7 +183,7 @@ namespace GameEngine.Charaters
 
             foreach (var projectile in projectiles)
             {
-                projectile.Draw(_spriteBatch);
+                projectile.Draw(_spriteBatch,4f);
             }
         }
 
@@ -256,6 +256,19 @@ namespace GameEngine.Charaters
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack3 && currentAnimation.count == 10)
             {
                 shoot();
+            }
+        }
+
+        public void shoot()
+        {
+            if (!attackCooldown)
+            {
+                attackCooldown = true;
+
+                var hitbox = new Rectangle(44 * 2, 44 * 2, 16 * 2, 16);
+                var center = GetCollisionRectangle().Center.ToVector2();
+                center -= hitbox.Center.ToVector2();
+                projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, hitbox));
             }
         }
     }

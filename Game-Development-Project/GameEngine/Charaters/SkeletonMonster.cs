@@ -112,7 +112,7 @@ namespace GameEngine.Charaters
                 }
 
 
-                if (!attackCooldown)
+                if (!attackCooldown && !Movement.InAir)
                 {
                     if (CollisionManager.Detection(hero.GetCollisionRectangle(), GetCollisionRectangle().Center, 300, 50) && currentAnimation.AnimatieNaam.canMove())
                     {
