@@ -227,13 +227,13 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MenuState.ChangeSceneState(new VictoryState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new VictoryState(MainGame, _graphics, _spriteBatch));
                 //MenuState.ChangeSceneState(new DeathState(MenuState, _graphics, _spriteBatch));
             }
 
             if (monsters[0].isDead)
             {
-                MenuState.ChangeSceneState(new LvlTwoState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
             }
 
             monsters.RemoveAll(x => x.isDead);

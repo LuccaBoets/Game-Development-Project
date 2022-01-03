@@ -6,7 +6,7 @@ namespace GameEngine.Scenes
 {
     public abstract class SceneState
     {
-        public MainGame MenuState { get; set; }
+        public MainGame MainGame { get; set; }
 
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
@@ -15,7 +15,7 @@ namespace GameEngine.Scenes
 
         protected SceneState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
         {
-            this.MenuState = game;
+            this.MainGame = game;
             this._graphics = graphics;
             this._spriteBatch = spriteBatch;
             this.Content = game.Content;

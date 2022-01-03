@@ -58,7 +58,7 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(MenuState.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
             background3 = new List<Background>();
             MediaPlayer.Stop();
             songVictory = Content.Load<Song>("Loop_1");
@@ -67,10 +67,10 @@ namespace GameEngine.Scenes
             MediaPlayer.Play(songVictory);
             for (int i = 0; i < 39; i++)
             {
-                background3.Add(new Background(MenuState.Content.Load<Texture2D>("victory-" + i), new Rectangle(0, 0, 1600, 900)));
+                background3.Add(new Background(MainGame.Content.Load<Texture2D>("victory-" + i), new Rectangle(0, 0, 1600, 900)));
             }
 
-            imageTitleWin = MenuState.Content.Load<Texture2D>("YouWin");
+            imageTitleWin = MainGame.Content.Load<Texture2D>("YouWin");
 
 
         }
@@ -79,7 +79,7 @@ namespace GameEngine.Scenes
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                MenuState.ChangeSceneState(new MenuState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
             }
 
            
