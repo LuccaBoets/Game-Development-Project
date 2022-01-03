@@ -215,7 +215,7 @@ namespace GameEngine.Scenes
             }
 
 
-            if (hero.position.X > 3741 && muziekBattle == false)
+            if (hero.position.X > 4285 && muziekBattle == false)
             {
                 muziekBattle = true;
                 MediaPlayer.Stop();
@@ -227,12 +227,13 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
+                MenuState.ChangeSceneState(new VictoryState(MenuState, _graphics, _spriteBatch));
+                //MenuState.ChangeSceneState(new DeathState(MenuState, _graphics, _spriteBatch));
             }
 
             if (monsters[0].isDead)
             {
-                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
+                MenuState.ChangeSceneState(new LvlTwoState(MenuState, _graphics, _spriteBatch));
             }
 
             monsters.RemoveAll(x => x.isDead);

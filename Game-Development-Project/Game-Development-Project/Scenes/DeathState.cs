@@ -45,7 +45,7 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(MenuState.GraphicsDevice);
             MediaPlayer.Stop();
             songDeath = Content.Load<Song>("GameOver");
             MediaPlayer.Volume = 0.7f;
@@ -53,7 +53,7 @@ namespace GameEngine.Scenes
             MediaPlayer.Play(songDeath);
             heroDeath = HeroAnimations.GetDeathFromHero(Content);
             backgroundDeath = new Background(Content.Load<Texture2D>("Game_Over"), new Rectangle(0, 0, 1600, 900));
-            imageYouDied = MainGame.Content.Load<Texture2D>("YouDied");
+            imageYouDied = MenuState.Content.Load<Texture2D>("YouDied");
 
 
         }
@@ -62,7 +62,7 @@ namespace GameEngine.Scenes
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
+                MenuState.ChangeSceneState(new LvlOneState(MenuState, _graphics, _spriteBatch));
             }
 
             if (!(heroDeath.count == 5))

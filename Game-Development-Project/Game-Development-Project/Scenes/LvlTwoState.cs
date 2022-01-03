@@ -157,7 +157,8 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
+                
+                MenuState.ChangeSceneState(new DeathState(MenuState, _graphics, _spriteBatch));
             }
 
 
@@ -188,7 +189,7 @@ namespace GameEngine.Scenes
             //var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
             //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
 
-            var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            var Texture2D = new Texture2D(MenuState.GraphicsDevice, 1, 1);
             Texture2D.SetData(new[] { Color.Red });
             //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
