@@ -251,7 +251,7 @@ namespace GameEngine
         {
             if (this.currentAnimation.count >= this.currentAnimation.frames.Count - 1)
             {
-                Debug.WriteLine("test");
+               
                 switch (this.currentAnimation.AnimatieNaam)
                 {
                     case AnimationsTypes.attack1:

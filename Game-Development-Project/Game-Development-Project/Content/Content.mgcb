@@ -319,6 +319,12 @@
 /processorParam:TextureFormat=Color
 /build:Fall.png
 
+#begin FinalBossBattle.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:FinalBossBattle.mp3
+
 #begin Game_Over.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1482,18 +1488,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Take Hit.png
-
-#begin Temp/lvl2.0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Temp/lvl2.0.png
 
 #begin Temp/lvl2.0.png
 /importer:TextureImporter

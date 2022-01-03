@@ -73,10 +73,7 @@ namespace GameEngine.Scenes
         public override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-
-               
-
+            { 
                 MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
 
             }
