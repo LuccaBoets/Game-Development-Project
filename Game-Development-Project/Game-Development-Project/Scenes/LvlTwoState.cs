@@ -45,11 +45,11 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>();
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(700, 300));
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(2000, 300));
             //monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(900, 700)));
 
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
+            //monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(900, 700)));
 
             song1 = Content.Load<Song>("lvl2");
             MediaPlayer.Volume = 0.1f;
@@ -81,13 +81,14 @@ namespace GameEngine.Scenes
             };
 
             //tilemap = new Tilemap();
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.0"), MainGame.GraphicsDevice);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.1"), MainGame.GraphicsDevice, 1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-1"), MainGame.GraphicsDevice, -1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-2"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.0"), MainGame.GraphicsDevice);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.1"), MainGame.GraphicsDevice, 1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.2"), MainGame.GraphicsDevice, 2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.-1"), MainGame.GraphicsDevice, -1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.-2"), MainGame.GraphicsDevice, -2);
 
-            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Castle/ExportedTileSet"));
-            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Castle/ExportedTilemapData.txt"))
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Castle/Temp/ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Castle/Temp/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }
@@ -111,10 +112,7 @@ namespace GameEngine.Scenes
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && currentState.LeftButton == ButtonState.Pressed &&
         lastMouseState.LeftButton == ButtonState.Released)
             {
-                //hero.attack1(this.Monsters);
-
                 hero.changeAnimation(AnimationsTypes.attack1);
-
             }
             else if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {

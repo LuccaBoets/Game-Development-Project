@@ -259,9 +259,9 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            const int Width = 30 * 2;
-            const int Height = 32 * 2;
-            const int yOffset = 0;
+            //const int Width = 30 * 2;
+            //const int Height = 32 * 2;
+            //const int yOffset = 0;
 
             //var attackCollsionRectangle = monsters[1].GetCollisionRectangle();
 
