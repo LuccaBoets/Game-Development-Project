@@ -4,6 +4,7 @@ using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,9 @@ namespace GameEngine.Scenes
         public Animatie heroDeath { get; set; }
         Background backgroundDeath;
         Texture2D imageYouDied;
+
+        public Song songDeath { get; set; }
+      
 
         public DeathState(MainGame game, GraphicsDeviceManager graphics, SpriteBatch spriteBatch) : base(game, graphics, spriteBatch)
         {
@@ -42,7 +46,11 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
-
+            MediaPlayer.Stop();
+            songDeath = Content.Load<Song>("GameOver");
+            MediaPlayer.Volume = 0.7f;
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Play(songDeath);
             heroDeath = HeroAnimations.GetDeathFromHero(Content);
             backgroundDeath = new Background(Content.Load<Texture2D>("Game_Over"), new Rectangle(0, 0, 1600, 900));
             imageYouDied = MainGame.Content.Load<Texture2D>("YouDied");
