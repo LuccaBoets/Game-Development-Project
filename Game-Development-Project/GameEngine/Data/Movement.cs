@@ -20,6 +20,14 @@ namespace GameEngine.Data
         public float MaxSpeedX { get; set; } = 4f;
         public bool IsButtonXPressed { get; set; } = false;
 
+        public virtual void moveTo(Vector2 position, Vector2 target)
+        {
+            var temp = target - position;
+            temp.Normalize();
+            Velocity = temp*2;
+        }
+
+
         public void right(IAnimationable animationable)
         {
 
@@ -67,7 +75,7 @@ namespace GameEngine.Data
             Velocity.Y += 0.15f * Gravity;
         }
 
-        public void update(GameTime gameTime, IAnimationable animationable, IMoveable moveable)
+        public virtual void update(GameTime gameTime, IAnimationable animationable, IMoveable moveable)
         {
             if (Velocity.X >= MaxSpeedX)
             {

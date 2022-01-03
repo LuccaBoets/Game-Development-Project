@@ -45,17 +45,18 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            monsters = new List<Enemy>();
-            hero = new Hero(HeroAnimations.AllAnimation(Content));
-            monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4213, 1000)));
+            monsters = new List<Enemy>(); // 700 300  X:1006.17267, Y:942.92206
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 300));
+            monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4653, 1000)));
 
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2016, 900)));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(1649, 900)));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2704, 1000)));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(1275, 850)));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3196, 1000)));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(2774, 850)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2516, 900)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2149, 900)));
+            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(3204, 1000)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(1775, 850)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3696, 1000)));
+            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3274, 850)));
 
+            //monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(1000, 900)));
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
 
             song1 = Content.Load<Song>("lvl1");
@@ -129,10 +130,14 @@ namespace GameEngine.Scenes
             };
 
             //tilemap = new Tilemap();
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.0"), MainGame.GraphicsDevice);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.1"), MainGame.GraphicsDevice, 1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-1"), MainGame.GraphicsDevice, -1);
-            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("lvl2.-2"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.0"), MainGame.GraphicsDevice);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.1"), MainGame.GraphicsDevice, 1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.2"), MainGame.GraphicsDevice, 2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.3"), MainGame.GraphicsDevice, 3);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.4"), MainGame.GraphicsDevice, 4);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.-1"), MainGame.GraphicsDevice, -1);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.-2"), MainGame.GraphicsDevice, -2);
+            //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl1.-3"), MainGame.GraphicsDevice, -3);
 
             TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Grass/ExportedTileSet"));
             using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Grass/ExportedTilemapData.txt"))
@@ -253,12 +258,13 @@ namespace GameEngine.Scenes
 
             _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, transformMatrix: Transform);
 
-            const int Width = 50 * 2;
-            const int Height = 29 * 2;
+            const int Width = 30 * 2;
+            const int Height = 32 * 2;
             const int yOffset = 0;
 
-            //var attackCollsionRectangle = monsters[0].GetCollisionRectangle();
-            //var attackCollsionRectangle = new Rectangle(monsters[0].GetCollisionRectangle().Left - Width, monsters[0].GetCollisionRectangle().Top + yOffset, Width, Height);
+            //var attackCollsionRectangle = monsters[1].GetCollisionRectangle();
+
+            //var attackCollsionRectangle = new Rectangle(monsters[1].GetCollisionRectangle().Left - Width, monsters[1].GetCollisionRectangle().Top + yOffset, Width, Height);
 
             //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
             //Texture2D.SetData(new[] { Color.Red });

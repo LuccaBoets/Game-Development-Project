@@ -553,7 +553,7 @@
 /processorParam:TextureFormat=Color
 /build:Monsters/Flying eye/Flight.png
 
-#begin Monsters/Flying eye/projectile_sprite.png
+#begin Monsters/Flying eye/ProjectileHit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -563,7 +563,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monsters/Flying eye/projectile_sprite.png
+/build:Monsters/Flying eye/ProjectileHit.png
+
+#begin Monsters/Flying eye/ProjectileInAir.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Monsters/Flying eye/ProjectileInAir.png
 
 #begin Monsters/Flying eye/Take Hit.png
 /importer:TextureImporter
