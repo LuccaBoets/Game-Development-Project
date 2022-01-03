@@ -18,7 +18,7 @@ namespace GameEngine.Environment
 
         public static TileType GetTileType(Texture2D texture)
         {
-            var tileType = TileTypes.FirstOrDefault(x => x.texture.EqualsPixelBased(texture));
+            var tileType = TileTypes.FirstOrDefault(x => x.hash == texture.GetHashCode());
 
             if (tileType == null)
             {

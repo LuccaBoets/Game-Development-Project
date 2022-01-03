@@ -76,7 +76,7 @@ namespace GameEngine.Scenes
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new LvlTwoState(MainGame, _graphics, _spriteBatch));
             }
 
         }

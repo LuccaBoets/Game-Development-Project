@@ -39,7 +39,7 @@ namespace GameEngine.ExtensionMethods
 
             for (int i = 0; i < buffer1.Length; i++)
             {
-                if (buffer1[i].R != buffer2[i].R && buffer1[i].G != buffer2[i].G && buffer1[i].B != buffer2[i].B)
+                if (buffer1[i] != buffer2[i])
                 {
                     temp = false;
                     break;
