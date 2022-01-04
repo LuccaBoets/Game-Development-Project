@@ -38,6 +38,7 @@ namespace GameEngine.Charaters
         public bool isDead { get; set; }
         public moveActions moveActions { get; set; }
         public double moveCooldownTimer { get; set; }
+        public int moveOffset { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBacth);
         public virtual void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
@@ -170,14 +171,23 @@ namespace GameEngine.Charaters
             }
 
             moveCooldownTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            
 
             switch (moveActions)
             {
                 case moveActions.left:
-                    Movement.left(this);
+                    if (moveOffset >= -20)
+                    {
+                        Movement.left(this);
+                        moveOffset--;
+                    }
                     break;
                 case moveActions.right:
-                    Movement.right(this);
+                    if (moveOffset <= 20)
+                    {
+                        Movement.right(this);
+                        moveOffset++;
+                    }
                     break;
                 case moveActions.idle:
                     break;
