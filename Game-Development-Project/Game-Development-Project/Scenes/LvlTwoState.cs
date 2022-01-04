@@ -52,7 +52,7 @@ namespace GameEngine.Scenes
         {
             monsters = new List<Enemy>();
 
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 700));
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 1450));
 
             monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(11344, 1518)));
             monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(12147, 1518)));
