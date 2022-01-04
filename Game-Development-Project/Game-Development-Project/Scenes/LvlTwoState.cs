@@ -27,10 +27,9 @@ namespace GameEngine.Scenes
         public Song song2Battle { get; set; }
         private bool muziekBattle2 = false;
 
-        public Enemy boss1 { get; set; }
-        public Enemy boss2 { get; set; }
+       
         private List<Enemy> monsters { get; set; }
-
+        
         private List<Scrolling> _scrollingBackgrounds;
         private Tilemap tilemap { get; set; }
 
@@ -51,14 +50,7 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>();
-
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 700));
-
-            monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(11344, 1518)));
-            monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(12147, 1518)));
-            boss1 = monsters[0];
-            boss2 = monsters[1];
-
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 1450));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1211, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(2270, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3433, 2532)));
@@ -84,6 +76,8 @@ namespace GameEngine.Scenes
             monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(9240, 1638)));
 
 
+            monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(11344, 1518)));
+            monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(12147, 1518)));
 
 
             song2 = Content.Load<Song>("lvl2");
@@ -100,7 +94,7 @@ namespace GameEngine.Scenes
                 {
                     Layer = 0.45f,
                 },
-
+               
                 new Scrolling(Content.Load<Texture2D>("Background/background_night2"), hero, 2f)
                 {
                     Layer = 0.35f,
@@ -199,20 +193,13 @@ namespace GameEngine.Scenes
                 MediaPlayer.Volume = 0.5f;
                 MediaPlayer.Play(song2Battle);
             }
-
-
             if (hero.isDead)
             {
+                
                 MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
 
-
-
-
-            if (boss1.isDead && boss2.isDead)
-            {
-                MainGame.ChangeSceneState(new VictoryState(MainGame, _graphics, _spriteBatch));
-            }
+           
         }
 
         public override void Draw(GameTime gameTime)
