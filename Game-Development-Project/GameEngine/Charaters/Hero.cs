@@ -39,7 +39,7 @@ namespace GameEngine
 
             Movement = new Movement();
 
-            this.lookingLeft = true;
+            this.lookingLeft = false;
 
             this.currentAnimation = this.Animaties.FirstOrDefault(x => x.AnimatieNaam == AnimationsTypes.idle);
 
