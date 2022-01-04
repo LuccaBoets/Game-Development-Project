@@ -124,8 +124,8 @@ namespace GameEngine.Scenes
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.-1"), MainGame.GraphicsDevice, -1);
             //tilemap.addTiles(MainGame.Content.Load<Texture2D>("Temp/lvl2.-2"), MainGame.GraphicsDevice, -2);
 
-            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Castle/Temp/ExportedTileSet"));
-            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Castle/Temp/ExportedTilemapData.txt"))
+            TileFactory.load(GraphicsDevice, Content.Load<Texture2D>("Tilemap/Castle/ExportedTileSet"));
+            using (FileStream fs = File.OpenRead(@"../../../Content/Tilemap/Castle/ExportedTilemapData.txt"))
             {
                 tilemap = new Tilemap(fs);
             }

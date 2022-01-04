@@ -269,8 +269,9 @@ namespace GameEngine.Scenes
 
             //var attackCollsionRectangle = new Rectangle(monsters[1].GetCollisionRectangle().Left - Width, monsters[1].GetCollisionRectangle().Top + yOffset, Width, Height);
 
-            //var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
-            //Texture2D.SetData(new[] { Color.Red });
+            var Texture2D = new Texture2D(MainGame.GraphicsDevice, 1, 1);
+            Texture2D.SetData(new[] { Color.Red });
+
             //_spriteBatch.Draw(Texture2D, attackCollsionRectangle.Location.ToVector2(), attackCollsionRectangle, Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.49f);
             //_spriteBatch.Draw(Texture2D, hero.GetCollisionRectangle().Location.ToVector2(), hero.GetCollisionRectangle(), Color.Yellow, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9f);
 
