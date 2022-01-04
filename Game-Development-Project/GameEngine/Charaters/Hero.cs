@@ -64,6 +64,11 @@ namespace GameEngine
                 attack1(enemies);
             }
 
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2)
+            {
+                attack2(enemies);
+            }
+
             if (invisible)
             {
                 invisibleTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -201,6 +206,30 @@ namespace GameEngine
         public void attack1(List<Enemy> enemies)
         {
             if (currentAnimation.AnimatieNaam == AnimationsTypes.attack1 && currentAnimation.count == 2)
+            {
+                Rectangle attackCollsionRectangle;
+                if (lookingLeft)
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Left - 36 * 3, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+                else
+                {
+                    attackCollsionRectangle = new Rectangle(GetCollisionRectangle().Right, GetCollisionRectangle().Top + 10, 54 * 2, 36 * 2);
+                }
+
+                foreach (var enemy in enemies)
+                {
+                    if (CollisionManager.Detection(enemy.GetCollisionRectangle(), attackCollsionRectangle))
+                    {
+                        enemy.Hit(stats.damage);
+                    }
+                }
+            }
+        }
+
+        public void attack2(List<Enemy> enemies)
+        {
+            if (currentAnimation.AnimatieNaam == AnimationsTypes.attack2 && currentAnimation.count == 2)
             {
                 Rectangle attackCollsionRectangle;
                 if (lookingLeft)
