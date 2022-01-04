@@ -84,7 +84,7 @@ namespace GameEngine.Charaters
             }
         }
 
-        public override void Follow(Hero hero, Tilemap tilemap)
+        public override void Follow(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
@@ -122,6 +122,10 @@ namespace GameEngine.Charaters
                     }
                 }
             }
+            else
+            {
+                randomMovement(gameTime);
+            }
 
             foreach (var tile in tilemap.MiddleGround.Tiles)
             {
@@ -135,6 +139,7 @@ namespace GameEngine.Charaters
                     Movement.jump();
                 }
             }
+
         }
 
         public override Rectangle GetMonsterRangeRectangle()

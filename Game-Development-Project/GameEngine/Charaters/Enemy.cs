@@ -13,6 +13,13 @@ using System.Text;
 
 namespace GameEngine.Charaters
 {
+    public enum moveActions
+    {
+        left,
+        right,
+        idle
+    }
+
     public abstract class Enemy : ICollisionable, IAnimationable, IHitable, IMoveable
     {
         public Animatie currentAnimation { get; set; }
@@ -29,11 +36,13 @@ namespace GameEngine.Charaters
         public double attackCooldownTimer { get; set; }
         public bool attackCooldown { get; set; }
         public bool isDead { get; set; }
+        public moveActions moveActions { get; set; }
+        public double moveCooldownTimer { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBacth);
         public virtual void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
-            Follow(hero, tilemap);
+            Follow(gameTime, hero, tilemap);
 
             move(gameTime, tilemap);
 
@@ -85,7 +94,7 @@ namespace GameEngine.Charaters
 
             projectiles.RemoveAll(x => x.isRemove);
         }
-        public abstract void Follow(Hero hero, Tilemap tilemap);
+        public abstract void Follow(GameTime gameTime, Hero hero, Tilemap tilemap);
         public virtual void move(GameTime gameTime, Tilemap tilemap)
         {
             if (currentAnimation.AnimatieNaam.canMove())
@@ -136,6 +145,47 @@ namespace GameEngine.Charaters
                 }
             }
         }
+
+        public virtual void randomMovement(GameTime gameTime)
+        {
+
+            if (moveCooldownTimer >= 1000)
+            {
+                moveCooldownTimer = 0;
+
+                Random random = new Random();
+                var getal = random.Next(0, 4);
+                if (getal == 1)
+                {
+                    moveActions = moveActions.left;
+                }
+                else if (getal == 2)
+                {
+                    moveActions = moveActions.right;
+                }
+                else
+                {
+                    moveActions = moveActions.idle;
+                }
+            }
+
+            moveCooldownTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            switch (moveActions)
+            {
+                case moveActions.left:
+                    Movement.left(this);
+                    break;
+                case moveActions.right:
+                    Movement.right(this);
+                    break;
+                case moveActions.idle:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void changeAnimation(AnimationsTypes animationsTypes, bool ignorePriority = false)
         {
             if (!(this.currentAnimation.AnimatieNaam == animationsTypes) && (this.currentAnimation.AnimatieNaam.isHigherPriority(animationsTypes) || ignorePriority))

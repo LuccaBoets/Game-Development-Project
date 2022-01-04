@@ -41,7 +41,7 @@ namespace GameEngine.Charaters
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
-            Follow(hero, tilemap);
+            Follow(gameTime ,hero, tilemap);
 
             move(gameTime, tilemap);
 
@@ -94,7 +94,7 @@ namespace GameEngine.Charaters
             projectiles.RemoveAll(x => x.isRemove);
         }
 
-        public override void Follow(Hero hero, Tilemap tilemap)
+        public override void Follow(GameTime gameTime, Hero hero, Tilemap tilemap)
         {
             if (CollisionManager.Detection(GetMonsterRangeRectangle(), hero.GetCollisionRectangle()))
             {
@@ -130,6 +130,11 @@ namespace GameEngine.Charaters
                         attack3(hero);
                     }
                 }
+                
+            }
+            else
+            {
+                randomMovement(gameTime);
             }
 
             foreach (var tile in tilemap.MiddleGround.Tiles)
