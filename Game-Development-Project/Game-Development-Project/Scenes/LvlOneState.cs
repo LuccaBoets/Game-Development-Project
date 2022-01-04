@@ -230,8 +230,7 @@ namespace GameEngine.Scenes
 
             if (hero.isDead)
             {
-                MainGame.ChangeSceneState(new VictoryState(MainGame, _graphics, _spriteBatch));
-                //MenuState.ChangeSceneState(new DeathState(MenuState, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
             }
 
             if (monsters[0].isDead)
