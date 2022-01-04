@@ -51,18 +51,14 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>();
-<<<<<<< Updated upstream
+
             hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 700));
-=======
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 1000));
 
             monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(11344, 1518)));
             monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(12147, 1518)));
             boss1 = monsters[0];
             boss2 = monsters[1];
 
-
->>>>>>> Stashed changes
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1211, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(2270, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3433, 2532)));
