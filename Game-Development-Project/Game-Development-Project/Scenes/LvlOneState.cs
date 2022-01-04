@@ -46,7 +46,7 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>(); // 700 300  X:1006.17267, Y:942.92206
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 300));
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 550));
             monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4653, 1000)));
             //monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4653, 1000)));
 
@@ -64,8 +64,10 @@ namespace GameEngine.Scenes
             song1Battle = Content.Load<Song>("newBattleV2");
 
             MediaPlayer.Volume = 0.1f;
+           
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Stop();
+            muziekBattle = false;
             MediaPlayer.Play(song1);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
             hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
