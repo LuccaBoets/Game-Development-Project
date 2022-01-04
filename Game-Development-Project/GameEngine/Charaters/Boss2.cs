@@ -16,8 +16,8 @@ namespace GameEngine.Charaters
     {
         public Boss2(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition) : base(animaties, projectileAnimation, newPosition)
         {
-            stats.maxHealth = 20;
-            stats.health = 20;
+            stats.maxHealth = 10;
+            stats.health = 10;
         }
 
         public override void Update(GameTime gameTime, Hero hero, Tilemap tilemap)
