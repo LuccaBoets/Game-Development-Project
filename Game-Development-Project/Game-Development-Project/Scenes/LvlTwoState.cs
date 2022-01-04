@@ -25,7 +25,7 @@ namespace GameEngine.Scenes
         public Song song2 { get; set; }
 
         public Song song2Battle { get; set; }
-        private bool muziekBattle = false;
+        private bool muziekBattle2 = false;
 
        
         private List<Enemy> monsters { get; set; }
@@ -50,7 +50,7 @@ namespace GameEngine.Scenes
         public override void LoadContent()
         {
             monsters = new List<Enemy>();
-            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 1000));
+            hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 700));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1211, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(2270, 1828)));
             monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3433, 2532)));
@@ -84,7 +84,6 @@ namespace GameEngine.Scenes
             song2Battle = Content.Load<Song>("FinalBossBattle");
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Stop();
-            muziekBattle = false;
             MediaPlayer.Play(song2);
             hero.hartjeVol = Content.Load<Texture2D>("icons/volvol");
             hero.hartjeLeeg = Content.Load<Texture2D>("icons/hartleeg");
@@ -187,9 +186,9 @@ namespace GameEngine.Scenes
             }
 
 
-            if (hero.position.X > 9570 && muziekBattle == false)
+            if (hero.position.X > 9570 && muziekBattle2 == false)
             {
-                muziekBattle = true;
+                muziekBattle2 = true;
                 MediaPlayer.Stop();
                 MediaPlayer.Volume = 0.5f;
                 MediaPlayer.Play(song2Battle);
