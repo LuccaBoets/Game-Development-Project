@@ -218,11 +218,9 @@ namespace GameEngine.Charaters
         public abstract Rectangle GetMonsterRangeRectangle();
         public abstract Rectangle GetCollisionRectangle();
         public abstract Rectangle GetNextCollisionRectangle();
-
         public abstract void attack1(Hero hero);
         public abstract void attack2(Hero hero);
         public abstract void attack3(Hero hero);
-
         public void Hit(int damage)
         {
             if (!invisible)
@@ -233,9 +231,11 @@ namespace GameEngine.Charaters
                 if (stats.health <= 0)
                 {
                     changeAnimation(AnimationsTypes.death);
+                    deadSound();
                 }
             }
         }
+        public abstract void deadSound();
         public void endOfAnimation()
         {
             if (this.currentAnimation.isFinished)

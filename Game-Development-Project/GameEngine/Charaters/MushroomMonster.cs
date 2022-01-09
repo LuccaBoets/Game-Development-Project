@@ -276,5 +276,10 @@ namespace GameEngine.Charaters
                 projectiles.Add(new Projectile(projectileInAirAnimation.clone(), projectileHitAnimation.clone(), lookingLeft, center, new Rectangle(44, 44, 16, 16)));
             }
         }
+
+        public override void deadSound()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
