@@ -52,17 +52,13 @@ namespace GameEngine.Scenes
             monsters = new List<Enemy>(); // 700 300  X:1006.17267, Y:942.92206
             hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 700));
             monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4653, 1000),mushroomDeath));
-            //monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4653, 1000)));
 
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2516, 900),mushroomDeath));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2149, 900),mushroomDeath));
-            monsters.Add(new MushroomMonster(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(3204, 1000),mushroomDeath));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(1775, 850), goblinDeath));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3696, 1000),goblinDeath));
-            monsters.Add(new GoblinMonster(GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3274, 850),goblinDeath));
-
-            //monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(1000, 900)));
-            //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
+            monsters.Add(EnemyFactory.CreateEnemy("MushroomMonster", MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2516, 900), mushroomDeath));
+            monsters.Add(EnemyFactory.CreateEnemy("MushroomMonster", MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(2149, 900), mushroomDeath));
+            monsters.Add(EnemyFactory.CreateEnemy("MushroomMonster", MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(3204, 1000), mushroomDeath));
+            monsters.Add(EnemyFactory.CreateEnemy("GoblinMonster", GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(1775, 850), goblinDeath));
+            monsters.Add(EnemyFactory.CreateEnemy("GoblinMonster", GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3696, 1000), goblinDeath));
+            monsters.Add(EnemyFactory.CreateEnemy("GoblinMonster", GoblinAnimations.AllAnimation(Content), ProjectileAnimations.AllGoblinAnimation(Content), new Vector2(3274, 850), goblinDeath));
 
             song1 = Content.Load<Song>("Sound/lvl1");
             song1Battle = Content.Load<Song>("Sound/newBattleV2");

@@ -61,32 +61,29 @@ namespace GameEngine.Scenes
             boss1 = monsters[0];
             boss2 = monsters[1];
 
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1211, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(2270, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3433, 2532),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3646, 2532),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4124, 2298),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4165, 2042),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4095, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4568, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(5342, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(5982, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(6808, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(7967, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(9240, 1828),deathSkeleton));
-            monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(8567, 900),deathSkeleton));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8305, 1246),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8075, 1182),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8000, 1282),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(7317, 1094),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8367, 820),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8667, 820),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8567, 850),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(9540, 1166),deathEye));
-            monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(9240, 1638),deathEye));
-
-
-
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(1211, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(2270, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3433, 2532), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(3646, 2532), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4124, 2298), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4165, 2042), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4095, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(4568, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(5342, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(5982, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(6808, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(7967, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(9240, 1828), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("SkeletonMonster", SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(8567, 900), deathSkeleton));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8305, 1246), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8075, 1182), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8000, 1282), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(7317, 1094), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8367, 820), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8667, 820), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(8567, 850), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(9540, 1166), deathEye));
+            monsters.Add(EnemyFactory.CreateEnemy("FlyingEyeMonster", FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(9240, 1638), deathEye));
 
             song2 = Content.Load<Song>("Sound/lvl2");
             song2Battle = Content.Load<Song>("Sound/FinalBossBattle");

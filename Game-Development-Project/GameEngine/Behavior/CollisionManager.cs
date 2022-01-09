@@ -42,29 +42,6 @@ namespace GameEngine.Behavior
             return rectangle1.Intersects(rectangle2);
         }
 
-        //private static CollisionDirection RectanglesToDirection(Rectangle rectangle1, Rectangle rectangle2)
-        //{
-        //    double degrees = RectanglesToDegrees(rectangle1, rectangle2);
-
-        //    if (degrees >= 45 && degrees < 135)
-        //    {
-        //        return CollisionDirection.up;
-
-        //    }
-        //    else if (degrees >= 135 && degrees < 225)
-        //    {
-        //        return CollisionDirection.left;
-        //    }
-        //    else if (degrees >= 225 && degrees < 315)
-        //    {
-        //        return CollisionDirection.down;
-        //    }
-        //    else
-        //    {
-        //        return CollisionDirection.right;
-        //    }
-        //}
-
         private static CollisionDirection RectanglesToDirection(Rectangle rectangle1, Rectangle rectangle2)
         {
             if (IsTouchingLeft(rectangle1, rectangle2))
@@ -88,17 +65,6 @@ namespace GameEngine.Behavior
             }
 
             return CollisionDirection.noHit;
-        }
-
-        private static double RectanglesToDegrees(Rectangle rectangle1, Rectangle rectangle2)
-        {
-            var deltaX = rectangle2.Center.X - rectangle1.Center.X;
-            var deltaY = rectangle2.Center.Y - rectangle1.Center.Y;
-
-            var radians = Math.Atan2(deltaY, deltaX);
-
-            double degrees = radians * (180 / Math.PI);
-            return degrees + 180;
         }
 
         public static bool IsTouchingLeft(Rectangle rectangle1, Rectangle rectangle2)
