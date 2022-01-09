@@ -47,8 +47,8 @@ namespace GameEngine.Scenes
 
         public override void LoadContent()
         {
-            SoundEffect goblinDeath = Content.Load<SoundEffect>("Goblin_Death");
-            SoundEffect mushroomDeath = Content.Load<SoundEffect>("monster-14");
+            SoundEffect goblinDeath = Content.Load<SoundEffect>("Sound/Goblin_Death");
+            SoundEffect mushroomDeath = Content.Load<SoundEffect>("Sound/monster-14");
             monsters = new List<Enemy>(); // 700 300  X:1006.17267, Y:942.92206
             hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1000, 700));
             monsters.Add(new Boss1(MushroomAnimations.AllAnimation(Content), ProjectileAnimations.AllMushroomAnimation(Content), new Vector2(4653, 1000),mushroomDeath));

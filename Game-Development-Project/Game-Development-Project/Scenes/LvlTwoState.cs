@@ -52,8 +52,8 @@ namespace GameEngine.Scenes
         {
             monsters = new List<Enemy>();
 
-            SoundEffect deathSkeleton = Content.Load<SoundEffect>("SkeletonShatter");
-            SoundEffect deathEye = Content.Load<SoundEffect>("monster-15");
+            SoundEffect deathSkeleton = Content.Load<SoundEffect>("Sound/SkeletonShatter");
+            SoundEffect deathEye = Content.Load<SoundEffect>("Sound/monster-15");
             hero = new Hero(HeroAnimations.AllAnimation(Content), new Vector2(1353, 1450));
 
             monsters.Add(new Boss2(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(11344, 1518),deathSkeleton));
