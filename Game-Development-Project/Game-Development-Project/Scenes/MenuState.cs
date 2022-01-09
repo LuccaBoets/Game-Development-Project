@@ -77,7 +77,7 @@ namespace GameEngine.Scenes
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) && keyCooldown > 500)
             { 
-                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
 
             }
         }
