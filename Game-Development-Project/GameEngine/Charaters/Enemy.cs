@@ -5,6 +5,7 @@ using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace GameEngine.Charaters
         public moveActions moveActions { get; set; }
         public double moveCooldownTimer { get; set; }
         public int moveOffset { get; set; }
+
+        public SoundEffect deathSound { get; set; } 
 
         public abstract void Draw(SpriteBatch spriteBacth);
         public virtual void Update(GameTime gameTime, Hero hero, Tilemap tilemap)

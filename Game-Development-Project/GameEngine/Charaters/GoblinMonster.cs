@@ -11,13 +11,14 @@ using System.Linq;
 using System.Text;
 using GameEngine.Data;
 using GameEngine.ExtensionMethods;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameEngine.Charaters
 {
     public class GoblinMonster : Enemy
     {
 
-        public GoblinMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
+        public GoblinMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition, SoundEffect effect)
         {
             this.Animaties = animaties;
             this.projectileHitAnimation = projectileAnimation[1];
@@ -27,7 +28,7 @@ namespace GameEngine.Charaters
             this.Movement = new Movement();
             this.Movement.MaxSpeedX = 1f;
             this.Movement.jumpSpeed = 4f;
-
+            this.deathSound = effect;
             this.lookingLeft = true;
 
             this.currentAnimation = animaties.First(x => x.AnimatieNaam == AnimationsTypes.idle);
@@ -279,7 +280,7 @@ namespace GameEngine.Charaters
 
         public override void deadSound()
         {
-            throw new NotImplementedException();
+            deathSound.Play(volume: 0.1f, pitch: 0.0f, pan: 0.0f);
         }
     }
 }

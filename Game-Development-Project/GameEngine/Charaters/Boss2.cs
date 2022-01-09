@@ -4,6 +4,7 @@ using GameEngine.Environment;
 using GameEngine.ExtensionMethods;
 using GameEngine.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace GameEngine.Charaters
 {
     public class Boss2 : SkeletonMonster
     {
-        public Boss2(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition) : base(animaties, projectileAnimation, newPosition)
+        public Boss2(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition, SoundEffect effect) : base(animaties, projectileAnimation, newPosition, effect)
         {
             stats.maxHealth = 10;
             stats.health = 10;

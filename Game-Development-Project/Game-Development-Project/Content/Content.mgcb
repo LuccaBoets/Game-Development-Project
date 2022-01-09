@@ -343,6 +343,12 @@
 /processorParam:Quality=Best
 /build:GameOver.mp3
 
+#begin Goblin_Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Goblin_Death.wav
+
 #begin Hills Free (update 3.0).png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -498,6 +504,24 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:MenuSong.mp3
+
+#begin monster-14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:monster-14.wav
+
+#begin monster-15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:monster-15.wav
+
+#begin monster-17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:monster-17.wav
 
 #begin Monsters/Flying eye/Attack.png
 /importer:TextureImporter
@@ -984,6 +1008,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SET1_Mainlev_build.png
+
+#begin SkeletonShatter.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SkeletonShatter.wav
+
+#begin slimy_monster_or_murderd_sound_7 (1).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:slimy_monster_or_murderd_sound_7 (1).mp3
 
 #begin startScreen-0.png
 /importer:TextureImporter

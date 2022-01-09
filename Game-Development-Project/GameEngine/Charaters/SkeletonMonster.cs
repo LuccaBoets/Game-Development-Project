@@ -11,18 +11,19 @@ using System.Linq;
 using System.Text;
 using GameEngine.Data;
 using GameEngine.ExtensionMethods;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameEngine.Charaters
 {
     public class SkeletonMonster : Enemy
     {
-        public SkeletonMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition)
+        public SkeletonMonster(List<Animatie> animaties, List<Animatie> projectileAnimation, Vector2 newPosition, SoundEffect effect)
         {
             this.Animaties = animaties;
             this.projectileHitAnimation = projectileAnimation[1];
             this.projectileInAirAnimation = projectileAnimation[0];
             this.position = newPosition;
-
+            this.deathSound = effect;
             this.Movement = new Movement();
             this.Movement.MaxSpeedX = 1.5f;
             this.Movement.jumpSpeed = 4f;
@@ -288,7 +289,7 @@ namespace GameEngine.Charaters
 
         public override void deadSound()
         {
-            throw new NotImplementedException();
+            deathSound.Play(volume: 0.1f, pitch: 0.0f, pan: 0.0f);
         }
     }
 }
