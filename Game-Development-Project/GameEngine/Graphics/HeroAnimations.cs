@@ -31,7 +31,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetIdleAnimatieFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Idle");
+            Texture2D texture = content.Load<Texture2D>("Hero/Idle");
 
             var animation = new Animatie(texture);
 
@@ -47,7 +47,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetRunAnimatieFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Run");
+            Texture2D texture = content.Load<Texture2D>("Hero/Run");
 
             var animation = new Animatie(texture);
 
@@ -63,7 +63,7 @@ namespace GameEngine.Graphics
         }
         public static Animatie GetFallAnimatieFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Fall");
+            Texture2D texture = content.Load<Texture2D>("Hero/Fall");
 
             var animation = new Animatie(texture);
 
@@ -79,7 +79,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetJumpAnimatieFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Jump");
+            Texture2D texture = content.Load<Texture2D>("Hero/Jump");
 
             var animation = new Animatie(texture);
 
@@ -95,7 +95,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetAttack2AnimatieFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Attack2");
+            Texture2D texture = content.Load<Texture2D>("Hero/Attack2");
 
             var animation = new Animatie(texture);
 
@@ -112,7 +112,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetAttack1FromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Attack1");
+            Texture2D texture = content.Load<Texture2D>("Hero/Attack1");
 
             var animation = new Animatie(texture);
 
@@ -128,7 +128,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetHitFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Take Hit - white silhouette");
+            Texture2D texture = content.Load<Texture2D>("Hero/Take Hit - white silhouette");
 
             var animation = new Animatie(texture);
 
@@ -144,7 +144,7 @@ namespace GameEngine.Graphics
 
         public static Animatie GetDeathFromHero(ContentManager content)
         {
-            Texture2D texture = content.Load<Texture2D>("Death");
+            Texture2D texture = content.Load<Texture2D>("Hero/Death");
 
             var animation = new Animatie(texture);
 

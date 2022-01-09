@@ -60,8 +60,8 @@ namespace GameEngine.Scenes
             //monsters.Add(new FlyingEyeMonster(FlyingEyeAnimations.AllAnimation(Content), ProjectileAnimations.AllFlyingEyeAnimation(Content), new Vector2(1000, 900)));
             //monsters.Add(new SkeletonMonster(SkeletonAnimations.AllAnimation(Content), ProjectileAnimations.AllSkeletonAnimation(Content), new Vector2(900, 700)));
 
-            song1 = Content.Load<Song>("lvl1");
-            song1Battle = Content.Load<Song>("newBattleV2");
+            song1 = Content.Load<Song>("Sound/lvl1");
+            song1Battle = Content.Load<Song>("Sound/newBattleV2");
 
             MediaPlayer.Volume = 0.1f;
            
