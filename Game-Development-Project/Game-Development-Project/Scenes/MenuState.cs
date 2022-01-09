@@ -15,6 +15,7 @@ namespace GameEngine.Scenes
         List<Background> background2;
         Background backgroundCharacterSelect;
         public Song songMenu { get; set; }
+        public double keyCooldown { get; set; }
 
         Texture2D image;
         Texture2D imageTitel;
@@ -72,12 +73,13 @@ namespace GameEngine.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            keyCooldown += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && keyCooldown > 500)
             { 
-                MainGame.ChangeSceneState(new DeathState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
 
             }
-
         }
     }
 }
