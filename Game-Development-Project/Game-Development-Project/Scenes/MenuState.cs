@@ -15,6 +15,7 @@ namespace GameEngine.Scenes
         List<Background> background2;
         Background backgroundCharacterSelect;
         public Song songMenu { get; set; }
+        public double keyCooldown { get; set; }
 
         Texture2D image;
         Texture2D imageTitel;
@@ -57,27 +58,28 @@ namespace GameEngine.Scenes
             _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
             background2 = new List<Background>();
 
-            songMenu = Content.Load<Song>("MenuSong");
+            songMenu = Content.Load<Song>("Sound/MenuSong");
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(songMenu);
             for (int i = 0; i < 39; i++)
             {
-                background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
+                background2.Add(new Background(MainGame.Content.Load<Texture2D>("startScreen/startScreen-" + i), new Rectangle(0, 0, 1600, 900)));
             }
 
-            imageTitel = MainGame.Content.Load<Texture2D>("TitelNieuw");
-            image = MainGame.Content.Load<Texture2D>("PressEnter2");
+            imageTitel = MainGame.Content.Load<Texture2D>("Text/TitelNieuw");
+            image = MainGame.Content.Load<Texture2D>("Text/PressEnter2");
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            keyCooldown += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && keyCooldown > 500)
             { 
-                MainGame.ChangeSceneState(new LvlOneState(MainGame, _graphics, _spriteBatch));
+                MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
 
             }
-
         }
     }
 }

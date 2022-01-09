@@ -47,13 +47,13 @@ namespace GameEngine.Scenes
         {
             _spriteBatch = new SpriteBatch(MainGame.GraphicsDevice);
             MediaPlayer.Stop();
-            songDeath = Content.Load<Song>("GameOver");
+            songDeath = Content.Load<Song>("Sound/GameOver");
             MediaPlayer.Volume = 0.7f;
             MediaPlayer.IsRepeating = false;
             MediaPlayer.Play(songDeath);
             heroDeath = HeroAnimations.GetDeathFromHero(Content);
-            backgroundDeath = new Background(Content.Load<Texture2D>("Game_Over"), new Rectangle(0, 0, 1600, 900));
-            imageYouDied = MainGame.Content.Load<Texture2D>("YouDied");
+            backgroundDeath = new Background(Content.Load<Texture2D>("GameOverScreen/Game_Over"), new Rectangle(0, 0, 1600, 900));
+            imageYouDied = MainGame.Content.Load<Texture2D>("Text/YouDied");
 
 
         }

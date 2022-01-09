@@ -88,8 +88,8 @@ namespace GameEngine.Scenes
 
 
 
-            song2 = Content.Load<Song>("lvl2");
-            song2Battle = Content.Load<Song>("FinalBossBattle");
+            song2 = Content.Load<Song>("Sound/lvl2");
+            song2Battle = Content.Load<Song>("Sound/FinalBossBattle");
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Stop();
             MediaPlayer.Play(song2);

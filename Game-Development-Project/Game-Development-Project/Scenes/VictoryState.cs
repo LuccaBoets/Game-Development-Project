@@ -11,12 +11,7 @@ namespace GameEngine.Scenes
 {
     public class VictoryState : SceneState
     {
-     
-
-
         List<Background> background3;
-
-
         Texture2D imageTitleWin;
         public Song songVictory { get; set; }
         int count = 0;
@@ -81,8 +76,6 @@ namespace GameEngine.Scenes
             {
                 MainGame.ChangeSceneState(new MenuState(MainGame, _graphics, _spriteBatch));
             }
-
-           
         }
     }
 }
